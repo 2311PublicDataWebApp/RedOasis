@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AdminMapper">
+	<!-- 유저 -->
 	<resultMap type="User" id="UserResultMap">
 		<id property="userId" column="USER_ID"></id>
 		<result property="userPw" column="USER_PW"></result>
@@ -11,7 +12,47 @@
 		<result property="userPhone" column="USER_PHONE"></result>
 		<result property="userBlackList" column="USER_BLACKLIST"></result>
 	</resultMap>
-	<select id="selectUserList" resultMap="UserResultMap">
-		SELECT * FROM USER_TBL
+	<select id="selectTotalCountUser" resultType="_int">
+		SELECT COUNT(*) FROM USER_TBL
+	</select><select id="selectUserList" parameterType="java.util.Map" resultMap="UserResultMap">
+	    SELECT * FROM USER_TBL
+	    ORDER BY ${sortList} ASC
+	</select>
+	
+	<!-- 게시판  -->
+	<resultMap type="Board" id="BoardResultMap">
+		<id property="boardNo" column="BOARD_NO" />
+		<result property="boardName" column="BOARD_NAME" />
+		<result property="boardContent" column="BOARD_CONTENT" />
+		<result property="boardDate" column="BOARD_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="userId" column="USER_ID" />
+	</resultMap>
+	<select id="selectTotalCountBoard" resultType="_int">
+		SELECT COUNT(*) FROM BOARD_TBL
+	</select>
+	<select id="selectBoardList" parameterType="java.util.Map" resultMap="BoardResultMap">
+	    SELECT * FROM BOARD_TBL
+	    ORDER BY ${sortList} ASC
+	</select>
+	<!-- 와이너리 -->
+	<resultMap type="Winery" id="WineryResultMap">
+		<id property="wineryNo" column="WINERY_NO"></id>
+		<result property="wineryName" column="WINERY_NAME"></result>
+		<result property="wineryAddress" column="WINERY_ADDRESS"></result>
+		<result property="wineryPhone" column="WINERY_PHONE"></result>
+		<result property="madeWine" column="MADE_WINE"></result>
+		<result property="wineryWebAddress" column="WINERY_WEB_ADDRESS"></result>
+		<result property="imgFilename" column="IMG_FILENAME"></result>
+		<result property="imgFileRename" column="IMG_FILERENAME"></result>
+		<result property="imgFilepath" column="IMG_FILEPATH"></result>
+		<result property="imgFilelength" column="IMG_FILELENGTH"></result>
+	</resultMap>
+	<select id="selectTotalCountWinery" resultType="_int">
+		SELECT COUNT(*) FROM WINERY_TBL
+	</select>
+	<select id="selectWineryList" parameterType="java.util.Map" resultMap="WineryResultMap">
+	    SELECT * FROM WINERY_TBL
+	    ORDER BY ${sortList} ASC
 	</select>
 </mapper>
