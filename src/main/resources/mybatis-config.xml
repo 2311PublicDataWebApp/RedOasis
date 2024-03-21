@@ -13,6 +13,7 @@
 		<!--  VO가 생성될 때마다 추가 -->
 		<typeAlias type="com.oasis.red.admin.domain.UserVO" alias="User"/>
 		<typeAlias type="com.oasis.red.admin.domain.BoardVO" alias="Board"/>
+		<typeAlias type="com.oasis.red.admin.domain.WineVO" alias="Wine"/>
 		<typeAlias type="com.oasis.red.admin.domain.WineryVO" alias="Winery"/>
 	</typeAliases>
 	<mappers>

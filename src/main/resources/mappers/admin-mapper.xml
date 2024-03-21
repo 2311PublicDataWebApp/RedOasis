@@ -35,6 +35,31 @@
 	    SELECT * FROM BOARD_TBL
 	    ORDER BY ${sortList} ASC
 	</select>
+	
+	<!-- 와인 -->
+	<resultMap type="Wine" id="WineResultMap">
+		<id property="wineNo" column="WINE_NO"></id>
+		<result property="wineName" column="WINE_NAME"></result>
+		<result property="wineRegion" column="WINE_REGION"></result>
+		<result property="wineRank" column="WINE_RANK"></result>
+		<result property="wineAging" column="WINE_AGING"></result>
+		<result property="wineAVB" column="WINE_ABV"></result>
+		<result property="wineTemp" column="WINE_TEMP"></result>
+		<result property="winePrice" column="WINE_PRICE"></result>
+		<result property="wineScore" column="WINE_SCORE"></result>
+		<result property="wineCategory" column="WINE_CATEGORY"></result>
+		<result property="imgFilename" column="IMG_FILENAME"></result>
+		<result property="imgFileRename" column="IMG_FILERENAME"></result>
+		<result property="imgFilePath" column="IMG_FILEPATH"></result>
+		<result property="imgFileLength" column="IMG_FILELENGTH"></result>
+		<result property="wineMonth" column="WINE_MONTH"></result>
+		<result property="wineAcidity" column="WINE_ACIDITY"></result>
+	</resultMap>
+	<insert id="wineRegister">
+		INSERT INTO WINE_TBL
+		VALUES(SEQ_WINE_NO.NEXTVAL, #{wineName}, #{wineRegion}, #{wineRank}, #{wineAging}, #{wineAVB}, #{wineTemp}, #{winePrice}, #{wineScore}, #{wineCategory}, #{imgFilename}, #{imgFileRename}, #{imgFilePath}, #{imgFileLength}, #{wineMonth}, #{wineAcidity})
+	</insert>
+	
 	<!-- 와이너리 -->
 	<resultMap type="Winery" id="WineryResultMap">
 		<id property="wineryNo" column="WINERY_NO"></id>

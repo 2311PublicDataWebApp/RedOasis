@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.oasis.red.admin.domain.BoardVO;
 import com.oasis.red.admin.domain.PageInfo;
 import com.oasis.red.admin.domain.UserVO;
+import com.oasis.red.admin.domain.WineVO;
 import com.oasis.red.admin.domain.WineryVO;
 import com.oasis.red.admin.service.AdminService;
 import com.oasis.red.admin.store.AdminStore;
@@ -43,6 +44,12 @@ public class AdminServiceImpl implements AdminService{
 	public List<BoardVO> selectBoardList(PageInfo pInfo, String sortList) {
 		List<BoardVO> bList = aStore.selectBoardList(session, pInfo, sortList);
 		return bList;
+	}
+
+	@Override
+	public int wineRegister(WineVO wine) {
+		int result = aStore.wineRegister(session, wine);
+		return result;
 	}
 
 	@Override

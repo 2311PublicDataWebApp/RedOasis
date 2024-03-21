@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.oasis.red.admin.domain.BoardVO;
 import com.oasis.red.admin.domain.PageInfo;
 import com.oasis.red.admin.domain.UserVO;
+import com.oasis.red.admin.domain.WineVO;
 import com.oasis.red.admin.domain.WineryVO;
 import com.oasis.red.admin.store.AdminStore;
 
@@ -55,6 +56,12 @@ public class AdminStoreImpl implements AdminStore{
 	    // 게시글 리스트 조회
 	    List<BoardVO> bList = session.selectList("AdminMapper.selectBoardList", params, rowBounds);
 		return bList;
+	}
+
+	@Override
+	public int wineRegister(SqlSession session, WineVO wine) {
+		int result = session.insert("AdminMapper.wineRegister", wine);
+		return result;
 	}
 
 	@Override

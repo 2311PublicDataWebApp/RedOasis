@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.oasis.red.admin.domain.BoardVO;
 import com.oasis.red.admin.domain.PageInfo;
 import com.oasis.red.admin.domain.UserVO;
+import com.oasis.red.admin.domain.WineVO;
 import com.oasis.red.admin.domain.WineryVO;
 
 public interface AdminStore {
@@ -18,6 +19,8 @@ public interface AdminStore {
 	Integer selectTotalCountBoard(SqlSession session);
 
 	List<BoardVO> selectBoardList(SqlSession session, PageInfo pInfo, String sortList);
+
+	int wineRegister(SqlSession session, WineVO wine);
 
 	Integer selectTotalCountWinery(SqlSession session);
 
