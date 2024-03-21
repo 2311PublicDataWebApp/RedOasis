@@ -13,11 +13,13 @@
 		<!--  VO가 생성될 때마다 추가 -->
 		<typeAlias type="com.oasis.red.admin.domain.UserVO" alias="User"/>
 		<typeAlias type="com.oasis.red.user.domain.UserVO" 	 alias="Member"/>
+		<typeAlias type="com.oasis.red.winery.domain.WineryVO" alias="Winery"/>
 	</typeAliases>
 	<mappers>
 		<!-- mapper.xml이 생성될 때마다 추가 -->
 		<mapper resource="mappers/admin-mapper.xml"></mapper>
 		<mapper resource="mappers/user-mapper.xml"></mapper>
+		<mapper resource="mappers/winery-mapper.xml"></mapper>
 	</mappers>
 
 </configuration>
