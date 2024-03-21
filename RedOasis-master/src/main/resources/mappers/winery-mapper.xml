@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="WineryMapper">
+	<resultMap type="com.oasis.red.winery.domain.WineryVO" id="WineryResultMap">
+		<id		property="wineryNo"				column="WINERY_NO"></id>
+		<result property="wineryName"			column="WINERY_NAME"></result>
+		<result property="wineryAddress"		column="WINERY_ADDRESS"></result>
+		<result property="wineryPhone"			column="WINERY_PHONE"></result>
+		<result property="madeWine"				column="MADE_WINE"></result>
+		<result property="wineryWebAddress"		column="WINERY_WEB_ADDRESS"></result>
+		<result property="imgFileName"			column="IMG_FILENAME"></result>
+		<result property="imgFileRename"		column="IMG_FILERENAME"></result>
+		<result property="imgFilePath"			column="IMG_FILEPATH"></result>
+		<result property="imgFileLength"		column="IMG_FILELENGTH"></result>
+		<result property="wineryDescription"	column="WINERY_DESCRIPTION"/>
+	</resultMap>
+	<select id="selectWineryList" resultMap="WineryResultMap">
+		SELECT * FROM WINERY_TBL
+	</select>
+	<select id="selectOneByWinery" resultMap="WineryResultMap">
+		SELECT * FROM WINERY_TBL
+		WHERE WINERY_NO = #{wineryNo}
+	</select>
+</mapper>
