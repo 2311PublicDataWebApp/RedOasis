@@ -25,12 +25,15 @@ import com.oasis.red.admin.domain.UserVO;
 import com.oasis.red.admin.domain.WineVO;
 import com.oasis.red.admin.domain.WineryVO;
 import com.oasis.red.admin.service.AdminService;
+import com.oasis.red.user.service.UserService;
 
 @Controller
 public class AdminController {
 
 	@Autowired
 	private AdminService aService;
+	@Autowired
+	private UserService uService;
 	
 	// 회원 관리
 	@RequestMapping(value= "/admin/userlist.kw", method=RequestMethod.GET)
@@ -55,6 +58,51 @@ public class AdminController {
 				model.addAttribute("uList", uList);
 			}
 			return "admin/userlist";
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
+	
+	// 회원 정보 수정 페이지 이동
+	@RequestMapping(value = "/admin/userlist/update.kw", method = RequestMethod.GET)
+	public String showUpdatePage(HttpSession session, Model model
+			,@RequestParam("userId") String userId) {
+		try {
+//			String userId = (String) session.getAttribute("userId");
+			com.oasis.red.user.domain.UserVO user = null;
+			if (userId != null) {
+				user = uService.getOneById(userId);
+			}
+			if (user != null) {
+				model.addAttribute("user", user);
+				return "admin/update";
+			} else {
+				model.addAttribute("msg", "회원 정보 조회를 완료하지 못하였습니다.");
+				return "common/errorPage";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
+	// 회원 정보 수정
+	@RequestMapping(value = "/admin/update.kw", method = RequestMethod.POST)
+	public String updatePage(@ModelAttribute com.oasis.red.user.domain.UserVO user, Model model) {
+		try {
+			//블랙리스트 값 Y N
+			if(user.getUserBlackList() == null) {
+				user.setUserBlackList("N");
+			}
+			int result = uService.updateUser(user);
+			if (result > 0) {
+				// success -> 페이지 이동
+				return "redirect:/admin/userlist";
+			} else {
+				// fail -> 에러페이지 이동
+				model.addAttribute("msg", "회원 정보 수정을 완료하지 못하였습니다.");
+				return "common/errorPage";
+			}
 		} catch (Exception e) {
 			model.addAttribute("msg", e.getMessage());
 			return "common/errorPage";

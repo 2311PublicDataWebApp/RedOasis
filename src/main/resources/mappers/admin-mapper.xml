@@ -16,7 +16,6 @@
 		SELECT COUNT(*) FROM USER_TBL
 	</select><select id="selectUserList" parameterType="java.util.Map" resultMap="UserResultMap">
 	    SELECT * FROM USER_TBL
-	    ORDER BY ${sortList} ASC
 	</select>
 	
 	<!-- 게시판  -->
@@ -33,7 +32,6 @@
 	</select>
 	<select id="selectBoardList" parameterType="java.util.Map" resultMap="BoardResultMap">
 	    SELECT * FROM BOARD_TBL
-	    ORDER BY ${sortList} ASC
 	</select>
 	
 	<!-- 와인 -->
@@ -78,6 +76,5 @@
 	</select>
 	<select id="selectWineryList" parameterType="java.util.Map" resultMap="WineryResultMap">
 	    SELECT * FROM WINERY_TBL
-	    ORDER BY ${sortList} ASC
 	</select>
 </mapper>
