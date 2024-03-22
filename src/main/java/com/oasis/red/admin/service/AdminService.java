@@ -25,5 +25,7 @@ public interface AdminService {
 	int selectTotalCountWinery();
 
 	List<WineryVO> selectWineryList(PageInfo pInfo, String sortList);
+	
+	int wineryInsert(WineryVO winery);
 
 }

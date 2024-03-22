@@ -2,15 +2,16 @@ package com.oasis.red.admin.domain;
 
 public class WineryVO {
 	private int wineryNo;
-	private String wineryName;
-	private String wineryAddress;
-	private String wineryPhone;
-	private String madeWine;
-	private String wineryWebAddress;
-	private String imgFilename;
-	private String imgFilerename;
-	private String imgFilepath;
-	private String imgFilelength;
+	private String 	wineryName;
+	private String 	wineryAddress;
+	private String 	wineryPhone;
+	private String 	madeWine;
+	private String 	wineryWebAddress;
+	private String 	imgFilename;
+	private String 	imgFilerename;
+	private String 	imgFilepath;
+	private long	imgFilelength;
+	private String	wineryDescription;
 	
 	public WineryVO() {}
 
@@ -86,12 +87,20 @@ public class WineryVO {
 		this.imgFilepath = imgFilepath;
 	}
 
-	public String getImgFilelength() {
+	public long getImgFilelength() {
 		return imgFilelength;
 	}
 
-	public void setImgFilelength(String imgFilelength) {
+	public void setImgFilelength(long imgFilelength) {
 		this.imgFilelength = imgFilelength;
+	}
+
+	public String getWineryDescription() {
+		return wineryDescription;
+	}
+
+	public void setWineryDescription(String wineryDescription) {
+		this.wineryDescription = wineryDescription;
 	}
 
 	@Override
@@ -99,8 +108,6 @@ public class WineryVO {
 		return "WineryVO [wineryNo=" + wineryNo + ", wineryName=" + wineryName + ", wineryAddress=" + wineryAddress
 				+ ", wineryPhone=" + wineryPhone + ", madeWine=" + madeWine + ", wineryWebAddress=" + wineryWebAddress
 				+ ", imgFilename=" + imgFilename + ", imgFilerename=" + imgFilerename + ", imgFilepath=" + imgFilepath
-				+ ", imgFilelength=" + imgFilelength + "]";
+				+ ", imgFilelength=" + imgFilelength + ", wineryDescription=" + wineryDescription + "]";
 	}
-	
-	
 }
