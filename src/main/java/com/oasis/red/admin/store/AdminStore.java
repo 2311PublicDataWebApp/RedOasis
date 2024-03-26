@@ -22,6 +22,10 @@ public interface AdminStore {
 
 	int wineRegister(SqlSession session, WineVO wine);
 
+	WineVO selectWineOne(SqlSession session, int wineNo);
+
+	int wineUpdate(SqlSession session, WineVO wine);
+
 	Integer selectTotalCountWinery(SqlSession session);
 
 	List<WineryVO> selectWineryList(SqlSession session, PageInfo pInfo, String sortList);

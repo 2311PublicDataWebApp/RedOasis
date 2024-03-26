@@ -22,6 +22,10 @@ public interface AdminService {
 
 	int wineRegister(WineVO wine);
 
+	WineVO selectWineOne(int wineNo);
+
+	int wineUpdate(WineVO wine);
+
 	int selectTotalCountWinery();
 
 	List<WineryVO> selectWineryList(PageInfo pInfo, String sortList);

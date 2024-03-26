@@ -76,7 +76,7 @@ public class AdminController {
 			}
 			if (user != null) {
 				model.addAttribute("user", user);
-				return "admin/update";
+				return "admin/userUpdate";
 			} else {
 				model.addAttribute("msg", "회원 정보 조회를 완료하지 못하였습니다.");
 				return "common/errorPage";
@@ -175,7 +175,7 @@ public class AdminController {
 	        }
 	        int result = aService.wineRegister(wine);
 	        if(result > 0) {
-	        	return ""; // 와인 리스트로 리다이렉트 해 달라
+	        	return ""; // *와인 리스트로 리다이렉트 해 달라
 	        }else {
 	        	model.addAttribute("msg", "와인등록이 완료되지 않았습니다.");
 	        	return "common/errorPage";
@@ -186,6 +186,58 @@ public class AdminController {
 	    }
 	}
 
+	// 와인 수정 폼 wineNo값 받아와야함
+	@RequestMapping(value="/admin/winelist/update.kw", method=RequestMethod.GET)
+	public String adminWineUpdateView(Model model) {
+		try {
+			int wineNo = 35;
+			WineVO wineOne = aService.selectWineOne(wineNo);
+			model.addAttribute("wineOne", wineOne);
+			return "admin/wineUpdate";
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
+	
+	// 와인 수정
+	@RequestMapping(value="/admin/winelist/update.kw", method=RequestMethod.POST)
+	public String adminWineUpdate(Model model,
+			@ModelAttribute WineVO wine,
+			@RequestParam(value="reloadFile", required = false) MultipartFile reloadFile,
+			@RequestParam(value = "wineAcidiry") String wineAcidity,
+			HttpServletRequest request) {
+		try {
+			if(reloadFile != null && !reloadFile.isEmpty()) {
+				String fileName = wine.getImgFileRename();
+				if(fileName != null) {
+					// 기존 파일 삭제
+					this.deleteFile(request, fileName);
+				}
+				// 새로 업로드하려는 파일 저장
+				Map<String, Object> rwMap = this.saveFile(request, reloadFile);
+				wine.setImgFilename((String)rwMap.get("fileName"));
+				wine.setImgFileRename((String)rwMap.get("fileRename"));
+				wine.setImgFilePath((String)rwMap.get("filePath"));
+				wine.setImgFileLength((long)rwMap.get("fileLength"));
+				wine.setWineAcidity(wineAcidity);
+		        // 이달의 와인 값 체크
+		        if(wine.getWineMonth() == null || wine.getWineMonth().equals("")) {
+		        	wine.setWineMonth("N");
+		        }
+			}
+			int result = aService.wineUpdate(wine);
+			if(result > 0) {
+				return "redirect:/admin/winelist";
+			}else {
+				System.out.println("수정 실패");
+				return "common/errorPage";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
 	
 	// 와리너리 관리
 	@RequestMapping(value="/admin/winerylist.kw", method=RequestMethod.GET)
@@ -258,5 +310,15 @@ public class AdminController {
 		fileMap.put("filePath", "../resources/buploadFiles/"+fileRename);
 		fileMap.put("fileLength", uploadFile.getSize());
 		return fileMap;
+	}
+
+	// 기존 이미지 삭제
+	private void deleteFile(HttpServletRequest request, String fileName) {
+		String rPath = request.getSession().getServletContext().getRealPath("resources");
+		String delFilepath = rPath + "\\buploadFiles\\" + fileName;
+		File delFile = new File(delFilepath);
+		if(delFile.exists()) {
+			delFile.delete();
+		}	
 	}
 }

@@ -57,7 +57,30 @@
 		INSERT INTO WINE_TBL
 		VALUES(SEQ_WINE_NO.NEXTVAL, #{wineName}, #{wineRegion}, #{wineRank}, #{wineAging}, #{wineAVB}, #{wineTemp}, #{winePrice}, #{wineScore}, #{wineCategory}, #{imgFilename}, #{imgFileRename}, #{imgFilePath}, #{imgFileLength}, #{wineMonth}, #{wineAcidity})
 	</insert>
-	
+	<select id="selectWineOne" resultMap="WineResultMap">
+		SELECT * FROM WINE_TBL
+		WHERE WINE_NO = ${wineNo}
+	</select>
+	<update id="wineUpdate">
+	    UPDATE WINE_TBL
+	    SET 
+	        WINE_NAME = #{wineName},
+	        WINE_REGION = #{wineRegion},
+	        WINE_RANK = #{wineRank},
+	        WINE_AGING = #{wineAging},
+	        WINE_ABV = #{wineAVB},
+	        WINE_TEMP = #{wineTemp},
+	        WINE_PRICE = #{winePrice},
+	        WINE_SCORE = #{wineScore},
+	        WINE_CATEGORY = #{wineCategory},
+	        IMG_FILENAME = #{imgFilename},
+	        IMG_FILERENAME = #{imgFileRename},
+	        IMG_FILEPATH = #{imgFilePath},
+	        IMG_FILELENGTH = #{imgFileLength},
+	        WINE_MONTH = #{wineMonth},
+	        WINE_ACIDITY = #{wineAcidity}
+	    WHERE WINE_NO = #{wineNo}
+	</update>
 	<!-- 와이너리 -->
 	<resultMap type="Winery" id="WineryResultMap">
 		<id property="wineryNo" column="WINERY_NO"></id>

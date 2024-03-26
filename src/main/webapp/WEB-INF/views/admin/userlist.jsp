@@ -55,14 +55,14 @@
 	            </button>
 	            <div class="collapse navbar-collapse" id="navbarResponsive">
 	                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-	                    <li class="nav-item"><a class="nav-link" href="#services">와이너리</a></li>
-	                    <li class="nav-item"><a class="nav-link" href="#portfolio">와인목록</a></li>
-	                    <li class="nav-item"><a class="nav-link" href="#about">와인설명</a></li>
+	                    <li class="nav-item"><a class="nav-link" href="/winery/main.kw">와이너리</a></li>
+	                    <li class="nav-item"><a class="nav-link" href="/wine/winelist.kw">와인목록</a></li>
+	                    <li class="nav-item"><a class="nav-link" href="/wine/list.kw">와인설명</a></li>
 	                    <li class="nav-item"><a class="nav-link" href="#team">자유게시판</a></li>
 	                    <li class="nav-item"><a class="nav-link" href="#contact">교육/시음회</a></li>
 	                </ul>
 	                    <div class="col-md-3 text-end">
-	                        <button type="button" class="btn btn-outline-primary me-2" >로그아웃</button>
+	                        <button type="button" class="btn btn-outline-primary me-2">로그아웃</button>
 	                    </div>
 	            </div>
 	        </div>

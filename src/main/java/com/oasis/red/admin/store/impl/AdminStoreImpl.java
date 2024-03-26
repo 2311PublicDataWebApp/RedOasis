@@ -65,6 +65,18 @@ public class AdminStoreImpl implements AdminStore{
 	}
 
 	@Override
+	public WineVO selectWineOne(SqlSession session, int wineNo) {
+		WineVO wineOne = session.selectOne("AdminMapper.selectWineOne",wineNo);
+		return wineOne;
+	}
+
+	@Override
+	public int wineUpdate(SqlSession session, WineVO wine) {
+		int result = session.update("AdminMapper.wineUpdate", wine);
+		return result;
+	}
+
+	@Override
 	public Integer selectTotalCountWinery(SqlSession session) {
 		Integer totalCount = session.selectOne("AdminMapper.selectTotalCountWinery");
 		return totalCount;
