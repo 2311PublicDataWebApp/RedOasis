@@ -43,7 +43,10 @@
 			숙성 기간 : <input type="number" name="wineAging">개월<br>
 			음용 온도 : <input type="number" name="wineTemp">℃<br>
 			와인 등급 : <input type="text" name="wineRank"><br>
-			카테고리 : <input type="text" name="wineCategory"><br>
+			카테고리 : 	RED<input type="radio" name="wineCategory" value="RED">
+						WHITE<input type="radio" name="wineCategory" value="WHITE">
+						SPARKLING<input type="radio" name="wineCategory" value="SPARKLING">
+						ROSE<input type="radio" name="wineCategory" value="ROSE"><br>
 			이달의 와인 : <input type="checkbox" name="wineMonth" value="Y"><br>
 			<input type="submit" value="등록하기">
 			<input type="submit" value="작성 취소">

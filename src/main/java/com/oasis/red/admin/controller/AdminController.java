@@ -190,7 +190,7 @@ public class AdminController {
 	@RequestMapping(value="/admin/winelist/update.kw", method=RequestMethod.GET)
 	public String adminWineUpdateView(Model model) {
 		try {
-			int wineNo = 35;
+			int wineNo = 36;
 			WineVO wineOne = aService.selectWineOne(wineNo);
 			model.addAttribute("wineOne", wineOne);
 			return "admin/wineUpdate";
@@ -214,18 +214,19 @@ public class AdminController {
 					// 기존 파일 삭제
 					this.deleteFile(request, fileName);
 				}
-				// 새로 업로드하려는 파일 저장
-				Map<String, Object> rwMap = this.saveFile(request, reloadFile);
-				wine.setImgFilename((String)rwMap.get("fileName"));
-				wine.setImgFileRename((String)rwMap.get("fileRename"));
-				wine.setImgFilePath((String)rwMap.get("filePath"));
-				wine.setImgFileLength((long)rwMap.get("fileLength"));
-				wine.setWineAcidity(wineAcidity);
-		        // 이달의 와인 값 체크
-		        if(wine.getWineMonth() == null || wine.getWineMonth().equals("")) {
-		        	wine.setWineMonth("N");
-		        }
 			}
+			// 새로 업로드하려는 파일 저장
+			Map<String, Object> rwMap = this.saveFile(request, reloadFile);
+			wine.setImgFilename((String)rwMap.get("fileName"));
+			wine.setImgFileRename((String)rwMap.get("fileRename"));
+			wine.setImgFilePath((String)rwMap.get("filePath"));
+			wine.setImgFileLength((long)rwMap.get("fileLength"));
+			wine.setWineAcidity(wineAcidity);
+	        // 이달의 와인 값 체크
+	        if(wine.getWineMonth() == null || wine.getWineMonth().equals("")) {
+	        	wine.setWineMonth("N");
+	        }
+	
 			int result = aService.wineUpdate(wine);
 			if(result > 0) {
 				return "redirect:/admin/winelist";

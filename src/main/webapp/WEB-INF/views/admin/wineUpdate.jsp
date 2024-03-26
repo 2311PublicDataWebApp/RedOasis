@@ -49,7 +49,10 @@
 			숙성 기간 : <input type="number" name="wineAging" value="${wineOne.wineAging}">개월<br>
 			음용 온도 : <input type="number" name="wineTemp" value="${wineOne.wineTemp}">℃<br>
 			와인 등급 : <input type="text" name="wineRank" value="${wineOne.wineRank}"><br>
-			카테고리 : <input type="text" name="wineCategory" value="${wineOne.wineCategory}"><br>
+			카테고리 : 	RED<input type="radio" name="wineCategory" value="RED">
+						WHITE<input type="radio" name="wineCategory" value="WHITE">
+						SPARKLING<input type="radio" name="wineCategory" value="SPARKLING">
+						ROSE<input type="radio" name="wineCategory" value="ROSE"><br>
 			이달의 와인 :
 			<c:choose>
 			    <c:when test="${wineOne.wineMonth eq 'Y'}">
@@ -70,6 +73,14 @@
 	var radioButtons = document.querySelectorAll('input[name="wineAcidiry"]');
 	radioButtons.forEach(function(radioButton) {
 	    if (radioButton.value === wineAcidityValue) {
+	        radioButton.checked = true;
+	    }
+	});
+	// 카테고리 선택 처리
+	var wineCategoryValue = "${wineOne.wineCategory}";
+	var radioButtons = document.querySelectorAll('input[name="wineCategory"]');
+	radioButtons.forEach(function(radioButton) {
+	    if (radioButton.value === wineCategoryValue) {
 	        radioButton.checked = true;
 	    }
 	});
