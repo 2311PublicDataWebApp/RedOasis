@@ -9,6 +9,19 @@ public class UserVO {
 	private String userBlackList;
 	
 	public UserVO() {}
+	
+	public UserVO(String userId, String userPw, String userName, String userEmail, String userPhone,
+			String userBlackList) {
+		super();
+		this.userId = userId;
+		this.userPw = userPw;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+		this.userBlackList = userBlackList;
+	}
+
+
 
 	public String getUserId() {
 		return userId;
