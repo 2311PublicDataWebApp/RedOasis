@@ -14,7 +14,7 @@
 		</style>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>게시판 관리</title>
+        <title>와인 관리</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <!-- 추가내용 -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -62,7 +62,7 @@
 	                    <li class="nav-item"><a class="nav-link" href="/tasting/list.kw">교육/시음회</a></li>
 	                </ul>
 	                    <div class="col-md-3 text-end">
-	                        <button type="button" class="btn btn-outline-primary me-2" >로그아웃</button>
+	                        <button type="button" class="btn btn-outline-primary me-2">로그아웃</button>
 	                    </div>
 	            </div>
 	        </div>
@@ -105,50 +105,53 @@
 	                    <div class="container-fluid px-4">
 	                    	<br><br><br><br><br>
 	                    	<div id="total-count-box">
-		                    	<h2><i class="fa-solid fa-table"></i> 총 게시글 수 	                    	
+		                    	<h2><i class="fa-solid fa-users"></i> 총 와인 수 	                    	
 		                    	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${totalCount} 개</h2>
 	                    	</div>
-	                        <h1 class="mt-4">게시판 관리</h1>
+	                        <h1 class="mt-4">와인 관리</h1>
 	                        <div class="card mb-4">
 	                        </div>
 	                        <div class="card mb-4">
 	                            <div class="card-header">
-	                                <i class="fas fa-table me-1"></i>
-	                                게시글 목록 조회
+	                                <i class="fas fa-user me-1"></i>
+	                                와인 목록 조회
 	                            </div>
 	                            <div class="card-body">
 	                                <table id="datatablesSimple">
 	                                    <thead>
 	                                        <tr>
-												<th>게시글 번호</th>
-												<th>작성자 아이디</th>
-												<th>게시글 제목</th>
-												<th>최근 수정일</th>
-												<th>수정</th>
-												<th>삭제</th>
+												<th>와인 번호</th>
+								                <th>와인 이름</th>
+								                <th>와인 가격</th>
+								                <th>와인 점수</th>
+								                <th>와인 카테고리</th>
+								                <th>수정</th>
+								                <th>삭제</th>
 	                                        </tr>
 	                                    </thead>
 	                                    <tfoot>
 	                                        <tr>
-												<th>게시글 번호</th>
-												<th>작성자 아이디</th>
-												<th>게시글 제목</th>
-												<th>최근 수정일</th>
-												<th>수정</th>
-												<th>삭제</th>
+												<th>와인 번호</th>
+								                <th>와인 이름</th>
+								                <th>와인 가격</th>
+								                <th>와인 점수</th>
+								                <th>와인 카테고리</th>
+								                <th>수정</th>
+								                <th>삭제</th>
 	                                        </tr>
 	                                    </tfoot>
 	                                    <tbody>
-											<c:forEach items="${bList }" var="board">
-												<tr>
-													<td>${board.boardNo }</td>
-								        			<td>${board.userId}</td>
-													<td>${board.boardName }</td>
-													<td>${board.updateDate }</td>
-													<td><a href="/admin/boardlist/update.kw?boardNo=${board.boardNo }"><button style="width: 100%; background-color : white; color : #caca00;">수정</button></a></td>
-													<td><a href="#"><button style="width: 100%; background-color : white; color : red;">삭제</button></a></td>
-												</tr>
-											</c:forEach>
+							                <c:forEach items="${wList}" var="wine">
+								                <tr>
+								                    <td>${wine.wineNo}</td>
+								                    <td>${wine.wineName}</td>
+								                    <td>${wine.winePrice}</td>
+								                    <td>${wine.wineScore}</td>
+								                    <td>${wine.wineCategory}</td>
+								                    <td><a href="/admin/winelist/update.kw?wineNo=${wine.wineNo }"><button style="width: 100%; background-color : white; color : #caca00;">수정</button></a></td>
+								                    <td><a href="#"><button style="width: 100%; background-color : white; color : red;">삭제</button></a></td>
+								                </tr>
+								            </c:forEach>
 	                                    </tbody>
 	                                </table>
 	                            </div>
@@ -157,67 +160,66 @@
 	                </main>
 	            </div>
 	        </div>
+<!-- 			<h1>(임시) 관리자 네브바</h1> -->
+<!-- 			<a href="/admin/userlist.kw">회원관리</a> -->
+<!-- 			<a href="/admin/boardlist.kw">게시판관리</a> -->
+<!-- 			<a href="#">와인관리</a> -->
+<!-- 			<a href="/admin/winerylist.kw">와이너리관리</a> -->
+<!-- 			<a href="#">이달의 와인 관리</a> -->
+<!-- 		    <h1>회원 관리</h1> -->
 
-<!-- 	<h1>(임시) 관리자 네브바</h1> -->
-<!-- 	<a href="/admin/userlist.kw">회원관리</a> -->
-<!-- 	<a href="/admin/boardlist.kw">게시판관리</a> -->
-<!-- 	<a href="#">와인관리</a> -->
-<!-- 	<a href="/admin/winerylist.kw">와이너리관리</a> -->
-<!-- 	<a href="#">이달의 와인 관리</a> -->
-<!-- 	<h1>게시판 관리</h1> -->
-<%-- 	<h2>총 게시글 수 : ${totalCount}</h2> --%>
-<!-- 	<!-- 여기 미완 --> -->
-<!--     <form action="/" method="get"> -->
-<%-- 		<input type="text" name="searchKeyword" placeholder="검색어 입력" value="${searchKeyword }"> --%>
-<!-- 		<input type="submit" value="검색"> -->
-<!--     </form> -->
-<!--     <form id="sortForm"> -->
-<!--     	정렬 :  -->
-<!-- 	    <select id="sortList" name="sortList" onchange="sortPage()"> -->
-<%-- 		  	<option value="UPDATE_DATE" <% if ("UPDATE_DATE".equals(request.getParameter("sortList"))) { %> selected <% } %>>최근 수정일</option> --%>
-<%-- 		    <option value="BOARD_NAME" <% if ("BOARD_NAME".equals(request.getParameter("sortList"))) { %> selected <% } %>>작성자 이름</option> --%>
-<%-- 		    <option value="USER_ID" <% if ("USER_ID".equals(request.getParameter("sortList"))) { %> selected <% } %>>작성자 아이디</option> --%>
-<!-- 	    </select> -->
-<!-- 	</form> -->
-<!-- 	<table> -->
-<!-- 		<thead> -->
-<!-- 			<tr> -->
-<!-- 				<th>게시글 번호</th> -->
-<!-- 				<th>작성자 아이디</th> -->
-<!-- 				<th>게시글 제목</th> -->
-<!-- 				<th>최근 수정일</th> -->
-<!-- 				<th>삭제</th> -->
-<!-- 			</tr>				 -->
-<!-- 		</thead> -->
-<!-- 		<tbody> -->
-<%-- 			<c:forEach items="${bList }" var="board"> --%>
-<!-- 				<tr> -->
-<%-- 					<td>${board.boardNo }</td> --%>
-<%--         			<td>${board.userId}</td> --%>
-<%-- 					<td>${board.boardName }</td> --%>
-<%-- 					<td>${board.updateDate }</td> --%>
-<!-- 					<td><input type="button" value="삭제"></td> -->
-<!-- 				</tr> -->
-<%-- 			</c:forEach> --%>
-<!-- 		</tbody> -->
-<!-- 		<!-- 페이지네이션 --> -->
-<!-- 		<tfoot> -->
-<!-- 			<tr align="center"> -->
-<!-- 				<td colspan="5"> -->
-<%-- 					<c:if test="${pInfo.startNavi ne '1' }"> --%>
-<%-- 					    <a href="/admin/boardlist.kw?page=${pInfo.startNavi -1 }&sortList=${param.sortList}">이전</a> --%>
-<%-- 					</c:if> --%>
-<%-- 					<c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }" var="p"> --%>
-<%-- 					    <a href="/admin/boardlist.kw?page=${p }&sortList=${param.sortList}">${p }</a> --%>
-<%-- 					</c:forEach> --%>
-<%-- 					<c:if test="${pInfo.endNavi ne pInfo.naviTotalCount }"> --%>
-<%-- 					    <a href="/admin/boardlist.kw?page=${pInfo.endNavi +1 }&sortList=${param.sortList}">다음</a> --%>
-<%-- 					</c:if> --%>
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<!-- 	    </tfoot> -->
-<!-- 	</table> -->
-
+			<!-- 여기 미완 -->
+<!-- 		    <form action="/" method="get">  -->
+<%-- 				<input type="text" name="searchKeyword" placeholder="검색어 입력" value="${searchKeyword }"> --%>
+<!-- 				<input type="submit" value="검색"> -->
+<!-- 		    </form> -->
+<!-- 		    <form id="sortForm"> -->
+<!-- 		    	정렬 :  -->
+<!-- 			    <select id="sortList" name="sortList" onchange="sortPage()"> -->
+<%-- 				  	<option value="USER_ID" <% if ("USER_ID".equals(request.getParameter("sortList"))) { %> selected <% } %>>아이디</option> --%>
+<%-- 				    <option value="USER_NAME" <% if ("USER_NAME".equals(request.getParameter("sortList"))) { %> selected <% } %>>이름</option> --%>
+<%-- 				    <option value="USER_BLACKLIST" <% if ("USER_BLACKLIST".equals(request.getParameter("sortList"))) { %> selected <% } %>>블랙리스트</option> --%>
+<!-- 			    </select> -->
+<!-- 			</form> -->
+<!-- 		    <table>  -->
+<!-- 		        <thead> -->
+<!-- 		            <tr> -->
+<!-- 		                <th>아이디</th> -->
+<!-- 		                <th>이름</th> -->
+<!-- 		                <th>휴대폰 번호</th> -->
+<!-- 		                <th>Email</th> -->
+<!-- 		                <th>차단</th> -->
+<!-- 		            </tr>                 -->
+<!-- 		        </thead> -->
+		
+<!-- 		        <tbody> -->
+<%-- 		            <c:forEach items="${uList}" var="user"> --%>
+<!-- 		                <tr> -->
+<%-- 		                    <td>${user.userId}</td> --%>
+<%-- 		                    <td>${user.userName}</td> --%>
+<%-- 		                    <td>${user.userPhone}</td> --%>
+<%-- 		                    <td>${user.userEmail}</td> --%>
+<%-- 		                    <td>${user.userBlackList}</td> --%>
+<!-- 		                </tr> -->
+<%-- 		            </c:forEach> --%>
+<!-- 		        </tbody> -->
+				<!-- 페이지네이션 -->
+<!-- 				<tfoot> -->
+<!-- 					<tr align="center"> -->
+<!-- 						<td colspan="5"> -->
+<%-- 							<c:if test="${pInfo.startNavi ne '1' }"> --%>
+<%-- 							    <a href="/admin/userlist.kw?page=${pInfo.startNavi -1 }&sortList=${param.sortList}">이전</a> --%>
+<%-- 							</c:if> --%>
+<%-- 							<c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }" var="p"> --%>
+<%-- 							    <a href="/admin/userlist.kw?page=${p }&sortList=${param.sortList}">${p }</a> --%>
+<%-- 							</c:forEach> --%>
+<%-- 							<c:if test="${pInfo.endNavi ne pInfo.naviTotalCount }"> --%>
+<%-- 							    <a href="/admin/userlist.kw?page=${pInfo.endNavi +1 }&sortList=${param.sortList}">다음</a> --%>
+<%-- 							</c:if> --%>
+<!-- 						</td> -->
+<!-- 					</tr> -->
+<!-- 			    </tfoot> -->
+<!-- 		    </table> -->
 			<!-- Footer-->
 			  <footer class="footer py-4" style="padding-top: 100px !important; padding-left:10% !important;">
 			    <div class="container">
@@ -253,7 +255,7 @@
 	<script>
 	function sortPage() {
 	    var sortList = document.getElementById("sortList").value;
-	    window.location.href = "/admin/boardlist.kw?sortList=" + sortList;
+	    window.location.href = "/admin/userlist.kw?sortList=" + sortList;
 	}
 	</script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>

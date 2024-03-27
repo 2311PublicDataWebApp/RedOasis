@@ -34,7 +34,7 @@ public class AdminStoreImpl implements AdminStore{
 	    params.put("rowBounds", rowBounds);
 	    params.put("sortList", sortList);
 	    // 사용자 리스트 조회
-	    List<UserVO> uList = session.selectList("AdminMapper.selectUserList", params, rowBounds);
+	    List<UserVO> uList = session.selectList("AdminMapper.selectUserList");
 	    return uList;
 	}
 
@@ -54,13 +54,37 @@ public class AdminStoreImpl implements AdminStore{
 	    params.put("rowBounds", rowBounds);
 	    params.put("sortList", sortList);
 	    // 게시글 리스트 조회
-	    List<BoardVO> bList = session.selectList("AdminMapper.selectBoardList", params, rowBounds);
+	    List<BoardVO> bList = session.selectList("AdminMapper.selectBoardList");
 		return bList;
+	}
+
+	@Override
+	public Integer selectTotalCountWine(SqlSession session) {
+		Integer totalCount = session.selectOne("AdminMapper.selectTotalCountWine");
+		return totalCount;
+	}
+
+	@Override
+	public List<WineVO> selectWineList(SqlSession session, PageInfo pInfo, String sortList) {
+		List<WineVO> wList = session.selectList("AdminMapper.selectWineList");
+		return wList;
 	}
 
 	@Override
 	public int wineRegister(SqlSession session, WineVO wine) {
 		int result = session.insert("AdminMapper.wineRegister", wine);
+		return result;
+	}
+
+	@Override
+	public WineVO selectWineOne(SqlSession session, int wineNo) {
+		WineVO wineOne = session.selectOne("AdminMapper.selectWineOne",wineNo);
+		return wineOne;
+	}
+
+	@Override
+	public int wineUpdate(SqlSession session, WineVO wine) {
+		int result = session.update("AdminMapper.wineUpdate", wine);
 		return result;
 	}
 
@@ -80,7 +104,7 @@ public class AdminStoreImpl implements AdminStore{
 	    params.put("rowBounds", rowBounds);
 	    params.put("sortList", sortList);
 	    // 게시글 리스트 조회
-	    List<WineryVO> wryList = session.selectList("AdminMapper.selectWineryList", params, rowBounds);
+	    List<WineryVO> wryList = session.selectList("AdminMapper.selectWineryList");
 		return wryList;
 	}
 

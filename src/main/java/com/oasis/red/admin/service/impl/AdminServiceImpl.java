@@ -47,8 +47,32 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+	public int selectTotalCountWine() {
+		Integer totalCount = aStore.selectTotalCountWine(session);
+		return totalCount;
+	}
+
+	@Override
+	public List<WineVO> selectWineList(PageInfo pInfo, String sortList) {
+		List<WineVO> wList = aStore.selectWineList(session, pInfo, sortList);
+		return wList;
+	}
+
+	@Override
 	public int wineRegister(WineVO wine) {
 		int result = aStore.wineRegister(session, wine);
+		return result;
+	}
+
+	@Override
+	public WineVO selectWineOne(int wineNo) {
+		WineVO wineOne = aStore.selectWineOne(session, wineNo);
+		return wineOne;
+	}
+
+	@Override
+	public int wineUpdate(WineVO wine) {
+		int result = aStore.wineUpdate(session, wine);
 		return result;
 	}
 

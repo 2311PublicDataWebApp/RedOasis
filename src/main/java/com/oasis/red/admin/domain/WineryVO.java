@@ -8,10 +8,11 @@ public class WineryVO {
 	private String 	madeWine;
 	private String 	wineryWebAddress;
 	private String 	imgFilename;
-	private String 	imgFilerename;
+	private String 	imgFileRename;
 	private String 	imgFilepath;
 	private long	imgFilelength;
 	private String	wineryDescription;
+
 	
 	public WineryVO() {}
 
@@ -71,12 +72,12 @@ public class WineryVO {
 		this.imgFilename = imgFilename;
 	}
 
-	public String getImgFilerename() {
-		return imgFilerename;
+	public String getImgFileRename() {
+		return imgFileRename;
 	}
 
-	public void setImgFilerename(String imgFilerename) {
-		this.imgFilerename = imgFilerename;
+	public void setImgFileRename(String imgFilerename) {
+		this.imgFileRename = imgFilerename;
 	}
 
 	public String getImgFilepath() {
@@ -107,7 +108,8 @@ public class WineryVO {
 	public String toString() {
 		return "WineryVO [wineryNo=" + wineryNo + ", wineryName=" + wineryName + ", wineryAddress=" + wineryAddress
 				+ ", wineryPhone=" + wineryPhone + ", madeWine=" + madeWine + ", wineryWebAddress=" + wineryWebAddress
-				+ ", imgFilename=" + imgFilename + ", imgFilerename=" + imgFilerename + ", imgFilepath=" + imgFilepath
+				+ ", imgFilename=" + imgFilename + ", imgFileRename=" + imgFileRename + ", imgFilepath=" + imgFilepath
 				+ ", imgFilelength=" + imgFilelength + ", wineryDescription=" + wineryDescription + "]";
+
 	}
 }

@@ -16,7 +16,6 @@
 		SELECT COUNT(*) FROM USER_TBL
 	</select><select id="selectUserList" parameterType="java.util.Map" resultMap="UserResultMap">
 	    SELECT * FROM USER_TBL
-	    ORDER BY ${sortList} ASC
 	</select>
 	
 	<!-- 게시판  -->
@@ -33,7 +32,6 @@
 	</select>
 	<select id="selectBoardList" parameterType="java.util.Map" resultMap="BoardResultMap">
 	    SELECT * FROM BOARD_TBL
-	    ORDER BY ${sortList} ASC
 	</select>
 	
 	<!-- 와인 -->
@@ -55,11 +53,40 @@
 		<result property="wineMonth" column="WINE_MONTH"></result>
 		<result property="wineAcidity" column="WINE_ACIDITY"></result>
 	</resultMap>
+	<select id="selectTotalCountWine" resultType="_int">
+		SELECT COUNT(*) FROM WINE_TBL
+	</select>
+	<select id="selectWineList" parameterType="java.util.Map" resultMap="WineResultMap">
+	    SELECT * FROM WINE_TBL
+	</select>
 	<insert id="wineRegister">
 		INSERT INTO WINE_TBL
 		VALUES(SEQ_WINE_NO.NEXTVAL, #{wineName}, #{wineRegion}, #{wineRank}, #{wineAging}, #{wineAVB}, #{wineTemp}, #{winePrice}, #{wineScore}, #{wineCategory}, #{imgFilename}, #{imgFileRename}, #{imgFilePath}, #{imgFileLength}, #{wineMonth}, #{wineAcidity})
 	</insert>
-	
+	<select id="selectWineOne" resultMap="WineResultMap">
+		SELECT * FROM WINE_TBL
+		WHERE WINE_NO = ${wineNo}
+	</select>
+	<update id="wineUpdate">
+	    UPDATE WINE_TBL
+	    SET 
+	        WINE_NAME = #{wineName},
+	        WINE_REGION = #{wineRegion},
+	        WINE_RANK = #{wineRank},
+	        WINE_AGING = #{wineAging},
+	        WINE_ABV = #{wineAVB},
+	        WINE_TEMP = #{wineTemp},
+	        WINE_PRICE = #{winePrice},
+	        WINE_SCORE = #{wineScore},
+	        WINE_CATEGORY = #{wineCategory},
+	        IMG_FILENAME = #{imgFilename},
+	        IMG_FILERENAME = #{imgFileRename},
+	        IMG_FILEPATH = #{imgFilePath},
+	        IMG_FILELENGTH = #{imgFileLength},
+	        WINE_MONTH = #{wineMonth},
+	        WINE_ACIDITY = #{wineAcidity}
+	    WHERE WINE_NO = #{wineNo}
+	</update>
 	<!-- 와이너리 -->
 	<resultMap type="Winery" id="WineryResultMap">
 		<id property="wineryNo" column="WINERY_NO"></id>
@@ -79,7 +106,6 @@
 	</select>
 	<select id="selectWineryList" parameterType="java.util.Map" resultMap="WineryResultMap">
 	    SELECT * FROM WINERY_TBL
-	    ORDER BY ${sortList} ASC
 	</select>
 	<insert id="insertWinery">
 		INSERT INTO WINERY_TBL

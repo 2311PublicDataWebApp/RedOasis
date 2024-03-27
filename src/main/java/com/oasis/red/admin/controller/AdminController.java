@@ -26,12 +26,15 @@ import com.oasis.red.admin.domain.UserVO;
 import com.oasis.red.admin.domain.WineVO;
 import com.oasis.red.admin.domain.WineryVO;
 import com.oasis.red.admin.service.AdminService;
+import com.oasis.red.user.service.UserService;
 
 @Controller
 public class AdminController {
 
 	@Autowired
 	private AdminService aService;
+	@Autowired
+	private UserService uService;
 	
 	// 회원 관리
 	@RequestMapping(value= "/admin/userlist.kw", method=RequestMethod.GET)
@@ -56,6 +59,48 @@ public class AdminController {
 				model.addAttribute("uList", uList);
 			}
 			return "admin/userlist";
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
+	
+	// 회원 정보 수정 페이지 이동
+	@RequestMapping(value = "/admin/userlist/update.kw", method = RequestMethod.GET)
+	public String showUpdatePage(HttpSession session, Model model
+			,@RequestParam("userId") String userId) {
+		try {
+			com.oasis.red.user.domain.UserVO user = null;
+			if (userId != null) {
+				user = uService.getOneById(userId);
+			}
+			if (user != null) {
+				model.addAttribute("user", user);
+				return "admin/userUpdate";
+			} else {
+				model.addAttribute("msg", "회원 정보 조회를 완료하지 못하였습니다.");
+				return "common/errorPage";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
+	// 회원 정보 수정
+	@RequestMapping(value = "/admin/update.kw", method = RequestMethod.POST)
+	public String updatePage(@ModelAttribute com.oasis.red.user.domain.UserVO user, Model model) {
+		try {
+			//블랙리스트 값
+			if(user.getUserBlackList() == null) {
+				user.setUserBlackList("N");
+			}
+			int result = uService.updateUser(user);
+			if (result > 0) {
+				return "redirect:/admin/userlist";
+			} else {
+				model.addAttribute("msg", "회원 정보 수정을 완료하지 못하였습니다.");
+				return "common/errorPage";
+			}
 		} catch (Exception e) {
 			model.addAttribute("msg", e.getMessage());
 			return "common/errorPage";
@@ -91,7 +136,31 @@ public class AdminController {
 		}
 	}
 	
-	// 와인 관리 미진행
+	// 와인 관리
+	@RequestMapping(value="/admin/winelist.kw", method=RequestMethod.GET)
+	public String adminWineList(Model model
+			, @RequestParam(value="page", required=false, defaultValue="1")Integer currentPage
+			, @RequestParam(value="sortList", required=false)String sortList) {
+		try {
+			// 총 와인 수
+			int totalCount = aService.selectTotalCountWine();
+			model.addAttribute("totalCount", totalCount);
+			// 페이징 처리후 값 조회
+			PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
+			// 초기 설정값
+			List<WineVO> wList = aService.selectWineList(pInfo, sortList);
+			if(!wList.isEmpty()) {
+				model.addAttribute("wList", wList);
+				model.addAttribute("pInfo", pInfo);
+			}else {
+				model.addAttribute("wList", wList);
+			}
+			return "admin/winelist";
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
 	
 	// 와인 등록
 	@RequestMapping(value="/admin/winelist/register.kw", method=RequestMethod.GET)
@@ -128,7 +197,7 @@ public class AdminController {
 	        }
 	        int result = aService.wineRegister(wine);
 	        if(result > 0) {
-	        	return ""; // 와인 리스트로 리다이렉트 해 달라
+	        	return "redirect:/wine/winelist"; // *주소 맞는지 확인불가
 	        }else {
 	        	model.addAttribute("msg", "와인등록이 완료되지 않았습니다.");
 	        	return "common/errorPage";
@@ -138,6 +207,7 @@ public class AdminController {
 	        return "common/errorPage";
 	    }
 	}
+
 
 	//와이너리 등록
 	@RequestMapping(value = "/admin/wineryinsert.kw", method = RequestMethod.GET)
@@ -155,7 +225,7 @@ public class AdminController {
 		try {
 			Map<String, Object> infoMap = this.saveFile(request, uploadFile);
 			winery.setImgFilename((String)infoMap.get("fileName"));
-			winery.setImgFilerename((String)infoMap.get("fileRename"));
+			winery.setImgFileRename((String)infoMap.get("fileRename"));
 			winery.setImgFilepath((String)infoMap.get("filePath"));
 			winery.setImgFilelength((long)infoMap.get("fileLength"));
 			
@@ -174,6 +244,62 @@ public class AdminController {
 		}
 		
 		return mv;
+	}
+
+	// 와인 수정 폼 wineNo값 받아와야함
+	@RequestMapping(value="/admin/winelist/update.kw", method=RequestMethod.GET)
+	public String adminWineUpdateView(Model model,
+			@ModelAttribute WineVO wine) {
+		try {
+			int wineNo = wine.getWineNo();
+			WineVO wineOne = aService.selectWineOne(wineNo);
+			model.addAttribute("wineOne", wineOne);
+			return "admin/wineUpdate";
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
+	
+	// 와인 수정
+	@RequestMapping(value="/admin/winelist/update.kw", method=RequestMethod.POST)
+	public String adminWineUpdate(Model model,
+			@ModelAttribute WineVO wine,
+			@RequestParam(value="reloadFile", required = false) MultipartFile reloadFile,
+			@RequestParam(value = "wineAcidiry") String wineAcidity,
+			HttpServletRequest request) {
+		try {
+			if(reloadFile != null && !reloadFile.isEmpty()) {
+				String fileName = wine.getImgFileRename();
+				if(fileName != null) {
+					// 기존 파일 삭제
+					this.deleteFile(request, fileName);
+				}
+			}
+			// 새로 업로드하려는 파일 저장
+			Map<String, Object> rwMap = this.saveFile(request, reloadFile);
+			wine.setImgFilename((String)rwMap.get("fileName"));
+			wine.setImgFileRename((String)rwMap.get("fileRename"));
+			wine.setImgFilePath((String)rwMap.get("filePath"));
+			wine.setImgFileLength((long)rwMap.get("fileLength"));
+			wine.setWineAcidity(wineAcidity);
+	        // 이달의 와인 값 체크
+	        if(wine.getWineMonth() == null || wine.getWineMonth().equals("")) {
+	        	wine.setWineMonth("N");
+	        }
+	
+			int result = aService.wineUpdate(wine);
+			if(result > 0) {
+				return "redirect:/admin/winelist";
+			}else {
+				System.out.println("수정 실패");
+				return "common/errorPage";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+
 	}
 	
 	// 와리너리 관리
@@ -247,5 +373,15 @@ public class AdminController {
 		fileMap.put("filePath", "../resources/buploadFiles/"+fileRename);
 		fileMap.put("fileLength", uploadFile.getSize());
 		return fileMap;
+	}
+
+	// 기존 이미지 삭제
+	private void deleteFile(HttpServletRequest request, String fileName) {
+		String rPath = request.getSession().getServletContext().getRealPath("resources");
+		String delFilepath = rPath + "\\buploadFiles\\" + fileName;
+		File delFile = new File(delFilepath);
+		if(delFile.exists()) {
+			delFile.delete();
+		}	
 	}
 }
