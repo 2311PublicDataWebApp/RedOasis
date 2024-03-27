@@ -14,14 +14,19 @@
 		<typeAlias type="com.oasis.red.admin.domain.UserVO" alias="User"/>
 		<typeAlias type="com.oasis.red.user.domain.UserVO" 	 alias="Member"/>
 		<typeAlias type="com.oasis.red.admin.domain.BoardVO" alias="Board"/>
+		<typeAlias type="com.oasis.red.board.domain.CommentVO" alias="Comment"/>
 		<typeAlias type="com.oasis.red.admin.domain.WineVO" alias="Wine"/>
 		<typeAlias type="com.oasis.red.admin.domain.WineryVO" alias="Winery"/>
+		<typeAlias type="com.oasis.red.board.domain.BoardImgVO" alias="Img"/>
 	</typeAliases>
 	<mappers>
 		<!-- mapper.xml이 생성될 때마다 추가 -->
 		<mapper resource="mappers/admin-mapper.xml"></mapper>
 		<mapper resource="mappers/user-mapper.xml"></mapper>
 		<mapper resource="mappers/winery-mapper.xml"></mapper>
+		<mapper resource="mappers/board-mapper.xml"></mapper>
+		<mapper resource="mappers/comment-mapper.xml"></mapper>
+		
 	</mappers>
 
 </configuration>

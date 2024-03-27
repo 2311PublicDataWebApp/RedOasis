@@ -35,8 +35,16 @@ public class UserController {
 			UserVO uOne = uService.checkUserLogin(user);
 			if (uOne != null) {
 				// 로그인 성공!, Session에 저장
-				session.setAttribute("userId", uOne.getUserId());
-				session.setAttribute("userName", uOne.getUserName());
+				if (uOne.getUserId().equals("BOSS")) {
+					session.setAttribute("userId", uOne.getUserId());
+					session.setAttribute("userName", uOne.getUserName());
+					return "redirect:/admin/userlist.kw";				
+				
+				} else {
+					session.setAttribute("userId", uOne.getUserId());
+					session.setAttribute("userName", uOne.getUserName());
+					return "redirect:/";				
+				}
 			} else {
 				// 로그인 실패, No Data Found!
 				model.addAttribute("msg", "No Data Found!!");
@@ -48,7 +56,6 @@ public class UserController {
 			model.addAttribute("msg", e.getMessage());
 			return "common/errorPage";
 		}
-		return "redirect:/index.jsp";
 	}
 
 //--------------------로그 아웃--------------------------------------------------------------------------------
