@@ -22,6 +22,7 @@
 		<mapper resource="mappers/admin-mapper.xml"></mapper>
 		<mapper resource="mappers/user-mapper.xml"></mapper>
 		<mapper resource="mappers/winery-mapper.xml"></mapper>
+		<mapper resource="mappers/wine-mapper.xml"></mapper>
 	</mappers>
 
 </configuration>

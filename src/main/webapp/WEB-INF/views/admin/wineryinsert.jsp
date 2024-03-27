@@ -47,35 +47,35 @@
     <div class="container mt-5">
         <div class="form-section">
             <h2 class="mb-4 wine-theme">와이너리 정보 입력</h2>
-            <form action="/admin/wineryinsert.kw" method="post">
+            <form action="/admin/wineryinsert.kw" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="wineryName">와이너리 이름</label>
-                    <input name="wineryName" type="text" class="form-control" id="wineryName" required>
+                    <label for="winery-name">와이너리 이름</label>
+                    <input name="wineryName" type="text" class="form-control" id="winery-name" required>
                 </div>
                 <div class="form-group">
-                    <label for="wineryAddress">와이너리 주소</label>
+                    <label>와이너리 주소</label>
                     <input name="wineryAddress" type="text" id="address" placeholder="주소" style="width:300px;">
-					<button class="btn btn-outline-secondary" type="button" id="findAddress" style="background-color: #720026; color: white;">주소 찾기</button>
+					<button class="btn btn-outline-secondary" type="button" id="find-address" style="background-color: #720026; color: white;">주소 찾기</button>
                 </div>
                 <div class="form-group">
-                    <label for="wineryWebsite">와이너리 웹 페이지 주소</label>
-                    <input name="wineryWebAddress" type="url" class="form-control" id="wineryWebsite">
+                    <label for="winery-website">와이너리 웹 페이지 주소</label>
+                    <input name="wineryWebAddress" type="url" class="form-control" id="winery-website">
                 </div>
                 <div class="form-group">
-                    <label for="wineryPhone">와이너리 전화번호</label>
-                    <input name="wineryPhone"  type="tel" class="form-control" id="wineryPhone">
+                    <label for="winery-phone">와이너리 전화번호</label>
+                    <input name="wineryPhone"  type="tel" class="form-control" id="winery-phone">
                 </div>
                 <div class="form-group">
                     <label for="wineryWine">대표 생산 와인</label>
                     <input name="madeWine" type="text" class="form-control" id="wineryWine">
                 </div>
                 <div class="form-group">
-                    <label for="wineryDescription">와이너리 설명</label>
-                    <textarea name="wineryDescription" class="form-control" id="wineryDescription" rows="3"></textarea>
+                    <label for="winery-description">와이너리 설명</label>
+                    <textarea name="wineryDescription" class="form-control" id="winery-description" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="wineryPhoto">와이너리 사진</label>
-                    <input type="file" name="uploadFile" class="form-control-file" id="wineryPhoto">
+                    <label for="winery-photo">와이너리 사진</label>
+                    <input type="file" name="uploadFile" class="form-control-file" id="winery-photo">
                 </div>
                 <button type="submit" class="btn btn-wine-theme">제출</button>
                 <button type="button" class="btn btn-wine-theme">취소</button>
@@ -89,7 +89,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-	document.getElementById('findAddress').addEventListener('click', function() {
+	document.getElementById('find-address').addEventListener('click', function() {
 	    new daum.Postcode({
 	        oncomplete: function(data) {
 	            // 사용자가 주소를 선택하면, 선택한 주소 정보를 입력 필드에 채웁니다.

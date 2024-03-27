@@ -154,9 +154,9 @@ public class AdminController {
 			,HttpSession session) {
 		try {
 			Map<String, Object> infoMap = this.saveFile(request, uploadFile);
-			winery.setImgFilename("fileName");
-			winery.setImgFilerename("fileRename");
-			winery.setImgFilepath("filePath");
+			winery.setImgFilename((String)infoMap.get("fileName"));
+			winery.setImgFilerename((String)infoMap.get("fileRename"));
+			winery.setImgFilepath((String)infoMap.get("filePath"));
 			winery.setImgFilelength((long)infoMap.get("fileLength"));
 			
 			int result = aService.wineryInsert(winery);
@@ -167,7 +167,7 @@ public class AdminController {
 				mv.setViewName("common/errorPage");
 			}
 			
-			mv.setViewName("admin/wineryinsert");
+			mv.setViewName("admin/winerylist");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("common/errorPage");
