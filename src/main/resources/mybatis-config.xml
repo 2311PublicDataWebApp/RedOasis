@@ -12,10 +12,14 @@
 	<typeAliases>
 		<!--  VO가 생성될 때마다 추가 -->
 		<typeAlias type="com.oasis.red.admin.domain.UserVO" alias="User"/>
+		<typeAlias type="com.oasis.red.tasting.domain.TastingVO" alias="Tasting"/>
+		<typeAlias type="com.oasis.red.education.domain.EducationVO" alias="Education"/>
 	</typeAliases>
 	<mappers>
 		<!-- mapper.xml이 생성될 때마다 추가 -->
 		<mapper resource="mappers/admin-mapper.xml"></mapper>
+		<mapper resource="mappers/tasting-mapper.xml"></mapper>
+		<mapper resource="mappers/education-mapper.xml"></mapper>
 	</mappers>
 
 </configuration>
