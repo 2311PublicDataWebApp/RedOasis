@@ -43,6 +43,9 @@
                         <label for="userPhone" class="form-label">휴대폰번호</label>
                         <input type="tel" class="form-control" id="userPhone" name="userPhone" value="${user.userPhone }">
                     </div>
+                    <input type="hidden" class="form-control" id="userBlackList" name="userBlackList" value="${user.userBlackList } ">
+                    
+                    
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">수정하기</button>
                     </div>

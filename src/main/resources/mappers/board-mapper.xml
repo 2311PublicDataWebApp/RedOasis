@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardMapper">
+	<resultMap type="Board" id="boardResultMap">
+		<id 	property="boardNo" 			column="BOARD_NO"/>
+		<result property="boardName" 		column="BOARD_NAME"/>
+		<result property="boardContent" 	column="BOARD_CONTENT"/>
+		<result property="userId" 		column="USER_ID"/>
+		<result property="boardDate" 		column="BOARD_DATE"/>
+		<result property="UpdateDate" 		column="UPDATE_DATE"/>		
+	</resultMap>
+	
+	<resultMap type="Img" id="boardImageMap">
+			<id 	property="imgNo" 			column="IMG_NO"/>
+			<result 	property="imgFilename" 			column="IMG_FILENAME"/>
+			<result 	property="imgFileRename" 			column="IMG_FILERENAME"/>
+			<result 	property="imgFilepath" 			column="IMG_FILEPATH"/>
+			<result 	property="imgFilelength" 			column="IMG_FILELENGTH"/>
+			<result 	property="boardNo" 			column="BOARD_NO"/>
+	
+	</resultMap>
+	
+	
+	
+	<select id="selectBoardList" resultMap="boardResultMap">
+		SELECT * FROM BOARD_TBL ORDER BY BOARD_NO DESC
+	</select>
+	<select id="selectOneByNo" resultMap="boardResultMap">
+		SELECT * FROM BOARD_TBL
+		WHERE BOARD_NO = #{boardNo } 
+		ORDER BY BOARD_NO DESC
+	</select>
+	<select id="selectImgList" resultMap="boardImageMap">
+		SELECT * FROM BOARD_IMG_TBL
+		WHERE BOARD_NO = #{boardNo } 
+		ORDER BY BOARD_NO DESC
+	</select>
+	<insert id="insertBoard">
+		INSERT INTO BOARD_TBL
+		VALUES(SEQ_BOARD_NO.NEXTVAL, #{boardName},#{boardContent},#{userId}
+		, #{boardDate},#{UpdateDate})
+	</insert>
+	
+</mapper>
