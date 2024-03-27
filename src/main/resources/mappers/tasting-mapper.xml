@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TastingMapper">
+    <resultMap type="Tasting" id="TastingResultMap">
+        <id     property="tastingNo"            column="TASTING_NO"/>
+        <result property="tastingName"          column="TASTING_NAME"/>
+        <result property="tastingLocation"      column="TASTING_LOCATION"/>
+        <result property="tastingDate"          column="TASTING_DATE"/>
+        <result property="tastingWriter"          column="TASTING_WRITER"/>
+        <result property="tastingContent"       column="TASTING_CONTENT"/>
+        <result property="imgFileName"          column="IMG_FILENAME"/>
+        <result property="imgFileRename"        column="IMG_FILERENAME"/>
+        <result property="imgFilePath"          column="IMG_FILEPATH"/>
+        <result property="imgFileLength"        column="IMG_FILELENGTH"/>
+    </resultMap>
+    <select id="selectTastingList" resultMap="TastingResultMap">
+        SELECT * FROM TTASTING_TBL ORDER BY TASTING_NO DESC
+    </select>
+   <select id="selectByTastingNo" resultMap="TastingResultMap">
+		SELECT * FROM TTASTING_TBL WHERE TASTING_NO = #{tastingNo }
+	</select>
+	<select id="selectTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM TTASTING_TBL
+	</select>
+	<insert id="insertTasting">
+		INSERT INTO TTASTING_TBL VALUES(SEQ_TASTING_NO.NEXTVAL, #{tastingName }, #{tastingLocation }, DEFAULT, #{tastingWriter }, #{tastingContent },#{imgFileName }, #{imgFileRename }, #{imgFilePath }, #{imgFileLength })
+	</insert>
+    
+	
+	
+</mapper>
