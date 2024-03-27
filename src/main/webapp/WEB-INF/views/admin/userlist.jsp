@@ -48,7 +48,7 @@
 	    <div id="navbar-square" class="navbar navbar-expand-lg navbar-dark fixed-top"></div>
 	    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
 	        <div class="container">
-	            <a class="navbar-brand" href="#page-top"><img src="../../resources/imag/main-logo.png" alt="..." style="width: 100px; height: 50px;"/></a>
+	            <a class="navbar-brand" href="/"><img src="../../resources/imag/main-logo.png" alt="..." style="width: 100px; height: 50px;"/></a>
 	            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 	                Menu
 	                <i class="fas fa-bars ms-1"></i>
@@ -58,8 +58,8 @@
 	                    <li class="nav-item"><a class="nav-link" href="/winery/main.kw">와이너리</a></li>
 	                    <li class="nav-item"><a class="nav-link" href="/wine/winelist.kw">와인목록</a></li>
 	                    <li class="nav-item"><a class="nav-link" href="/wine/list.kw">와인설명</a></li>
-	                    <li class="nav-item"><a class="nav-link" href="#team">자유게시판</a></li>
-	                    <li class="nav-item"><a class="nav-link" href="#contact">교육/시음회</a></li>
+	                    <li class="nav-item"><a class="nav-link" href="/board/list.kw">자유게시판</a></li>
+	                    <li class="nav-item"><a class="nav-link" href="/tasting/list.kw">교육/시음회</a></li>
 	                </ul>
 	                    <div class="col-md-3 text-end">
 	                        <button type="button" class="btn btn-outline-primary me-2">로그아웃</button>
@@ -146,7 +146,7 @@
 								                    <td>${user.userPhone}</td>
 								                    <td>${user.userEmail}</td>
 								                    <td>${user.userBlackList}</td>
-								                    <td><a href="/admin/userlist/update.kw?userId=${user.userId }"><button style="width: 100%; background-color : white; color : #caca00;">수정</button></td>
+								                    <td><a href="/admin/userlist/update.kw?userId=${user.userId }"><button style="width: 100%; background-color : white; color : #caca00;">수정</button></a></td>
 								                </tr>
 								            </c:forEach>
 	                                    </tbody>

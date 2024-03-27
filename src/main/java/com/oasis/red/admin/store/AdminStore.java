@@ -20,6 +20,10 @@ public interface AdminStore {
 
 	List<BoardVO> selectBoardList(SqlSession session, PageInfo pInfo, String sortList);
 
+	Integer selectTotalCountWine(SqlSession session);
+
+	List<WineVO> selectWineList(SqlSession session, PageInfo pInfo, String sortList);
+
 	int wineRegister(SqlSession session, WineVO wine);
 
 	WineVO selectWineOne(SqlSession session, int wineNo);

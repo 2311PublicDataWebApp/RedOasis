@@ -53,6 +53,12 @@
 		<result property="wineMonth" column="WINE_MONTH"></result>
 		<result property="wineAcidity" column="WINE_ACIDITY"></result>
 	</resultMap>
+	<select id="selectTotalCountWine" resultType="_int">
+		SELECT COUNT(*) FROM WINE_TBL
+	</select>
+	<select id="selectWineList" parameterType="java.util.Map" resultMap="WineResultMap">
+	    SELECT * FROM WINE_TBL
+	</select>
 	<insert id="wineRegister">
 		INSERT INTO WINE_TBL
 		VALUES(SEQ_WINE_NO.NEXTVAL, #{wineName}, #{wineRegion}, #{wineRank}, #{wineAging}, #{wineAVB}, #{wineTemp}, #{winePrice}, #{wineScore}, #{wineCategory}, #{imgFilename}, #{imgFileRename}, #{imgFilePath}, #{imgFileLength}, #{wineMonth}, #{wineAcidity})

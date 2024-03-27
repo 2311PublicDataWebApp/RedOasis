@@ -20,6 +20,10 @@ public interface AdminService {
 
 	List<BoardVO> selectBoardList(PageInfo pInfo, String sortList);
 
+	int selectTotalCountWine();
+
+	List<WineVO> selectWineList(PageInfo pInfo, String sortList);
+
 	int wineRegister(WineVO wine);
 
 	WineVO selectWineOne(int wineNo);

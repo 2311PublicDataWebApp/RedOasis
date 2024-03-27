@@ -69,7 +69,6 @@ public class AdminController {
 	public String showUpdatePage(HttpSession session, Model model
 			,@RequestParam("userId") String userId) {
 		try {
-//			String userId = (String) session.getAttribute("userId");
 			com.oasis.red.user.domain.UserVO user = null;
 			if (userId != null) {
 				user = uService.getOneById(userId);
@@ -90,16 +89,14 @@ public class AdminController {
 	@RequestMapping(value = "/admin/update.kw", method = RequestMethod.POST)
 	public String updatePage(@ModelAttribute com.oasis.red.user.domain.UserVO user, Model model) {
 		try {
-			//블랙리스트 값 Y N
+			//블랙리스트 값
 			if(user.getUserBlackList() == null) {
 				user.setUserBlackList("N");
 			}
 			int result = uService.updateUser(user);
 			if (result > 0) {
-				// success -> 페이지 이동
 				return "redirect:/admin/userlist";
 			} else {
-				// fail -> 에러페이지 이동
 				model.addAttribute("msg", "회원 정보 수정을 완료하지 못하였습니다.");
 				return "common/errorPage";
 			}
@@ -138,7 +135,31 @@ public class AdminController {
 		}
 	}
 	
-	// 와인 관리 미진행
+	// 와인 관리
+	@RequestMapping(value="/admin/winelist.kw", method=RequestMethod.GET)
+	public String adminWineList(Model model
+			, @RequestParam(value="page", required=false, defaultValue="1")Integer currentPage
+			, @RequestParam(value="sortList", required=false)String sortList) {
+		try {
+			// 총 와인 수
+			int totalCount = aService.selectTotalCountWine();
+			model.addAttribute("totalCount", totalCount);
+			// 페이징 처리후 값 조회
+			PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
+			// 초기 설정값
+			List<WineVO> wList = aService.selectWineList(pInfo, sortList);
+			if(!wList.isEmpty()) {
+				model.addAttribute("wList", wList);
+				model.addAttribute("pInfo", pInfo);
+			}else {
+				model.addAttribute("wList", wList);
+			}
+			return "admin/winelist";
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
 	
 	// 와인 등록
 	@RequestMapping(value="/admin/winelist/register.kw", method=RequestMethod.GET)
@@ -175,7 +196,7 @@ public class AdminController {
 	        }
 	        int result = aService.wineRegister(wine);
 	        if(result > 0) {
-	        	return ""; // *와인 리스트로 리다이렉트 해 달라
+	        	return "redirect:/wine/winelist"; // *주소 맞는지 확인불가
 	        }else {
 	        	model.addAttribute("msg", "와인등록이 완료되지 않았습니다.");
 	        	return "common/errorPage";
@@ -188,9 +209,10 @@ public class AdminController {
 
 	// 와인 수정 폼 wineNo값 받아와야함
 	@RequestMapping(value="/admin/winelist/update.kw", method=RequestMethod.GET)
-	public String adminWineUpdateView(Model model) {
+	public String adminWineUpdateView(Model model,
+			@ModelAttribute WineVO wine) {
 		try {
-			int wineNo = 36;
+			int wineNo = wine.getWineNo();
 			WineVO wineOne = aService.selectWineOne(wineNo);
 			model.addAttribute("wineOne", wineOne);
 			return "admin/wineUpdate";
