@@ -38,4 +38,11 @@ public interface WineService {
 	 */
 	int getSearchCountWine(String keyword);
 
+	/**
+	 * 와인 정보 상세 보기 Service
+	 * @param wineNo
+	 * @return WineVO
+	 */
+	WineVO selectOneByWine(int wineNo);
+
 }

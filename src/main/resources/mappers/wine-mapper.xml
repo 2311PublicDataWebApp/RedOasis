@@ -43,4 +43,9 @@
 		SELECT COUNT(*) FROM WINE_TBL
    		WHERE WINE_NAME LIKE '%' || #{keyword} || '%'
 	</select>
+	
+	<select id="oneByWine" resultMap="wineResultMap">
+		SELECT * FROM WINE_TBL
+		WHERE WINE_NO = #{wineNo}
+	</select>
 </mapper>

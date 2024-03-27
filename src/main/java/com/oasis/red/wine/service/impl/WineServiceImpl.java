@@ -42,4 +42,10 @@ public class WineServiceImpl implements WineService{
 		return result;
 	}
 
+	@Override
+	public WineVO selectOneByWine(int wineNo) {
+		WineVO wine = wStore.selectOneByWine(session, wineNo);
+		return wine;
+	}
+
 }

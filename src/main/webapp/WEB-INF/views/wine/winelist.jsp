@@ -158,7 +158,7 @@
 						<div class="wine-card">
 						    <a href="/wine/winedetail.kw?wineNo=${wine.wineNo}"><img alt="와인" src="${wine.imgFilePath }" class="wine-image"><br></a>
 						    <div class="wine-info">
-						        <span class="wine-name">${wine.wineName }</span>
+						        <a href="/wine/winedetail.kw?wineNo=${wine.wineNo}"><span class="wine-name">${wine.wineName }</span></a>
 						        <span class="wine-category">${wine.wineCategory}</span> <br clear="both">
 						        <span class="wine-score">${wine.wineScore } 점</span>
 						    </div>

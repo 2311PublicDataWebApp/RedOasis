@@ -32,16 +32,24 @@ public interface WineStore {
 	 * @param pInfo
 	 * @param category
 	 * @param keyword
-	 * @return
+	 * @return List<WineVO>
 	 */
 	List<WineVO> searchWineList(SqlSession session, PageInfo pInfo, String keyword);
 
 	/**
-	 * 와인 검색 수 조회
+	 * 와인 검색 수 조회 Store
 	 * @param session
 	 * @param keyword
-	 * @return
+	 * @return int
 	 */
 	int getSearchCountWine(SqlSession session, String keyword);
+
+	/**
+	 * 와인 정보 상세 조회 Store
+	 * @param session
+	 * @param wineNo
+	 * @return WineVO
+	 */
+	WineVO selectOneByWine(SqlSession session, int wineNo);
 
 }

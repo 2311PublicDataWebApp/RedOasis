@@ -62,4 +62,10 @@ public class WineStoreImpl implements WineStore{
 		return result;
 	}
 
+	@Override
+	public WineVO selectOneByWine(SqlSession session, int wineNo) {
+		WineVO wine = session.selectOne("WineMapper.oneByWine", wineNo);
+		return wine;
+	}
+
 }

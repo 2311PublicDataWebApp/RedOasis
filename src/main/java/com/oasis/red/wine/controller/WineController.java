@@ -18,11 +18,32 @@ public class WineController {
 	@Autowired
 	WineService wService;
 	
+	//와인 정보 댓글
+	@RequestMapping()
+	public ModelAndView commentWine(ModelAndView mv) {
+		try {
+			
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	//와인 상세 조회 페이지
 	@RequestMapping(value = "/wine/winedetail.kw", method = RequestMethod.GET)
 	public ModelAndView showWineDetail(ModelAndView mv
-			,@RequestParam("wineNo") String WindNo) {
+			,@RequestParam("wineNo") int wineNo) {
 		try {
-			mv.setViewName("wine/winedetail");
+			WineVO wine = wService.selectOneByWine(wineNo);
+			if(wine != null) {
+				mv.addObject("wine", wine);
+				mv.setViewName("wine/winedetail");
+			} else {
+				mv.addObject("msg", "와인 정보를 찾을 수 없습니다. 관리자에게 문의해주세요.");
+				mv.setViewName("common/errorPage");
+			}
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("common/errorPage");
@@ -30,6 +51,7 @@ public class WineController {
 		return mv;
 	}
 	
+	//와인 목록 페이지
 	@RequestMapping(value = "/wine/winelist.kw", method = RequestMethod.GET)
 	public ModelAndView showWineList(ModelAndView mv
 			, @RequestParam(value="page", required=false, defaultValue="1")Integer currentPage

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -86,64 +87,71 @@
 </head>
 <body class="container mt-5">
 
-    <button class="btn btn-danger">목록으로</button>
+    <button class="btn btn-danger" style="margin-bottom : 20px"
+    onclick="goBack();">이전으로</button>
     <div class="row">
     
         <div class="wine-info col-md-6">
-            <h2>와인 이름</h2>
-            <p><strong>생산지:</strong> 프랑스</p>
-            <p><strong>와인 등급:</strong> AOC</p>
-            <p><strong>숙성 개월 수:</strong> 12개월</p>
-            <p><strong>와인 농도:</strong> 13.5%</p>
-            <p><strong>와인 도수:</strong> 12%</p>
-            <p><strong>가격:</strong> 50,000원</p>
-            <p><strong>점수:</strong> 95점</p>
-            <p><strong>와인 종류:</strong> 레드</p>
-            <p><strong>산도:</strong> 높음</p>
+            <h2>${wine.wineName }</h2>
+            <p><strong>생산지:</strong> ${wine.wineRegion }</p>
+            <p><strong>와인 등급:</strong> ${wine.wineRank }</p>
+            <p><strong>숙성 개월 수:</strong> ${wine.wineAging }개월</p>
+            <p><strong>와인 농도:</strong> ${wine.wineABV }%</p>
+            <p><strong>와인 도수:</strong> ${wine.wineTemp }%</p>
+            <p><strong>가격:</strong> ${wine.winePrice }원</p>
+            <p><strong>점수:</strong> ${wine.wineScore }점</p>
+            <p><strong>와인 종류:</strong> ${wine.wineCategory }</p>
+            <p><strong>산도:</strong> ${wine.wineAcidity }</p>
         </div>
         <div class="wine-image col-md-6">
             <img src="wine-image-url.jpg" alt="와인 이미지">
         </div>
     </div>
 	<hr>
-    <div class="wine-comments mt-4">
-        <h3>댓글</h3>
-        <div class="wine-comment-form mt-2">
-		    <textarea class="form-control" rows="4" placeholder="댓글을 입력하세요"></textarea>
-		    
-		    <!-- 별점 주기 -->
-		    <div class="rating mt-3">
-		        <label>
-		            <input type="radio" name="stars" value="5" id="stars5"/>
-		            <span class="icon">★</span>
-		        </label>
-		        <label>
-		            <input type="radio" name="stars" value="4" id="stars4"/>
-		            <span class="icon">★</span>
-		        </label>
-		        <label>
-		            <input type="radio" name="stars" value="3" id="stars3"/>
-		            <span class="icon">★</span>
-		        </label>
-		        <label>
-		            <input type="radio" name="stars" value="2" id="stars2"/>
-		            <span class="icon">★</span>
-		        </label>
-		        <label>
-		            <input type="radio" name="stars" value="1" id="stars1"/>
-		            <span class="icon">★</span>
-		        </label>
-		    </div>
-		    <button type="button" class="btn btn-primary mt-2">댓글 작성</button>
-		</div>
-        <ul class="list-unstyled mt-3">
-            <!-- 댓글 리스트 -->
-            <li class="mt-2">정말 맛있는 와인이에요. - 사용자 A</li>
-            <li class="mt-2">가격 대비 훌륭합니다. - 사용자 B</li>
-            <!-- 추가 댓글 -->
-        </ul>
-    </div>
+	<form action="">
+	    <div class="wine-comments mt-4">
+	        <h3>댓글</h3>
+	        <div class="wine-comment-form mt-2">
+			    <textarea class="form-control" rows="4" placeholder="댓글을 입력하세요"></textarea>
+			    
+			    <!-- 별점 주기 -->
+			    <div class="rating mt-3">
+			        <label>
+			            <input type="radio" name="stars" value="5" id="stars5"/>
+			            <span class="icon">★</span>
+			        </label>
+			        <label>
+			            <input type="radio" name="stars" value="4" id="stars4"/>
+			            <span class="icon">★</span>
+			        </label>
+			        <label>
+			            <input type="radio" name="stars" value="3" id="stars3"/>
+			            <span class="icon">★</span>
+			        </label>
+			        <label>
+			            <input type="radio" name="stars" value="2" id="stars2"/>
+			            <span class="icon">★</span>
+			        </label>
+			        <label>
+			            <input type="radio" name="stars" value="1" id="stars1"/>
+			            <span class="icon">★</span>
+			        </label>
+			    </div>
+			    <button type="button" class="btn btn-primary mt-2">댓글 작성</button>
+			</div>
+	        <ul class="list-unstyled mt-3">
+	            <!-- 댓글 리스트 -->
+	            <li class="mt-2">정말 맛있는 와인이에요. - 사용자 A</li>
+	            <li class="mt-2">가격 대비 훌륭합니다. - 사용자 B</li>
+	            <!-- 추가 댓글 -->
+	        </ul>
+	    </div>
+    </form>
 	<script>
+		function goBack() {
+			window.history.back();
+		}
+	
 		document.addEventListener("DOMContentLoaded", function() {
 		    // 별점 입력 요소를 모두 가져옵니다.
 		    var stars = document.querySelectorAll('.rating input[type="radio"]');
