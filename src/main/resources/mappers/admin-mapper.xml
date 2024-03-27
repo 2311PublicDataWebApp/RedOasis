@@ -72,6 +72,7 @@
 		<result property="imgFileRename" column="IMG_FILERENAME"></result>
 		<result property="imgFilepath" column="IMG_FILEPATH"></result>
 		<result property="imgFilelength" column="IMG_FILELENGTH"></result>
+		<result property="wineryDescription" column="WINERY_DESCRIPTION"/>
 	</resultMap>
 	<select id="selectTotalCountWinery" resultType="_int">
 		SELECT COUNT(*) FROM WINERY_TBL
@@ -80,4 +81,20 @@
 	    SELECT * FROM WINERY_TBL
 	    ORDER BY ${sortList} ASC
 	</select>
+	<insert id="insertWinery">
+		INSERT INTO WINERY_TBL
+		VALUES (
+		SEQ_WINERY_NO.NEXTVAL
+		, #{wineryName}
+		, #{wineryAddress}
+		, #{wineryPhone}
+		, #{madeWine}
+		, #{wineryWebAddress}
+		, #{imgFilename}
+		, #{imgFilerename}
+		, #{imgFilepath}
+		, #{imgFilelength}
+		, #{wineryDescription}
+		)
+	</insert>
 </mapper>

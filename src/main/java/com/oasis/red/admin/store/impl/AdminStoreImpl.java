@@ -84,5 +84,11 @@ public class AdminStoreImpl implements AdminStore{
 		return wryList;
 	}
 
+	@Override
+	public int wineryInsert(SqlSession session, WineryVO winery) {
+		int result = session.insert("AdminMapper.insertWinery", winery);
+		return result;
+	}
+
 
 }

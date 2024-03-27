@@ -26,4 +26,6 @@ public interface AdminStore {
 
 	List<WineryVO> selectWineryList(SqlSession session, PageInfo pInfo, String sortList);
 
+	int wineryInsert(SqlSession session, WineryVO winery);
+
 }

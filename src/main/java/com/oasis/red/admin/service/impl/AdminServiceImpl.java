@@ -64,4 +64,10 @@ public class AdminServiceImpl implements AdminService{
 		return wryList;
 	}
 
+	@Override
+	public int wineryInsert(WineryVO winery) {
+		int result = aStore.wineryInsert(session, winery);
+		return result;
+	}
+
 }

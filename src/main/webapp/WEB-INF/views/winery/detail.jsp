@@ -117,7 +117,7 @@
 			</span>
 		</section>
 		<section class="winery-display">
-		    <img alt="와이너리" src="../../resources/winery/001.png" class="winery-image">
+		    <img alt="와이너리" src="${winery.imgFilePath }" class="winery-image">
 		    <ul id="winery-info">
 		        <li id="winery-name"><h1>${winery.wineryName}</h1></li>
 		        <li>주소 : ${winery.wineryAddress}</li>
@@ -136,7 +136,7 @@
 		<section class="d-flex justify-content-center">
 		    <div id="winery-description">
 		        <div id="text">
-		            ${winery.wineryDescription}
+		        	${winery.wineryDescription}
 		        </div>
 		    </div>
 		</section>
@@ -188,6 +188,27 @@
 			    
 			    // 여기에 서버로 데이터를 전송하는 코드를 추가할 수 있습니다.
 			});
+			
+// 			var originalText = "${winery.wineryDescription}";
+			
+// 			// 100자마다 개행을 추가하는 함수
+// 		    function addNewLines(text, everyNChars) {
+// 		        var result = '';
+// 		        while (text.length > 0) {
+// 		            var part = text.substring(0, everyNChars);
+// 		            text = text.substring(everyNChars);
+// 		            result += part + '\n'; // '\n'으로 개행을 추가합니다. HTML에서는 <br> 태그로 대체될 것입니다.
+// 		        }
+// 		        return result;
+// 		    }
+			
+// 		    var processedText = addNewLines(originalText, 50);
+		    
+// 		    // HTML에서 개행을 <br>로 처리하기 위해 '\n'을 <br>로 대체합니다.
+// 		    processedText = processedText.replace(/\n/g, '<br>');
+
+// 		    // 가공된 텍스트를 div에 넣습니다.
+// 		    document.getElementById('text').innerHTML = processedText;
 		</script>
 	</body>
 </html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="WineMapper">
+	<resultMap type="com.oasis.red.wine.domain.WineVO" id="wineResultMap">
+		<id		property="wineNo"			column="WINE_NO"/>
+		<result	property="wineName"			column="WINE_NAME"/>
+		<result	property="wineRegion"		column="WINE_REGION"/>
+		<result	property="wineRank"			column="WINE_RANK"/>
+		<result	property="wineAging"		column="WINE_AGING"/>
+		<result	property="wineABV"			column="WINE_ABV"/>
+		<result	property="wineTemp"			column="WINE_TEMP"/>
+		<result	property="winePrice"		column="WINE_PRICE"/>
+		<result	property="wineScore"		column="WINE_SCORE"/>
+		<result	property="wineCategory"		column="WINE_CATEGORY"/>
+		<result	property="imgFileName"		column="IMG_FILENAME"/>
+		<result	property="imgFileRename"	column="IMG_FILERENAME"/>
+		<result	property="imgFilePath"		column="IMG_FILEPATH"/>
+		<result	property="imgFileLength"	column="IMG_FILELENGTH"/>
+		<result	property="wineMonth"		column="WINE_MONTH"/>
+		<result	property="wineAcidity"		column="WINE_ACIDITY"/>
+	</resultMap>
+	<select id="selectWineList" resultMap="wineResultMap">
+		SELECT * FROM WINE_TBL
+		WHERE 1=1
+	    <if test="category != null and category != ''">
+	        AND WINE_CATEGORY = #{category}
+	    </if>
+	</select>
+	<select id="searchWineList" resultMap="wineResultMap">
+		SELECT * FROM WINE_TBL
+   		WHERE WINE_NAME LIKE '%' || #{keyword} || '%'
+	</select>
+	<select id="selectTotalCountWine" resultType="_int">
+		SELECT COUNT(*) FROM WINE_TBL
+		WHERE 1=1
+		<if test="category != null and category != ''">
+	        AND WINE_CATEGORY = #{category}
+	    </if>
+	</select>
+	<select id="searchTotalCountWine" resultType="_int">
+		SELECT COUNT(*) FROM WINE_TBL
+   		WHERE WINE_NAME LIKE '%' || #{keyword} || '%'
+	</select>
+</mapper>
