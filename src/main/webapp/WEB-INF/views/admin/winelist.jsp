@@ -62,7 +62,7 @@
 	                    <li class="nav-item"><a class="nav-link" href="/tasting/list.kw">교육/시음회</a></li>
 	                </ul>
 	                    <div class="col-md-3 text-end">
-	                        <button type="button" class="btn btn-outline-primary me-2">로그아웃</button>
+	                        <a href="/user/logout.kw"><button type="button" class="btn btn-outline-primary me-2" >로그아웃</button></a>
 	                    </div>
 	            </div>
 	        </div>
@@ -104,10 +104,13 @@
 	                <main>
 	                    <div class="container-fluid px-4">
 	                    	<br><br><br><br><br>
-	                    	<div id="total-count-box">
-		                    	<h2><i class="fa-solid fa-users"></i> 총 와인 수 	                    	
-		                    	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${totalCount} 개</h2>
-	                    	</div>
+							<div id="total-count-box" style="float: left; margin-right: 20px;">
+							    <h2><i class="fa-solid fa-users"></i> 총 와인 수 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${totalCount} 개</h2>
+							</div>
+							<div style="float: left;">
+								<a href="/admin/winelist/register.kw"><button type="button" class="btn btn-outline-dark" style="padding: 10px 20px; font-size: 24px;">와인 등록</button></a>
+							</div>
+	                    	<br><br><br><br>
 	                        <h1 class="mt-4">와인 관리</h1>
 	                        <div class="card mb-4">
 	                        </div>
@@ -149,7 +152,7 @@
 								                    <td>${wine.wineScore}</td>
 								                    <td>${wine.wineCategory}</td>
 								                    <td><a href="/admin/winelist/update.kw?wineNo=${wine.wineNo }"><button style="width: 100%; background-color : white; color : #caca00;">수정</button></a></td>
-								                    <td><a href="#"><button style="width: 100%; background-color : white; color : red;">삭제</button></a></td>
+								                    <td><a href="/admin/wine/delete.kw?wineNo=${wine.wineNo }"><button style="width: 100%; background-color : white; color : red;">삭제</button></a></td>
 								                </tr>
 								            </c:forEach>
 	                                    </tbody>

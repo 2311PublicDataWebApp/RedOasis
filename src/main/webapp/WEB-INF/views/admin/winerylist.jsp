@@ -62,7 +62,7 @@
 	                    <li class="nav-item"><a class="nav-link" href="/tasting/list.kw">교육/시음회</a></li>
 	                </ul>
 	                    <div class="col-md-3 text-end">
-	                        <button type="button" class="btn btn-outline-primary me-2" >로그아웃</button>
+	                        <a href="/user/logout.kw"><button type="button" class="btn btn-outline-primary me-2" >로그아웃</button></a>
 	                    </div>
 	            </div>
 	        </div>
@@ -104,10 +104,13 @@
 	                <main>
 	                    <div class="container-fluid px-4">
 	                    	<br><br><br><br><br>
-	                    	<div id="total-count-box">
-		                    	<h2><i class="fa-solid fa-shop"></i> 와이너리 수 	                    	
-		                    	<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${totalCount} 개</h2>
+	                    	<div id="total-count-box" style="float: left; margin-right: 20px;">
+		                    	<h2><i class="fa-solid fa-shop"></i> 와이너리 수 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${totalCount} 개</h2>
 	                    	</div>
+	                    	<div style="float: left;">
+	                    		<a href="/admin/wineryinsert.kw"><button type="button" class="btn btn-outline-dark" style="padding: 10px 20px; font-size: 24px;">와이너리 등록</button></a>
+	                    	</div>
+	                    	<br><br><br><br>
 	                        <h1 class="mt-4">와이너리 관리</h1>
 	                        <div class="card mb-4">
 	                        </div>
@@ -125,6 +128,7 @@
 								                <th>와이너리 주소</th>
 								                <th>대표와인</th>
 								                <th>수정</th>
+								                <th>삭제</th>
 	                                        </tr>
 	                                    </thead>
 	                                    <tfoot>
@@ -134,16 +138,18 @@
 								                <th>와이너리 주소</th>
 								                <th>대표와인</th>
 								                <th>수정</th>
+								                <th>삭제</th>
 	                                        </tr>
 	                                    </tfoot>
 	                                    <tbody>
-								            <c:forEach items="${wryList}" var="wine">
+								            <c:forEach items="${wryList}" var="winery">
 								                <tr>
-								                    <td>${wine.wineryNo}</td>
-								                    <td>${wine.wineryName}</td>
-								                    <td>${wine.wineryAddress}</td>
-								                    <td>${wine.madeWine}</td>
-								                    <td><button style="width: 100%; background-color : white; color : #caca00;">수정</button></td>
+								                    <td>${winery.wineryNo}</td>
+								                    <td>${winery.wineryName}</td>
+								                    <td>${winery.wineryAddress}</td>
+								                    <td>${winery.madeWine}</td>
+								                    <td><a href="/admin/winery/update.kw?wineryNo=${winery.wineryNo }"><button style="width: 100%; background-color : white; color : #caca00;">수정</button></a></td>
+								                    <td><a href="/admin/winery/delete.kw?wineryNo=${winery.wineryNo }"><button style="width: 100%; background-color : white; color : red;">삭제</button></a></td>
 								                </tr>
 								            </c:forEach>
 	                                    </tbody>
