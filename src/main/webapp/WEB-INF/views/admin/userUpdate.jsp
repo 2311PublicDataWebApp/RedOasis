@@ -36,8 +36,9 @@
                         <input type="tel" class="form-control" id="userPhone" name="userPhone" value="${user.userPhone }">
                     </div>
                     <div class="mb-3">
-                        <label for="blacklist" class="form-label">블랙리스트 등록 : </label>
-						<input type="checkbox" id="userBlackList" name="userBlackList" value="${user.userBlackList}">
+                        <label for="userBlackList" class="form-label">블랙리스트 등록 : </label>
+						<input type="checkbox" id="userBlackList" name="userBlackList" value="Y" ${user.userBlackList == 'Y' ? 'checked' : ''}>
+
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">수정하기</button>

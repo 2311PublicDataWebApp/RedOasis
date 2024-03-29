@@ -17,6 +17,9 @@
 	</select><select id="selectUserList" parameterType="java.util.Map" resultMap="UserResultMap">
 	    SELECT * FROM USER_TBL
 	</select>
+	<delete id="deleteUser">
+		DELETE FROM USER_TBL WHERE USER_ID = #{userId}
+	</delete>
 	
 	<!-- 게시판  -->
 	<resultMap type="Board" id="BoardResultMap">
@@ -33,6 +36,21 @@
 	<select id="selectBoardList" parameterType="java.util.Map" resultMap="BoardResultMap">
 	    SELECT * FROM BOARD_TBL
 	</select>
+	<select id="selectBoardOne" resultMap="BoardResultMap">
+		SELECT * FROM BOARD_TBL
+		WHERE BOARD_NO = ${boardNo}
+	</select>
+	<update id="boardUpdate">
+	    UPDATE BOARD_TBL
+	    SET 
+	        BOARD_NAME = #{boardName},
+	        BOARD_CONTENT = #{boardContent},
+	        UPDATE_DATE = DEFAULT
+	    WHERE BOARD_NO = #{boardNo}
+	</update>
+	<delete id="deleteBoard">
+		DELETE FROM BOARD_TBL WHERE BOARD_NO =  ${boardNo }
+	</delete>
 	
 	<!-- 와인 -->
 	<resultMap type="Wine" id="WineResultMap">
@@ -87,6 +105,9 @@
 	        WINE_ACIDITY = #{wineAcidity}
 	    WHERE WINE_NO = #{wineNo}
 	</update>
+	<delete id="deleteWine">
+		DELETE FROM WINE_TBL WHERE WINE_NO =  ${wineNo }
+	</delete>
 	<!-- 와이너리 -->
 	<resultMap type="Winery" id="WineryResultMap">
 		<id property="wineryNo" column="WINERY_NO"></id>
@@ -117,10 +138,27 @@
 		, #{madeWine}
 		, #{wineryWebAddress}
 		, #{imgFilename}
-		, #{imgFilerename}
+		, #{imgFileRename}
 		, #{imgFilepath}
 		, #{imgFilelength}
 		, #{wineryDescription}
 		)
 	</insert>
+	<select id="selectWineryOne" resultMap="WineryResultMap">
+		SELECT * FROM WINERY_TBL
+		WHERE WINERY_NO = ${wineryNo}
+	</select>
+	<update id="wineryUpdate">
+	    UPDATE WINERY_TBL
+	    SET WINERY_NAME = #{wineryName},
+			WINERY_ADDRESS = #{wineryAddress},
+			WINERY_PHONE = #{wineryPhone},
+			MADE_WINE = #{madeWine},
+			WINERY_WEB_ADDRESS = #{wineryWebAddress},
+			WINERY_DESCRIPTION = #{wineryDescription}
+	    WHERE WINERY_NO = #{wineryNo}
+	</update>
+	<delete id="deleteWinery">
+		DELETE FROM WINERY_TBL WHERE WINERY_NO =  #{wineryNo }
+	</delete>
 </mapper>

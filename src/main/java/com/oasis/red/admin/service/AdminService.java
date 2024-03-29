@@ -16,9 +16,17 @@ public interface AdminService {
 
 	List<UserVO> selectUserList(PageInfo pInfo, String sortList);
 
+	int deleteUser(String userId);
+
 	int selectTotalCountBoard();
 
 	List<BoardVO> selectBoardList(PageInfo pInfo, String sortList);
+
+	BoardVO selectBoardOne(int boardNo);
+
+	int boardUpdate(BoardVO boardOne);
+
+	int deleteBoard(int boardNo);
 
 	int selectTotalCountWine();
 
@@ -30,10 +38,18 @@ public interface AdminService {
 
 	int wineUpdate(WineVO wine);
 
+	int deleteWine(int wineNo);
+
 	int selectTotalCountWinery();
 
 	List<WineryVO> selectWineryList(PageInfo pInfo, String sortList);
 	
 	int wineryInsert(WineryVO winery);
+
+	WineryVO selectWineryOne(int wineryNo);
+
+	int wineryUpdate(WineryVO wineryOne);
+
+	int deleteWinery(int wineryNo);
 
 }

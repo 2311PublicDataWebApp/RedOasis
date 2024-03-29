@@ -62,7 +62,7 @@
 	                    <li class="nav-item"><a class="nav-link" href="/tasting/list.kw">교육/시음회</a></li>
 	                </ul>
 	                    <div class="col-md-3 text-end">
-	                        <button type="button" class="btn btn-outline-primary me-2">로그아웃</button>
+	                        <a href="/user/logout.kw"><button type="button" class="btn btn-outline-primary me-2" >로그아웃</button></a>
 	                    </div>
 	            </div>
 	        </div>
@@ -126,6 +126,7 @@
 								                <th>Email</th>
 								                <th>차단</th>
 								                <th>수정</th>
+								                <th>삭제</th>
 	                                        </tr>
 	                                    </thead>
 	                                    <tfoot>
@@ -136,6 +137,7 @@
 								                <th>Email</th>
 								                <th>차단</th>
 								                <th>수정</th>
+								                <th>삭제</th>
 	                                        </tr>
 	                                    </tfoot>
 	                                    <tbody>
@@ -147,6 +149,7 @@
 								                    <td>${user.userEmail}</td>
 								                    <td>${user.userBlackList}</td>
 								                    <td><a href="/admin/userlist/update.kw?userId=${user.userId }"><button style="width: 100%; background-color : white; color : #caca00;">수정</button></a></td>
+								                    <td><a href="/admin/user/delete.kw?userId=${user.userId }"><button style="width: 100%; background-color : white; color : red;">삭제</button></a></td>
 								                </tr>
 								            </c:forEach>
 	                                    </tbody>
