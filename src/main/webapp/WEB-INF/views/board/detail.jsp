@@ -115,10 +115,14 @@
 								class="overflow-auto text-wrap p-3" readonly>${board.boardContent }</textarea>
 						</div></li>
 				</div>
+				
 				<div class="row mb-4 justify-content-center">
-					<li><label>첨부파일</label> <span><a
+					<li><label>첨부파일</label> 
+					<c:forEach items="${iList }" var="boardImg">
+					<span><a
 							class="link-underline-light"
-							href="../resources/nuploadFiles/${boardImg.imgFileRename }">${boardImg.imgFilename }</a></span>
+							href="${boardImg.imgFilepath }">${boardImg.imgFilename }</a></span>
+					</c:forEach>
 					</li>
 				</div>
 			</ul>

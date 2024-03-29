@@ -13,13 +13,12 @@
 	</resultMap>
 	
 	<resultMap type="Img" id="boardImageMap">
-			<id 	property="imgNo" 			column="IMG_NO"/>
-			<result 	property="imgFilename" 			column="IMG_FILENAME"/>
-			<result 	property="imgFileRename" 			column="IMG_FILERENAME"/>
-			<result 	property="imgFilepath" 			column="IMG_FILEPATH"/>
-			<result 	property="imgFilelength" 			column="IMG_FILELENGTH"/>
-			<result 	property="boardNo" 			column="BOARD_NO"/>
-	
+		<id 	property="imgNo" 			column="IMG_NO"/>
+		<result 	property="imgFilename" 			column="IMG_FILENAME"/>
+		<result 	property="imgFileRename" 			column="IMG_FILERENAME"/>
+		<result 	property="imgFilepath" 			column="IMG_FILEPATH"/>
+		<result 	property="imgFilelength" 			column="IMG_FILELENGTH"/>
+		<result 	property="boardNo" 			column="BOARD_NO"/>
 	</resultMap>
 	
 	
@@ -42,7 +41,11 @@
 		VALUES(SEQ_BOARD_NO.NEXTVAL, #{boardName},#{boardContent}
 		,DEFAULT,DEFAULT,#{userId})
 	</insert>
-	
+	<insert id="insertBoardFiles">
+		INSERT INTO BOARD_IMG_TBL
+		VALUES(SEQ_BOARD_IMG_NO.NEXTVAL, #{imgFilename},#{imgFileRename}
+		,#{imgFilepath},#{imgFilelength},SEQ_BOARD_NO.CURRVAL)
+	</insert>
 	  	<select id="searchTotalCount" resultType="_int">
   		SELECT COUNT(*) FROM BOARD_TBL
   		WHERE USER_ID LIKE '%'||#{searchKeyword }||'%'
