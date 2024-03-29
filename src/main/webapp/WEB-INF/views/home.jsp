@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,28 +18,39 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../resources/css/style.css" rel="stylesheet" />
+        
     </head>
+    
+<!--    연습 -->
+
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="../resources/imag/main-logo.png" alt="..." style="width: 100px; height: 50px;"/></a>
+                <a class="navbar-brand" href="/"><img src="../resources/imag/main-logo.png" alt="..." style="width: 100px; height: 50px;"/></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">와이너리</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">와인목록</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">와인설명</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team">자유게시판</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">교육/시음회</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/winery/main.kw">와이너리</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/wine/winelist.kw">와인목록</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/wine/list.kw">와인설명</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/board/list.kw">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/tasting/list.kw">교육/시음회</a></li>
                     </ul>
+                    	<c:if test = "${userId eq null }">	
                         <div class="col-md-3 text-end">
-                            <button type="button" class="btn btn-outline-primary me-2">로그인</button>
-                            <button type="button" class="btn btn-primary">회원가입</button>
+                            <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='/user/login.kw'">로그인</button>
+                            <button type="button" class="btn btn-primary" onclick="location.href='/user/register.kw'">회원가입</button>
                         </div>
+                    	</c:if>
+                    	<c:if test = "${userId ne null }">	
+                        <div class="col-md-3 text-end">
+                            <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='/user/logout.kw'">로그아웃</button>
+                        </div>
+                    	</c:if>
                 </div>
             </div>
         </nav>
@@ -47,9 +60,7 @@
                 <div class="masthead-subheading">Welcome To Red Oasis</div>
                 <div class="masthead-heading text-uppercase">k-와이너리의 매력에 빠져보세요</div>
                 <div class="d-flex align-items-center">
-                    <form class="w-100 me-3" role="search">
-                    <input type="search" class="form-control" placeholder="와인에 대한 궁금한 모든것을 검색해보세요" aria-label="Search" style="height: 60px;  border-radius: 30px;">
-                    </form>
+                    
                 </div>
             </div>
         </header>
@@ -61,11 +72,11 @@
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
                 <!-- <img src="./img-wine/902f3c3d7c055-cutout.png" alt="wine2" style="width: 100px; height: 350px;  margin-left: 595px;"> -->
-                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal7">
+<!--                 <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal7"> -->
                     <div class="portfolio-hover">
                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid" src="../resources/imag/today-wine.png" alt="wine" style="width: 100px; height: 350px;  margin-left: 595px;" />
+                    <img class="img-fluid" src="${wine.imgFilePath }" alt="wine" style="width: 100px; height: 350px;  margin-left: 595px;" />
                 </a>
                 <div class="row text-center">
                     <!-- <div class="col-md-4">
@@ -81,9 +92,10 @@
                             <!-- <i class="fas fa-circle fa-stack-2x text-primary"></i> -->
                             <!-- <i class="fas fa-laptop fa-stack-1x fa-inverse"></i> -->
                         </span>
-                        <h4 class="my-3">장 루이 샤브, 셀렉시옹 꼬뜨  <br>
-                            뒤 론 몽 꼬르</h4>
-                        <p class="text-muted">Jean-Louis Chave, Selection Cotes du Rhone Mon Coeur</p>
+                        <c:forEach items="${wList}" var="wine" varStatus="i">
+                        <h4 class="my-3">${wine.wineName }</h4>
+                        <p class="text-muted">${wine.wineRegion }</p>
+                    </c:forEach>
                     </div>
                     <!-- <div class="col-md-4">
                         <span class="fa-stack fa-4x">
@@ -101,14 +113,13 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">시음회/강의</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
                 <div class="row">
-                    <button type="button" class="btn btn-link" style="margin-left: 620px;">더보기</button>
+                    <a type="button" class="btn btn-link" style="margin-left: 620px;" href="/tasting/list.kw">더보기</a>
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <!-- Portfolio item 1-->
                         <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
+<!--                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1"> -->
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
@@ -123,7 +134,7 @@
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <!-- Portfolio item 2-->
                         <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
+<!--                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2"> -->
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
@@ -138,7 +149,7 @@
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <!-- Portfolio item 3-->
                         <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
+<!--                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3"> -->
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
@@ -150,11 +161,11 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-link" style="margin-left: 620px;">더보기</button>
+                    <a type="button" class="btn btn-link" style="margin-left: 620px;" href="/education/list.kw">더보기</a>
                     <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
                         <!-- Portfolio item 4-->
                         <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
+<!--                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4"> -->
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
@@ -169,7 +180,7 @@
                     <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
                         <!-- Portfolio item 5-->
                         <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
+<!--                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5"> -->
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
@@ -184,7 +195,7 @@
                     <div class="col-lg-4 col-sm-6">
                         <!-- Portfolio item 6-->
                         <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
+<!--                             <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6"> -->
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>

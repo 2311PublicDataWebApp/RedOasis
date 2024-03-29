@@ -1,8 +1,13 @@
 package com.oasis.red.tasting.controller;
 
 import java.io.File;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,10 +34,42 @@ public class TastingController {
 	@Autowired
 	private TastingService nService;
 	
+		
+	
+		// 와인팁 목록
+		@RequestMapping(value="/wine/list.kw", method=RequestMethod.GET)
+	    public String winetip() {
+	        return "wineTip/wineTipList";
+	    }
+		
+		// 와인팁 페이지 1
+				@RequestMapping(value="/wine/listone.kw", method=RequestMethod.GET)
+			    public String winetipone() {
+			        return "wineTip/winetipone";
+		}
+				
+				// 와인팁 페이지 2
+				@RequestMapping(value="/wine/listtwo.kw", method=RequestMethod.GET)
+			    public String winetiptwo() {
+			        return "wineTip/winetiptwo";
+				}
+				
+				// 와인팁 페이지 3
+				@RequestMapping(value="/wine/listthree.kw", method=RequestMethod.GET)
+			    public String winetipthree() {
+			        return "wineTip/winetipthree";
+				}
+				
+				// 와인팁 페이지 4
+				@RequestMapping(value="/wine/listfour.kw", method=RequestMethod.GET)
+			    public String winetipfour() {
+			        return "wineTip/winetipfour";
+				}
+		
 	
 	// 공지사항 목록
 	@RequestMapping(value = "/tasting/list.kw", method = RequestMethod.GET)
-	public ModelAndView showNoticeList(ModelAndView mv
+	public ModelAndView showTastingList(ModelAndView mv
 			, @RequestParam(value = "page", required = false, defaultValue = "1") 
 				Integer currentPage) {
 	    try {
@@ -41,7 +78,7 @@ public class TastingController {
 	        List<TastingVO> tList = nService.selectTastingList(pInfo);
 	        mv.addObject("tList", tList);
 	        mv.addObject("pInfo", pInfo);
-	        mv.setViewName("tasting/tastingtest");
+	        mv.setViewName("tasting/tastingList");
 	    } catch (Exception e) {
 	        // 예외 처리
 	        mv.addObject("msg", e.getMessage());
@@ -96,8 +133,7 @@ public class TastingController {
 				String fileName 	    = (String) infoMap.get("fileName");
 				String fileRename 	= (String) infoMap.get("fileRename");
 				String filePath	    = (String) infoMap.get("filePath");
-				long fileLength 	    = (long) infoMap.get("fileSize");
-				
+				long fileLength 	    = (long) infoMap.get("fileLength");
 				tasting.setImgFileName(fileName);
 				tasting.setImgFileRename(fileRename);
 				tasting.setImgFilePath(filePath);
@@ -125,7 +161,7 @@ public class TastingController {
 	        if (tastingNo != null) {
 	            TastingVO tasting = nService.selectByTastingNo(tastingNo);
 	            if (tasting != null) {
-	                mv.addObject("tasting", tasting).setViewName("tasting/tastingDetailTest");
+	                mv.addObject("tasting", tasting).setViewName("tasting/tastingDetail");
 	            } else {
 	                mv.addObject("msg", "데이터 불러오기가 완료되지 못했습니다.");
 	                mv.setViewName("common/errorPage");
@@ -147,7 +183,7 @@ public class TastingController {
 			TastingVO tasting = nService.selectByTastingNo(tastingNo);
 			if (tasting != null) {
 				mv.addObject("tasting", tasting);
-				mv.setViewName("tasting/modify");
+				mv.setViewName("tasting/tastingModifyTest");
 			} else {
 				mv.addObject("msg", "데이터 불러오기가 완료되지 못했습니다.");
 				mv.setViewName("common/errorPage");
@@ -178,8 +214,8 @@ public class TastingController {
 				}
 				// 없으면 새로 업로드하려는 파일 저장
 				Map<String, Object> infoMap = this.saveFile(reloadFile, request);
-				String tastingFileName = (String) infoMap.get("fileName");
-				tasting.setImgFileName(tastingFileName);
+				String educationFileName = (String) infoMap.get("fileName");
+				tasting.setImgFileName(educationFileName);
 				tasting.setImgFileRename((String) infoMap.get("fileRename"));
 				tasting.setImgFilePath((String) infoMap.get("filePath"));
 				tasting.setImgFileLength((long) infoMap.get("fileSize"));
@@ -242,7 +278,7 @@ public class TastingController {
 		String fileName = uploadFile.getOriginalFilename();
 		// 저장 경로
 		String projectPath 	 = request.getSession().getServletContext().getRealPath("resources");
-		String saveDirectory = projectPath + "\\nuploadFiles";
+		String saveDirectory = projectPath + "\\tuploadFiles";
 		File sDir 			 = new File(saveDirectory);
 		if (!sDir.exists()) {
 			sDir.mkdir(); //nuploadFile 폴더가 없으면 자동으로 만들어줌
@@ -256,18 +292,19 @@ public class TastingController {
 		String fileRename = strResult + "." + ext;
 //		Date date = new Date();
 		
-		String savePath 	 = saveDirectory + "\\" + fileRename;
-		File file = new File(savePath);
+		String filePath 	 = saveDirectory + "\\" + fileRename;
+		File file = new File(filePath);
 		// 파일 저장
 		uploadFile.transferTo(file);
 		// DB에 저장할 파일정보 셋팅
 		// 1. 파일이름, 2. 파일리네임, 3. 파일경로, 4. 파일크기
+		filePath 	 = "..\\resources\\tuploadFiles\\" + fileRename;
 		long fileLength = uploadFile.getSize();
 		Map<String, Object> infoMap = new HashMap<String, Object>();
 		infoMap.put("fileName"	, fileName);
 		infoMap.put("fileRename", fileRename);
-		infoMap.put("filePath"	, savePath);
-		infoMap.put("fileSize"	, fileLength);
+		infoMap.put("filePath"	, filePath);
+		infoMap.put("fileLength", fileLength);
 		return infoMap;
 	}
 	
@@ -275,10 +312,12 @@ public class TastingController {
 	private void deleteFile(HttpServletRequest request, String fileName) {
 		// TODO Auto-generated method stub
 		String rPath = request.getSession().getServletContext().getRealPath("resources");
-		String delFilePath = rPath + "\\nuploadFiles\\" + fileName;
+		String delFilePath = rPath + "\\tuploadFiles\\" + fileName;
 		File delFile = new File(delFilePath);
 		if (delFile.exists()) {
 			delFile.delete();
 		}
 	}
+	
+	
 }

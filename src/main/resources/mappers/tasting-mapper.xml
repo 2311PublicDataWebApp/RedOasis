@@ -15,7 +15,7 @@
         <result property="imgFilePath"          column="IMG_FILEPATH"/>
         <result property="imgFileLength"        column="IMG_FILELENGTH"/>
     </resultMap>
-    <select id="selectTastingList" resultMap="TastingResultMap">
+      <select id="selectTastingList" resultMap="TastingResultMap">
         SELECT * FROM TTASTING_TBL ORDER BY TASTING_NO DESC
     </select>
    <select id="selectByTastingNo" resultMap="TastingResultMap">
@@ -27,6 +27,60 @@
 	<insert id="insertTasting">
 		INSERT INTO TTASTING_TBL VALUES(SEQ_TASTING_NO.NEXTVAL, #{tastingName }, #{tastingLocation }, DEFAULT, #{tastingWriter }, #{tastingContent },#{imgFileName }, #{imgFileRename }, #{imgFilePath }, #{imgFileLength })
 	</insert>
+	<update id="updateTasting">
+		UPDATE TTASTING_TBL SET TASTING_NAME = #{tastingName }, TASTING_LOCATION = #{tastingLocation }, TASTING_DATE = DEFAULT, TASTING_WRITER = #{tastingWriter }, TASTING_CONTENT = #{tastingContent }, IMG_FILENAME = #{imgFileName }, IMG_FILERENAME = #{imgFileRename },IMG_FILEPATH = #{imgFilePath },IMG_FILELENGTH = #{imgFileLength }  WHERE tasting_NO = #{tastingNo }
+	</update>
+	<delete id="deleteTasting">
+		DELETE FROM TTASTING_TBL WHERE TASTING_NO = #{tastingNo }
+	</delete>
+	<select id="searchTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM TTASTING_TBL
+		<if test="searchCondition =='all'">		
+			WHERE TASTING_WRITER LIKE '%'||#{searchKeyword}||'%'
+			OR TASTING_NAME LIKE '%'||#{searchKeyword}||'%'
+			OR TASTING_CONTENT LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'writer'">		
+			WHERE TASTING_WRITER LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'title'">		
+			WHERE TASTING_NAME LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'content'">	
+			WHERE TASTING_CONTENT LIKE '%'||#{searchKeyword}||'%'
+		</if>
+	</select>
+	<select id="searchTastingTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM TTASTING_TBL
+		<if test="searchCondition == 'writer'">		
+			WHERE TASTING_WRITER LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'title'">		
+			WHERE TASTING_NAME LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'content'">	
+			WHERE TASTING_CONTENT LIKE '%'||#{searchKeyword}||'%'
+		</if>
+	</select>
+	<select id="selectTastingByKeyword" resultMap="TastingResultMap">
+		SELECT * FROM TTASTING_TBL
+		<if test="searchCondition =='all'">		
+			WHERE TASTING_WRITER LIKE '%'||#{searchKeyword}||'%'
+			OR TASTING_NAME LIKE '%'||#{searchKeyword}||'%'
+			OR TASTING_CONTENT LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'writer'">		
+			WHERE TASTING_WRITER LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'title'">		
+			WHERE TASTING_SUBJECT LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'content'">	
+			WHERE TASTING_CONTENT LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		ORDER BY TASTING_NO DESC
+	</select>
+	
     
 	
 	

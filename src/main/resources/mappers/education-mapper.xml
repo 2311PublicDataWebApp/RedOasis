@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EducationMapper">
+    <resultMap type="Education" id="EducationResultMap">
+        <id     property="educationNo"            column="EDUCATION_NO"/>
+        <result property="educationName"          column="EDUCATION_NAME"/>
+        <result property="educationLocation"      column="EDUCATION_LOCATION"/>
+        <result property="educationDate"          column="EDUCATION_DATE"/>
+        <result property="educationLink"          column="EDUCATION_LINK"/>
+        <result property="educationContent"       column="EDUCATION_CONTENT"/>
+        <result property="educationTeacher"       column="EDUCATION_TEACHER"/>
+        <result property="imgFileName"            column="IMG_FILENAME"/>
+        <result property="imgFileRename"          column="IMG_FILERENAME"/>
+        <result property="imgFilePath"            column="IMG_FILEPATH"/>
+        <result property="imgFileLength"          column="IMG_FILELENGTH"/>
+    </resultMap>
+    <select id="selecteducationList" resultMap="EducationResultMap">
+        SELECT * FROM EEDUCATION_TBL ORDER BY EDUCATION_NO DESC
+    </select>
+    <select id="selectTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM EEDUCATION_TBL
+	</select>
+	<select id="selectByeducationNo" resultMap="EducationResultMap">
+		SELECT * FROM EEDUCATION_TBL WHERE EDUCATION_NO = #{educationNo }
+	</select>
+	<insert id="inserteducation">
+		INSERT INTO EEDUCATION_TBL VALUES(SEQ_EDUCATION_NO.NEXTVAL, #{educationName }, #{educationLocation }, SYSDATE, #{educationLink },#{educationContent }, #{educationTeacher }, #{imgFileName }, #{imgFileRename }, #{imgFilePath }, #{imgFileLength })
+	</insert>
+	<update id="updateeducation">
+	UPDATE EEDUCATION_TBL 
+	SET 
+    EDUCATION_NAME = #{educationName },
+    EDUCATION_LOCATION = #{educationLocation },
+    EDUCATION_DATE = SYSDATE,
+    EDUCATION_LINK = #{educationLink },
+    EDUCATION_CONTENT = #{educationContent },
+    EDUCATION_TEACHER = #{educationTeacher },
+    IMG_FILENAME = #{imgFileName },
+    IMG_FILERENAME = #{imgFileRename },
+    IMG_FILEPATH = #{imgFilePath },
+    IMG_FILELENGTH = #{imgFileLength } 
+	WHERE 
+    EDUCATION_NO = #{educationNo }
+    </update>
+    <delete id="deleteeducation">
+		DELETE FROM EEDUCATION_TBL WHERE EDUCATION_NO = #{educationNo }
+	</delete>
+</mapper> 
