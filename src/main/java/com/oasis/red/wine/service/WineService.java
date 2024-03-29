@@ -9,6 +9,12 @@ import com.oasis.red.wine.domain.WineVO;
 public interface WineService {
 
 	/**
+	 * 와인 전체 목록 가져오기
+	 * @return List<WineVO>
+	 */
+	List<WineVO> selectWineList();
+	
+	/**
 	 * 와인 목록 전체 조회 Service
 	 * @param pInfo 
 	 * @param category 

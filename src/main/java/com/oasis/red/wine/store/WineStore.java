@@ -85,4 +85,11 @@ public interface WineStore {
 	 */
 	int wineReplyDelete(SqlSession session, int commentNo);
 
+	/**
+	 * 와인 전체 목록 가져오기
+	 * @param session
+	 * @return List<WineVO>
+	 */
+	List<WineVO> selectWineList(SqlSession session);
+
 }

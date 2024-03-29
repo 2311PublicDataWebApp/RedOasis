@@ -269,7 +269,44 @@ public class AdminController {
 	    }
 	}
 
-	// 와인 수정 폼
+	//와이너리 등록
+	@RequestMapping(value = "/admin/wineryinsert.kw", method = RequestMethod.GET)
+	public ModelAndView showWineryInsertForm(ModelAndView mv) {
+		mv.setViewName("admin/wineryinsert");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/admin/wineryinsert.kw", method = RequestMethod.POST)
+	public ModelAndView wineryInsert(ModelAndView mv
+			,@ModelAttribute WineryVO winery
+			,@RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile
+			,HttpServletRequest request
+			,HttpSession session) {
+		try {
+			Map<String, Object> infoMap = this.saveFile(request, uploadFile);
+			winery.setImgFilename((String)infoMap.get("fileName"));
+			winery.setImgFileRename((String)infoMap.get("fileRename"));
+			winery.setImgFilepath((String)infoMap.get("filePath"));
+			winery.setImgFilelength((long)infoMap.get("fileLength"));
+			
+			int result = aService.wineryInsert(winery);
+			if(result > 0) {
+				mv.setViewName("admin/winerylist");
+			}else {
+				mv.addObject("msg", "와이너리 정보를 등록할 수 없습니다 관리자에게 문의해주십시오");
+				mv.setViewName("common/errorPage");
+			}
+			
+			mv.setViewName("admin/winerylist");
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+
+	// 와인 수정 폼 wineNo값 받아와야함
 	@RequestMapping(value="/admin/winelist/update.kw", method=RequestMethod.GET)
 	public String viewWineUpdate(Model model,
 			@ModelAttribute WineVO wine) {
@@ -338,6 +375,7 @@ public class AdminController {
 			model.addAttribute("msg", e.getMessage());
 			return "common/errorPage";
 		}
+
 	}
 	
 	// 와리너리 관리

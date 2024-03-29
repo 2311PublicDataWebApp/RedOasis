@@ -72,4 +72,10 @@ public class WineServiceImpl implements WineService{
 		return result;
 	}
 
+	@Override
+	public List<WineVO> selectWineList() {
+		List<WineVO> wList = wStore.selectWineList(session);
+        return wList;
+	}
+
 }

@@ -107,4 +107,10 @@ public class WineStoreImpl implements WineStore{
 		return result;
 	}
 
+	@Override
+	public List<WineVO> selectWineList(SqlSession session) {
+		 List<WineVO> wList = session.selectList("WineMapper.todayWine");
+		return wList;
+	}
+
 }
