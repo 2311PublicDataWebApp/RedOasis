@@ -67,7 +67,7 @@ public class AdminController {
 	
 	// 회원 정보 수정 페이지 이동
 	@RequestMapping(value = "/admin/userlist/update.kw", method = RequestMethod.GET)
-	public String showUpdatePage(HttpSession session, Model model
+	public String viewUpdatePage(HttpSession session, Model model
 			,@RequestParam("userId") String userId) {
 		try {
 			com.oasis.red.user.domain.UserVO user = null;
@@ -88,7 +88,7 @@ public class AdminController {
 	}
 	// 회원 정보 수정
 	@RequestMapping(value = "/admin/update.kw", method = RequestMethod.POST)
-	public String updatePage(@ModelAttribute com.oasis.red.user.domain.UserVO user, Model model) {
+	public String adminUpdateUser(@ModelAttribute com.oasis.red.user.domain.UserVO user, Model model) {
 		try {
 			//블랙리스트 값
 			if(user.getUserBlackList() == null) {
@@ -96,9 +96,24 @@ public class AdminController {
 			}
 			int result = uService.updateUser(user);
 			if (result > 0) {
-				return "redirect:/admin/userlist";
+				return "redirect:/admin/userlist.kw";
 			} else {
 				model.addAttribute("msg", "회원 정보 수정을 완료하지 못하였습니다.");
+				return "common/errorPage";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
+	// 회원 삭제
+	@RequestMapping(value="/admin/user/delete.kw", method=RequestMethod.GET)
+	public String adminDeleteUser (Model model, String userId) {
+		try {
+			int result = aService.deleteUser(userId);
+			if(result > 0) {
+				return "redirect:/admin/userlist.kw";
+			}else {
 				return "common/errorPage";
 			}
 		} catch (Exception e) {
@@ -136,6 +151,52 @@ public class AdminController {
 		}
 	}
 	
+	// 게시판 수정 뷰
+	@RequestMapping(value="/admin/boardlist/update.kw", method=RequestMethod.GET)
+	public String viewBoardUpdate(Model model, int boardNo) {
+		try {
+			BoardVO boardOne = aService.selectBoardOne(boardNo);
+			model.addAttribute("board", boardOne);
+			return "admin/boardUpdate";			
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
+	
+	// 게시판 수정
+	@RequestMapping(value="/admin/boardlist/update.kw", method=RequestMethod.POST)
+	public String adminUpdateBoard(Model model, BoardVO boardOne) {
+		try {
+			int result = aService.boardUpdate(boardOne);
+			if(result > 0) {
+				return "redirect:/admin/boardlist.kw";
+			}else {
+				return "common/errorPage";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
+	
+	// 게시판 삭제
+	@RequestMapping(value="/admin/board/delete.kw", method=RequestMethod.GET)
+	public String adminDeleteBoard (Model model, int boardNo) {
+		try {
+			int result = aService.deleteBoard(boardNo);
+			if(result > 0) {
+				return "redirect:/admin/boardlist.kw";
+			}else {
+				return "common/errorPage";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
+	
+	
 	// 와인 관리
 	@RequestMapping(value="/admin/winelist.kw", method=RequestMethod.GET)
 	public String adminWineList(Model model
@@ -164,7 +225,7 @@ public class AdminController {
 	
 	// 와인 등록
 	@RequestMapping(value="/admin/winelist/register.kw", method=RequestMethod.GET)
-	public String ViewadminWineregister() {
+	public String viewWineregister() {
 		return "admin/wineRegister";
 	}
 	@RequestMapping(value = "/admin/winelist/register.kw", method = RequestMethod.POST)
@@ -197,7 +258,7 @@ public class AdminController {
 	        }
 	        int result = aService.wineRegister(wine);
 	        if(result > 0) {
-	        	return "redirect:/wine/winelist"; // *주소 맞는지 확인불가
+	        	return "redirect:/admin/winelist.kw";
 	        }else {
 	        	model.addAttribute("msg", "와인등록이 완료되지 않았습니다.");
 	        	return "common/errorPage";
@@ -207,7 +268,6 @@ public class AdminController {
 	        return "common/errorPage";
 	    }
 	}
-
 
 	//와이너리 등록
 	@RequestMapping(value = "/admin/wineryinsert.kw", method = RequestMethod.GET)
@@ -248,7 +308,7 @@ public class AdminController {
 
 	// 와인 수정 폼 wineNo값 받아와야함
 	@RequestMapping(value="/admin/winelist/update.kw", method=RequestMethod.GET)
-	public String adminWineUpdateView(Model model,
+	public String viewWineUpdate(Model model,
 			@ModelAttribute WineVO wine) {
 		try {
 			int wineNo = wine.getWineNo();
@@ -290,9 +350,25 @@ public class AdminController {
 	
 			int result = aService.wineUpdate(wine);
 			if(result > 0) {
-				return "redirect:/admin/winelist";
+				return "redirect:/admin/winelist.kw";
 			}else {
 				System.out.println("수정 실패");
+				return "common/errorPage";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
+	
+	// 와인 삭제
+	@RequestMapping(value="/admin/wine/delete.kw", method=RequestMethod.GET)
+	public String adminDeleteWine (Model model, int wineNo) {
+		try {
+			int result = aService.deleteWine(wineNo);
+			if(result > 0) {
+				return "redirect:/admin/winelist.kw";
+			}else {
 				return "common/errorPage";
 			}
 		} catch (Exception e) {
@@ -330,6 +406,92 @@ public class AdminController {
 			return "common/errorPage";
 		}
 	}
+	//와이너리 등록 뷰
+	@RequestMapping(value = "/admin/wineryinsert.kw", method = RequestMethod.GET)
+	public ModelAndView viewWineryInsertForm(ModelAndView mv) {
+		mv.setViewName("admin/wineryinsert");
+		return mv;
+	}
+
+	// 와이너리 등록
+	@RequestMapping(value = "/admin/wineryinsert.kw", method = RequestMethod.POST)
+	public ModelAndView adminWineryInsert(ModelAndView mv
+			,@ModelAttribute WineryVO winery
+			,@RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile
+			,HttpServletRequest request
+			,HttpSession session) {
+		try {
+			Map<String, Object> infoMap = this.saveFile(request, uploadFile);
+			winery.setImgFilename((String)infoMap.get("fileName"));
+			winery.setImgFileRename((String)infoMap.get("fileRename"));
+			winery.setImgFilepath((String)infoMap.get("filePath"));
+			winery.setImgFilelength((long)infoMap.get("fileLength"));
+			
+			int result = aService.wineryInsert(winery);
+			if(result > 0) {
+				mv.setViewName("redirect:/admin/winerylist.kw");
+			}else {
+				mv.addObject("msg", "와이너리 정보를 등록할 수 없습니다 관리자에게 문의해주십시오");
+				mv.setViewName("common/errorPage");
+			}
+			
+//			mv.setViewName("admin/winerylist");
+		} catch (Exception e) {
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	// 와이너리 수정 뷰
+	@RequestMapping(value="/admin/winery/update.kw", method=RequestMethod.GET)
+	public String viewWineryUpdate(Model model, int wineryNo) {
+		try {
+			WineryVO wineryOne = aService.selectWineryOne(wineryNo);
+			if(wineryOne != null) {
+				model.addAttribute("wineryOne", wineryOne);
+				return "admin/wineryUpdate";
+			} else {
+				return "common/errorPage";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
+	// 와이너리 수정
+	@RequestMapping(value="/admin/winery/update.kw", method=RequestMethod.POST)
+	public String adminWineryUpdate(Model model
+			, WineryVO wineryOne) {
+		try {
+			int result = aService.wineryUpdate(wineryOne);
+			if(result > 0) {				
+				return "redirect:/admin/winerylist.kw";
+			}else {
+				return "common/errorPage";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
+	
+	// 와이너리 삭제
+	@RequestMapping(value="/admin/winery/delete.kw", method=RequestMethod.GET)
+	public String adminDeleteWinery(Model model, int wineryNo) {
+		try {
+			int result = aService.deleteWinery(wineryNo);
+			if(result > 0 ) {
+				return "redirect:/admin/winerylist.kw";
+			}else {
+				return "common/errorPage";		
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/errorPage";
+		}
+	}
+
 	// 페이징
 	private PageInfo getPageInfo(Integer currentPage, Integer totalCount) {
 		PageInfo pInfo = new PageInfo();

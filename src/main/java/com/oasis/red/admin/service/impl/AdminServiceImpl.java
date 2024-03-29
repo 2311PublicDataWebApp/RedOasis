@@ -35,6 +35,12 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+	public int deleteUser(String userId) {
+		int result = aStore.deleteUser(session, userId);
+		return result;
+	}
+
+	@Override
 	public int selectTotalCountBoard() {
 		Integer totalCount = aStore.selectTotalCountBoard(session);
 		return totalCount;
@@ -44,6 +50,24 @@ public class AdminServiceImpl implements AdminService{
 	public List<BoardVO> selectBoardList(PageInfo pInfo, String sortList) {
 		List<BoardVO> bList = aStore.selectBoardList(session, pInfo, sortList);
 		return bList;
+	}
+
+	@Override
+	public BoardVO selectBoardOne(int boardNo) {
+		BoardVO boardOne = aStore.selectBoardOne(session, boardNo);
+		return boardOne;
+	}
+
+	@Override
+	public int boardUpdate(BoardVO boardOne) {
+		int result = aStore.boardUpdate(session, boardOne);
+		return result;
+	}
+
+	@Override
+	public int deleteBoard(int boardNo) {
+		int result = aStore.deleteBoard(session, boardNo);
+		return result;
 	}
 
 	@Override
@@ -77,6 +101,12 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+	public int deleteWine(int wineNo) {
+		int result = aStore.deleteWine(session, wineNo);
+		return result;
+	}
+
+	@Override
 	public int selectTotalCountWinery() {
 		Integer totalCount = aStore.selectTotalCountWinery(session);
 		return totalCount;
@@ -91,6 +121,24 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int wineryInsert(WineryVO winery) {
 		int result = aStore.wineryInsert(session, winery);
+		return result;
+	}
+
+	@Override
+	public WineryVO selectWineryOne(int wineryNo) {
+		WineryVO wineryOne = aStore.selectWineryOne(session, wineryNo);
+		return wineryOne;
+	}
+
+	@Override
+	public int wineryUpdate(WineryVO wineryOne) {
+		int result = aStore.wineryUpdate(session, wineryOne);
+		return result;
+	}
+
+	@Override
+	public int deleteWinery(int wineryNo) {
+		int result = aStore.deleteWinery(session, wineryNo);
 		return result;
 	}
 

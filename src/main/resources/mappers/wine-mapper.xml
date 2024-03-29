@@ -43,4 +43,18 @@
 		SELECT COUNT(*) FROM WINE_TBL
    		WHERE WINE_NAME LIKE '%' || #{keyword} || '%'
 	</select>
+	
+	<select id="todayWine" resultMap="wineResultMap">
+        SELECT * FROM ( SELECT * FROM WINE_TBL WHERE WINE_MONTH = 'Y' ORDER BY WINE_NO DESC) WHERE ROWNUM = 1
+    </select>
+	
+	<select id="oneByWine" resultMap="wineResultMap">
+		SELECT * FROM WINE_TBL
+		WHERE WINE_NO = #{wineNo}
+	</select>
+	<update id="wineScoreSet">
+		UPDATE WINE_TBL
+		SET WINE_SCORE = #{average}
+		WHERE WINE_NO = #{wineNo}
+	</update>
 </mapper>

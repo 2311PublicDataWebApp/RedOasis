@@ -62,7 +62,7 @@
 	                    <li class="nav-item"><a class="nav-link" href="/tasting/list.kw">교육/시음회</a></li>
 	                </ul>
 	                    <div class="col-md-3 text-end">
-	                        <button type="button" class="btn btn-outline-primary me-2" >로그아웃</button>
+	                        <a href="/user/logout.kw"><button type="button" class="btn btn-outline-primary me-2" >로그아웃</button></a>
 	                    </div>
 	            </div>
 	        </div>
@@ -146,7 +146,7 @@
 													<td>${board.boardName }</td>
 													<td>${board.updateDate }</td>
 													<td><a href="/admin/boardlist/update.kw?boardNo=${board.boardNo }"><button style="width: 100%; background-color : white; color : #caca00;">수정</button></a></td>
-													<td><a href="#"><button style="width: 100%; background-color : white; color : red;">삭제</button></a></td>
+													<td><a href="/admin/board/delete.kw?boardNo=${board.boardNo }"><button style="width: 100%; background-color : white; color : red;">삭제</button></a></td>
 												</tr>
 											</c:forEach>
 	                                    </tbody>
