@@ -35,9 +35,9 @@ public class TastingServiceImpl implements TastingService{
 	 * 공지사항 상세조회 Service
 	 */
 	@Override
-	public TastingVO selectByTastingNo(int TastingDetailNo) {
+	public TastingVO selectByTastingNo(int TastingNo) {
 		// TODO Auto-generated method stub
-		TastingVO Tasting = tStore.selectByTastingNo(session, TastingDetailNo);
+		TastingVO Tasting = tStore.selectByTastingNo(session, TastingNo);
 		return Tasting;
 	}
 
@@ -100,6 +100,14 @@ public class TastingServiceImpl implements TastingService{
 		// TODO Auto-generated method stub
 		int result = tStore.deleteTasting(session, TastingNo);
 		return result;
+	}
+	/**
+	 * 3개
+	 */
+	@Override
+	public List<TastingVO> selectLatestTastings(int i) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

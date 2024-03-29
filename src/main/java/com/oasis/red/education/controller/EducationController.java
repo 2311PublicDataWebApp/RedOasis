@@ -36,12 +36,12 @@ public class EducationController {
 			, @RequestParam(value = "page", required = false, defaultValue = "1") 
 				Integer currentPage) {
 	    try {
-//	        int totalCount = nService.getTotalCount();
-//	        PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
-	        List<EducationVO> eList = nService.selecteducationList();
+	        int totalCount = nService.getTotalCount();
+	        PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
+	        List<EducationVO> eList = nService.selecteducationList(pInfo);
 	        mv.addObject("eList", eList);
-//	        mv.addObject("pInfo", pInfo);
-	        mv.setViewName("education/educationListTest");
+	        mv.addObject("pInfo", pInfo);
+	        mv.setViewName("education/educationList");
 	    } catch (Exception e) {
 	        // 예외 처리
 	        mv.addObject("msg", e.getMessage());
@@ -80,7 +80,7 @@ public class EducationController {
 	// 공지사항 등록 GET
 	@RequestMapping(value="/education/insert.kw", method=RequestMethod.GET)
     public ModelAndView showInsertForm(ModelAndView mv) {
-        mv.setViewName("education/educationInsert");
+        mv.setViewName("education/educationInsertTest");
         return mv;
     }
 	
@@ -125,7 +125,7 @@ public class EducationController {
 	        if (educationNo != null) {
 	            EducationVO education = nService.selectByeducationNo(educationNo);
 	            if (education != null) {
-	                mv.addObject("education", education).setViewName("education/educationDetailTest");
+	                mv.addObject("education", education).setViewName("education/educationDetail");
 	            } else {
 	                mv.addObject("msg", "데이터 불러오기가 완료되지 못했습니다.");
 	                mv.setViewName("common/errorPage");
@@ -147,7 +147,7 @@ public class EducationController {
 			EducationVO education = nService.selectByeducationNo(educationNo);
 			if (education != null) {
 				mv.addObject("education", education);
-				mv.setViewName("education/modify");
+				mv.setViewName("education/educationModifyTest");
 			} else {
 				mv.addObject("msg", "데이터 불러오기가 완료되지 못했습니다.");
 				mv.setViewName("common/errorPage");
@@ -242,7 +242,7 @@ public class EducationController {
 		String fileName = uploadFile.getOriginalFilename();
 		// 저장 경로
 		String projectPath 	 = request.getSession().getServletContext().getRealPath("resources");
-		String saveDirectory = projectPath + "\\nuploadFiles";
+		String saveDirectory = projectPath + "\\euploadFiles";
 		File sDir 			 = new File(saveDirectory);
 		if (!sDir.exists()) {
 			sDir.mkdir(); //nuploadFile 폴더가 없으면 자동으로 만들어줌
@@ -275,7 +275,7 @@ public class EducationController {
 	private void deleteFile(HttpServletRequest request, String fileName) {
 		// TODO Auto-generated method stub
 		String rPath = request.getSession().getServletContext().getRealPath("resources");
-		String delFilePath = rPath + "\\nuploadFiles\\" + fileName;
+		String delFilePath = rPath + "\\euploadFiles\\" + fileName;
 		File delFile = new File(delFilePath);
 		if (delFile.exists()) {
 			delFile.delete();

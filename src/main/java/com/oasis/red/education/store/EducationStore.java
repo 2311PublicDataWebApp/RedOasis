@@ -24,7 +24,7 @@ public interface EducationStore {
 	 * @param educationNo
 	 * @return education
 	 */
-	EducationVO selectByeducationNo(SqlSession session, int educationDetailNo);
+	EducationVO selectByeducationNo(SqlSession session, int educationNo);
 
 	/**
 	 * 공지사항 검색 Store
@@ -35,12 +35,12 @@ public interface EducationStore {
 	 */
 	List<EducationVO> selecteducationByKeyword(SqlSession session, PageInfo pInfo, Map<String, String> paramMap);
 
-//	/**
-//	 * 전체 게시물 갯수 Store
-//	 * @return totalCount
-//	 */
-//	int selectTotalCount(SqlSession session);
-//	
+	/**
+	 * 전체 게시물 갯수 Store
+	 * @return totalCount
+	 */
+	int selectTotalCount(SqlSession session);
+	
 	/**
 	 * 검색 게시물 갯수 Store
 	 * @param session

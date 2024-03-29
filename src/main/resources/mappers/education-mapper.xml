@@ -19,4 +19,32 @@
     <select id="selecteducationList" resultMap="EducationResultMap">
         SELECT * FROM EEDUCATION_TBL ORDER BY EDUCATION_NO DESC
     </select>
+    <select id="selectTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM EEDUCATION_TBL
+	</select>
+	<select id="selectByeducationNo" resultMap="EducationResultMap">
+		SELECT * FROM EEDUCATION_TBL WHERE EDUCATION_NO = #{educationNo }
+	</select>
+	<insert id="inserteducation">
+		INSERT INTO EEDUCATION_TBL VALUES(SEQ_EDUCATION_NO.NEXTVAL, #{educationName }, #{educationLocation }, SYSDATE, #{educationLink },#{educationContent }, #{educationTeacher }, #{imgFileName }, #{imgFileRename }, #{imgFilePath }, #{imgFileLength })
+	</insert>
+	<update id="updateeducation">
+	UPDATE EEDUCATION_TBL 
+	SET 
+    EDUCATION_NAME = #{educationName },
+    EDUCATION_LOCATION = #{educationLocation },
+    EDUCATION_DATE = SYSDATE,
+    EDUCATION_LINK = #{educationLink },
+    EDUCATION_CONTENT = #{educationContent },
+    EDUCATION_TEACHER = #{educationTeacher },
+    IMG_FILENAME = #{imgFileName },
+    IMG_FILERENAME = #{imgFileRename },
+    IMG_FILEPATH = #{imgFilePath },
+    IMG_FILELENGTH = #{imgFileLength } 
+	WHERE 
+    EDUCATION_NO = #{educationNo }
+    </update>
+    <delete id="deleteeducation">
+		DELETE FROM EEDUCATION_TBL WHERE EDUCATION_NO = #{educationNo }
+	</delete>
 </mapper> 
