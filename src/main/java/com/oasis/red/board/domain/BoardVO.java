@@ -9,7 +9,7 @@ public class BoardVO {
 	private String boardContent;
 	private String userId;
 	private Date boardDate;
-	private Timestamp UpdateDate;
+	private Timestamp updateDate;
 	
 	public BoardVO() {}
 	
@@ -23,7 +23,7 @@ public class BoardVO {
 		this.boardContent = boardContent;
 		this.userId = userId;
 		this.boardDate = boardDate;
-		UpdateDate = updateDate;
+		this.updateDate = updateDate;
 	}
 
 
@@ -69,18 +69,18 @@ public class BoardVO {
 	}
 
 	public Timestamp getUpdateDate() {
-		return UpdateDate;
+		return updateDate;
 	}
 
 	public void setUpdateDate(Timestamp updateDate) {
-		UpdateDate = updateDate;
+		this.updateDate = updateDate;
 	}
 
 	@Override
 	public String toString() {
 		return "BoardVO [boardNo=" + boardNo + ", boardName=" + boardName + ", boardContent=" + boardContent
-				+ ", userId=" + userId + ", boardDate=" + boardDate + ", UpdateDate=" + UpdateDate + "]";
+				+ ", userId=" + userId + ", boardDate=" + boardDate + ", updateDate=" + updateDate + "]";
 	}
 	
-	
+
 }

@@ -14,6 +14,7 @@
 		<typeAlias type="com.oasis.red.admin.domain.UserVO" alias="User"/>
 		<typeAlias type="com.oasis.red.user.domain.UserVO" 	 alias="Member"/>
 		<typeAlias type="com.oasis.red.admin.domain.BoardVO" alias="Board"/>
+		<typeAlias type="com.oasis.red.board.domain.BoardVO" alias="Kboard"/>
 		<typeAlias type="com.oasis.red.board.domain.CommentVO" alias="Comment"/>
 		<typeAlias type="com.oasis.red.admin.domain.WineVO" alias="Wine"/>
 		<typeAlias type="com.oasis.red.admin.domain.WineryVO" alias="Winery"/>
