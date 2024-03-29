@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 정보 수정</title>
+<title>자유게시판</title>
+
 <!-- -----------------------------------부트스트랩 cdn------------------------ --> 
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -32,6 +33,7 @@
     height: 100px;
     background: #212529;
   }
+  
   </style>
 </head>
 <!-------------------------------------------헤더------------------------------------------ -->
@@ -57,56 +59,90 @@
                         <button type="button" class="btn btn-outline-primary me-2" onclick="window.location.href='/user/login.kw'">로그인</button>
                         <button type="button" class="btn btn-primary" onclick="window.location.href='/user/register.kw'">회원가입</button>
                     </div>
+                    </div>
             </div>
         </div>
     </nav>
-
-<!-- -------------------------------메인-------------------------------------------------------- -->
-<div class="container"style="margin-top: 200px;">
-    <main class="my-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <h1 class="text-center mb-4">회원 정보 수정</h1>
-<!-- 				<form action="/user/withdrawuser.kw" method="post" class="d-flex justify-content-end"> -->
-<%--     			<a href="/user/delete.kw?userId=${user.userId }" class="text-dark">탈퇴하기</a> --%>
-<!-- 				</form> -->
-                <form action="/user/update.kw" method="post" class="border rounded p-4">
-                    <div class="mb-3">
-                        <label for="userId" class="form-label">아이디</label>
-                        <input type="text" class="form-control" id="userId" name="userId" value="${user.userId }">
-                    </div>
-                    <div class="mb-3">
-                        <label for="userPw" class="form-label">비밀번호</label>
-                        <input type="password" class="form-control" id="userPw" name="userPw" value="${user.userPw }">
-                    </div>
-                    <!-- 비밀번호 확인 등의 필드는 필요하지 않을 때 주석 처리 -->
-                    <!-- <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">비밀번호 확인:</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
-                    </div> -->
-                    <div class="mb-3">
-                        <label for="userName" class="form-label">이름</label>
-                        <input type="text" class="form-control" id="userName" name="userName" value="${user.userName }">
-                    </div>
-                    <div class="mb-3">
-                        <label for="userEmail" class="form-label">이메일</label>
-                        <input type="email" class="form-control" id="userEmail" name="userEmail" value="${user.userEmail }">
-                    </div>
-                    <div class="mb-3">
-                        <label for="userPhone" class="form-label">휴대폰번호</label>
-                        <input type="tel" class="form-control" id="userPhone" name="userPhone" value="${user.userPhone }">
-                    </div>
-                    <input type="hidden" class="form-control" id="userBlackList" name="userBlackList" value="${user.userBlackList } ">
-                    
-                    
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">수정하기</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </main>
-</div>
+<!-- --------------------------메인--------------------------------------------------------- -->
+	<div class="container"style="margin-top: 200px;">
+			<main class="m-5 px-5">
+				<h1 class="mb-4 py-3">자유게시판</h1>
+				<br>
+				<table class="table table-hover">
+					<thead>
+						<tr class="table-light" align="center">
+							<th scope="col" class="mb-1" style="width: 10%;">번호</th>
+							<th scope="col" class="mb-1" style="width: 40%;">제목</th>
+							<th scope="col" class="mb-1" style="width: 20%;">작성자</th>
+							<th scope="col" class="mb-1" style="width: 20%;">작성날짜</th>
+							<!--<th scope="col" style="width: 10%; ">첨부파일</th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${bList }" var="board" varStatus="i">
+							<tr align="center" style="">
+								<td class="">${board.boardNo }</td>
+								<td class="">
+									<a class="link-underline-light link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="/board/detail.kw?boardNo=${board.boardNo }">
+										${board.boardName }
+									</a>
+								</td>
+								<td class="">${board.userId }</td>
+								<td class="">${board.boardDate }</td>
+								
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<div class="row mt-3 mb-1">
+					<div class="col-md-12">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination justify-content-center" style="font-weight: 600; ">
+								<c:if test="${pInfo.startNavi != 1 }">
+									<li class="page-item">
+										<a class="page-link rounded-circle" href="/board/list.kw?page=${pInfo.startNavi - 1 }" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+								</c:if>
+								<c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }" var="p">
+									<li class="page-item">
+										<a class="page-link rounded-circle mx-2" href="/board/list.kw?page=${p }" style="border: none; color: #313131;">
+											${p }
+										</a>
+									</li>
+								</c:forEach>
+								<c:if test="${pInfo.endNavi != pInfo.naviTotalCount }">
+									<li class="page-item">
+										<a class="page-link rounded-circle" href="/board/list.kw?page=${pInfo.currentPage + 1 }" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</c:if>
+							</ul>
+						</nav>
+					</div>
+				</div>
+ 				<div class="d-flex flex-wrap justify-content-center align-items-center"> 
+ 		
+					<div class="col-md-3""> 
+ 						<button type="button" class="btn rounded-pill shadow-sm" 
+							style="width: 110px; height: 38px; background-color: #212529; color: #ffffff;"
+							onclick="showInsertPage();">글쓰기</button> 
+					</div> 
+ 				
+ 				<div class="d-flex col-md-6"></div>
+					<div class="d-flex col-md-3 justify-content-end">
+						<form action="/board/search.kh" method="get">
+							<div class="input-group">
+								<input class="form-control" type="text" name="searchKeyword" id="searchKeyword" placeholder="입력하세요">
+								<button class="btn" type="submit" style="background-color: #212529; color: #ffffff;">검색</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</main>
+	</div>
 <!-- -----------------------------푸터--------------------------------------- -->
 <!-- Footer-->
   <footer class="footer py-4">
@@ -145,5 +181,10 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"></script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function showInsertPage() {
+				location.href = "/board/register.kw";
+			}
+    </script>
 </body>
 </html>

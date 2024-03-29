@@ -20,10 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.oasis.red.admin.domain.PageInfo;
+
 import com.oasis.red.board.domain.BoardImgVO;
 import com.oasis.red.board.domain.BoardVO;
 import com.oasis.red.board.domain.CommentVO;
+import com.oasis.red.board.domain.PageInfo;
 import com.oasis.red.board.service.BoardService;
 import com.oasis.red.board.service.CommentService;
 
@@ -40,14 +41,14 @@ public class BoardController {
 		return mv;
 	}
 	
-//-----------------------------게시판 묵록------------------------------------
+//-----------------------------게시판 목록------------------------------------
 	@RequestMapping(value="/board/list.kw", method=RequestMethod.GET)
-	public String showNoticeList(Model model
+	public String showBoardList(Model model
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
 		try {
 			Integer totalCount = 300;
 			PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
-			List<BoardVO> bList = bService.selectNoticeList(pInfo);
+			List<BoardVO> bList = bService.selectBoardList(pInfo);
 			if(!bList.isEmpty()) {
 				model.addAttribute("pInfo", pInfo);
 				model.addAttribute("bList", bList);
@@ -65,7 +66,7 @@ public class BoardController {
 	}
 //--------------------------게시판 세부사항-----------------------------------------
 	@RequestMapping(value="/board/detail.kw", method=RequestMethod.GET)
-	public String showNoticeDetail(Model model, Integer boardNo) {
+	public String showBoardDetail(Model model, Integer boardNo) {
 		try {
 			BoardVO boardVO = bService.selectOneByNo(boardNo);
 			List<CommentVO> rList = rService.selectCommentList(boardNo);
@@ -80,7 +81,29 @@ public class BoardController {
 		}
 	}
 	
-	// 페이징 처리 정보저장
+//------------------------------------ 게시물 검색-------------------------------------------
+	@RequestMapping(value="/board/search.kh", method=RequestMethod.GET)
+	public ModelAndView searchBoardList(ModelAndView mv
+			, @RequestParam("searchKeyword")String searchKeyword
+			, @RequestParam(value="page", required=false, defaultValue="1")Integer currentPage) {
+		/*
+		 * 2개의 값을 하나의 변수로 다루는 방법
+		 * 1. VO 클래스를 만드는 방법 (이미 해봄)
+		 * 2. HashMap 사용하는 방법 (이미 해봄)
+		 */
+		Map<String, String> paramMap = new HashMap<String, String>();
+		
+		paramMap.put("searchKeyword", searchKeyword);
+		int totalCount = bService.getTotalCount(paramMap);
+		PageInfo pInfo = this.getPageInfo(currentPage, totalCount);
+		List<BoardVO> searchList = bService.searchBoardByKeword(pInfo, paramMap);
+		mv.addObject("sList", searchList);
+		mv.addObject("pInfo", pInfo);
+		mv.addObject("searchKeyword", searchKeyword);
+		mv.setViewName("board/search");
+		return mv;
+	}
+//--------------------------- 페이징 처리 정보저장----------------------------------
 	private PageInfo getPageInfo(Integer currentPage, Integer totalCount) {
 		PageInfo pInfo = new PageInfo();
 		int recordCountPerPage = pInfo.getRecordCountPerPage();
@@ -101,6 +124,67 @@ public class BoardController {
 		pInfo.setEndNavi(endNavi);
 		return pInfo;
 	}
+	
+//------------------------게시판 수정페이지-----------------------------------------------------
+			@RequestMapping(value="/board/update.kw", method=RequestMethod.GET)
+			public ModelAndView showUpdateForm(ModelAndView mv, int boardNo) {
+				try {
+					BoardVO board = bService.selectBoardByNo(boardNo);
+					if(board != null) {
+						mv.addObject("board", board);
+						mv.setViewName("board/update");
+					}else {
+						mv.addObject("msg", "데이터 존재안함");
+						mv.setViewName("common/errorPage");
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+					mv.addObject("msg", e.getMessage());
+					mv.setViewName("common/errorPage");
+				}
+				return mv;
+			}
+			
+
+			@RequestMapping(value="/board/update.kw", method=RequestMethod.POST)
+			public ModelAndView updateBoard(
+					ModelAndView mv
+					, @ModelAttribute BoardImgVO boardImg
+					, @ModelAttribute BoardVO board
+					,@RequestParam(value="reloadFile", required=false) MultipartFile reloadFile
+					, HttpServletRequest request) {
+				try {
+					// 수정 기능 -> 1. 대체, 2. 삭제 후 등록
+					if(reloadFile != null && !reloadFile.isEmpty()) {
+						String fileName = boardImg.getImgFileRename();
+						if(fileName != null) {
+							//있으면 기존 파일 삭제
+							//this.deleteFile(request, fileName);
+						}
+						//없으면 새로 업로드하려는 파일 저장
+						Map<String, Object> infoMap = this.saveFile(request, reloadFile);
+						String boardFilename = (String)infoMap.get("fileName");
+						boardImg.setImgFilename(boardFilename);
+						boardImg.setImgFileRename((String)infoMap.get("fileRename"));
+						boardImg.setImgFilepath((String)infoMap.get("filePath"));
+						boardImg.setImgFilelength((long)infoMap.get("fileSize"));
+					}
+					int result = bService.updateBoard(board);
+					if(result > 0) {
+						mv.setViewName("redirect:/board/detail.kw?boardNo="+board.getBoardNo());
+//						return "redirect:/board/detail.kw?boardNo="+board.getBoardNo();
+					}else {
+						mv.addObject("msg", "데이터 존재안함");
+						mv.setViewName("common/errorPage");
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+					mv.addObject("msg", e.getMessage());
+					mv.setViewName("common/errorPage");
+				}
+				return mv;
+			}
+	
 	//--------------------------------------게시판 등록----------------------------
 	// 게시물 등록 페이지, /board/register.kh를 주소표시줄에 입력하면 register.jsp가 나타남
 	@RequestMapping(value="/board/register.kw", method=RequestMethod.GET)
@@ -130,11 +214,11 @@ public class BoardController {
 				model.addAttribute("msg", "로그인이 필요합니다.");
 				return "common/errorPage";
 			}
-			int result = bService.insertBoard(board);
+			int result = bService.insertBoard(board,boardImg);
 			if(result > 0) {
-				return "redirect:/board/list.kh";
+				return "redirect:/board/list.kw";
 			}else {
-				model.addAttribute("msg", "공지사항 등록이 완료되지 않았습니다.");
+				model.addAttribute("msg", "게시물이 완료되지 않았습니다.");
 				return "common/errorPage";
 			}
 		} catch (Exception e) {
@@ -142,9 +226,12 @@ public class BoardController {
 			return "common/errorPage";
 		}
 	}
+	
+	
+//------------------------------첨부파일 저장----------------------------------	
 	private Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws Exception {
 		String boardFolder = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = boardFolder + "\\buploadFiles";
+		String savePath = boardFolder + "\\kwloadFiles";
 		File saveFolder = new File(savePath);
 		if(!saveFolder.exists()) {
 			saveFolder.mkdir();		// 저장할 경로에 폴더가 없으면 폴더를 생성하도록 함.
@@ -160,7 +247,7 @@ public class BoardController {
 		Map<String, Object> fileMap = new HashMap<String, Object>();
 		fileMap.put("fileName", fileName);
 		fileMap.put("fileRename", fileRename);
-		fileMap.put("filePath", "../resources/buploadFiles/"+fileRename);
+		fileMap.put("filePath", "../resources/kwloadFiles/"+fileRename);
 		fileMap.put("fileLength", uploadFile.getSize());
 		return fileMap;
 	}

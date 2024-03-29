@@ -35,8 +35,8 @@
                         <li class="nav-item"><a class="nav-link" href="#contact">교육/시음회</a></li>
                     </ul>
                         <div class="col-md-3 text-end">
-                            <button type="button" class="btn btn-outline-primary me-2" >로그인</button>
-                            <button type="button" class="btn btn-primary" >회원가입</button>
+                            <button type="button" class="btn btn-outline-primary me-2">로그인</button>
+                            <button type="button" class="btn btn-primary">회원가입</button>
                         </div>
                 </div>
             </div>
