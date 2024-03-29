@@ -160,7 +160,7 @@
             <p><strong>산도:</strong> ${wine.wineAcidity }</p>
         </div>
         <div class="wine-image col-md-6">
-            <img src="wine-image-url.jpg" alt="와인 이미지">
+            <img src=${wine.imgFilePath } alt="와인 이미지">
         </div>
     </div>
 	<hr>
