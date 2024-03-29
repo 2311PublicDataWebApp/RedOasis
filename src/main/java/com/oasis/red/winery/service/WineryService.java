@@ -2,6 +2,7 @@ package com.oasis.red.winery.service;
 
 import java.util.List;
 
+import com.oasis.red.winery.domain.WineryReplyVO;
 import com.oasis.red.winery.domain.WineryVO;
 
 public interface WineryService {
@@ -18,5 +19,26 @@ public interface WineryService {
 	 * @return WineryVO
 	 */
 	public WineryVO selectOneByWinery(int wineryNo);
+
+	/**
+	 * 와이너리 댓글 등록 Service
+	 * @param reply
+	 * @return int
+	 */
+	public int wineryReplyRegister(WineryReplyVO reply);
+
+	/**
+	 * 와이너리 댓글 조회 Service
+	 * @param wineryNo
+	 * @return List<WineryReplyVO>
+	 */
+	public List<WineryReplyVO> selectWineryReply(int wineryNo);
+
+	/**
+	 * 와이너리 댓글 삭제 Service
+	 * @param replyNo
+	 * @return int
+	 */
+	public int wineryReplyDelete(int replyNo);
 
 }

@@ -48,4 +48,9 @@
 		SELECT * FROM WINE_TBL
 		WHERE WINE_NO = #{wineNo}
 	</select>
+	<update id="wineScoreSet">
+		UPDATE WINE_TBL
+		SET WINE_SCORE = #{average}
+		WHERE WINE_NO = #{wineNo}
+	</update>
 </mapper>

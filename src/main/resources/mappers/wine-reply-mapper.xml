@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="WineReplyMapper">
+    <resultMap type="WineReply" id="WineReplyResultMap">
+    	<id		property="commentNo"	column="COMMENT_NO"/>
+    	<result	property="commentReply"	column="COMMENT_CONTENT"/>
+    	<result	property="commentDate"	column="COMMENT_DATE"/>
+    	<result	property="commentScore"	column="COMMENT_SCORE"/>
+    	<result	property="wineNo"		column="WINE_NO"/>
+    	<result	property="userId"		column="USER_ID"/>
+    </resultMap>
+    <insert id="wineReplyInsert">
+    	INSERT INTO WINE_COMMENT_TBL
+    	VALUES (SEQ_WINE_COMMENT_NO.NEXTVAL, #{commentReply}, DEFAULT, #{commentScore}, #{wineNo}, #{userId})
+    </insert>
+    <select id="wineReplySelect" resultMap="WineReplyResultMap">
+    	SELECT * FROM WINE_COMMENT_TBL
+    	WHERE WINE_NO = #{wineNo}
+    	ORDER BY COMMENT_NO ASC
+    </select>
+    
+    <delete id="wineReplyDelete">
+    	DELETE FROM WINE_COMMENT_TBL
+    	WHERE COMMENT_NO = #{commentNo}
+    </delete>
+   </mapper>

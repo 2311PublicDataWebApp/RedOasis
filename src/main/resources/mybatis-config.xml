@@ -16,6 +16,8 @@
 		<typeAlias type="com.oasis.red.admin.domain.BoardVO" alias="Board"/>
 		<typeAlias type="com.oasis.red.admin.domain.WineVO" alias="Wine"/>
 		<typeAlias type="com.oasis.red.admin.domain.WineryVO" alias="Winery"/>
+		<typeAlias type="com.oasis.red.wine.domain.WineReplyVO" alias="WineReply"/>
+		<typeAlias type="com.oasis.red.winery.domain.WineryReplyVO" alias="WineryReply"/>
 	</typeAliases>
 	<mappers>
 		<!-- mapper.xml이 생성될 때마다 추가 -->
@@ -23,6 +25,8 @@
 		<mapper resource="mappers/user-mapper.xml"></mapper>
 		<mapper resource="mappers/winery-mapper.xml"></mapper>
 		<mapper resource="mappers/wine-mapper.xml"></mapper>
+		<mapper resource="mappers/wine-reply-mapper.xml"></mapper>
+		<mapper resource="mappers/winery-reply-mapper.xml"></mapper>
 	</mappers>
 
 </configuration>

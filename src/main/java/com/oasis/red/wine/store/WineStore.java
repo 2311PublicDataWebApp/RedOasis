@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.oasis.red.wine.domain.PageInfo;
+import com.oasis.red.wine.domain.WineReplyVO;
 import com.oasis.red.wine.domain.WineVO;
 
 public interface WineStore {
@@ -51,5 +52,37 @@ public interface WineStore {
 	 * @return WineVO
 	 */
 	WineVO selectOneByWine(SqlSession session, int wineNo);
+
+	/**
+	 * 와인 정보 댓글 등록 Store
+	 * @param reply
+	 * @param session
+	 * @return int
+	 */
+	int insertWineReply(WineReplyVO reply, SqlSession session);
+
+	/**
+	 * 와인 정보 댓글 조회 Store
+	 * @param session
+	 * @param wineNo
+	 * @return List<WineReplyVO>
+	 */
+	List<WineReplyVO> selectWineReply(SqlSession session, int wineNo);
+
+	/**
+	 * 와인 점수 계산 Store
+	 * @param session
+	 * @param wrList
+	 * @param wineNo 
+	 */
+	void wineScoreSet(SqlSession session, List<WineReplyVO> wrList, int wineNo);
+
+	/**
+	 * 댓글 삭제 Store
+	 * @param session
+	 * @param commentNo
+	 * @return int
+	 */
+	int wineReplyDelete(SqlSession session, int commentNo);
 
 }
