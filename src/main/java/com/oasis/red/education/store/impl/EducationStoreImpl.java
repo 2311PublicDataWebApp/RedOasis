@@ -25,7 +25,7 @@ public class EducationStoreImpl implements EducationStore{
 		int limit = pInfo.getRecordCountPerPage();
 		int offset = (pInfo.getCurrentPage() - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<EducationVO> tList = session.selectList("educationMapper.selecteducationList", null, rowBounds);
+		List<EducationVO> tList = session.selectList("EducationMapper.selecteducationList", null, rowBounds);
 		return tList;
 	}
 
@@ -35,8 +35,8 @@ public class EducationStoreImpl implements EducationStore{
 	 * @return education
 	 */
 	@Override
-	public EducationVO selectByeducationNo(SqlSession session, int educationDetailNo) {
-		EducationVO education = session.selectOne("educationMapper.selectByeducationNo", educationDetailNo);
+	public EducationVO selectByeducationNo(SqlSession session, int educationNo) {
+		EducationVO education = session.selectOne("EducationMapper.selectByeducationNo", educationNo);
 		return education;
 	}
 	
@@ -48,20 +48,20 @@ public class EducationStoreImpl implements EducationStore{
 		int limit = pInfo.getRecordCountPerPage();
 		int offset = (pInfo.getCurrentPage() - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<EducationVO> searchList = session.selectList("educationMapper.selecteducationsByKeyword", paramMap, rowBounds);
+		List<EducationVO> searchList = session.selectList("EducationMapper.selecteducationsByKeyword", paramMap, rowBounds);
 		return searchList;
 	}
 
-//	/**
-//	 * 전체 게시물 갯수 Store
-//	 * @return totalCount
-//	 */
-//	@Override
-//	public int selectTotalCount(SqlSession session) {
-//		// TODO Auto-generated method stub
-//		int totalCount = session.selectOne("educationMapper.selectTotalCount");
-//		return totalCount;
-//	}
+	/**
+	 * 전체 게시물 갯수 Store
+	 * @return totalCount
+	 */
+	@Override
+	public int selectTotalCount(SqlSession session) {
+		// TODO Auto-generated method stub
+		int totalCount = session.selectOne("EducationMapper.selectTotalCount");
+		return totalCount;
+	}
 	
 	/**
 	 * 검색 게시물 갯수 Store
@@ -70,7 +70,7 @@ public class EducationStoreImpl implements EducationStore{
 	@Override
 	public int selectTotalCount(SqlSession session, Map<String, String> paramMap) {
 		// TODO Auto-generated method stub
-		int totalCount = session.selectOne("educationMapper.searchTotalCount", paramMap);
+		int totalCount = session.selectOne("EducationMapper.searchTotalCount", paramMap);
 		return totalCount;
 	}
 
@@ -82,7 +82,7 @@ public class EducationStoreImpl implements EducationStore{
 	@Override
 	public int inserteducation(SqlSession session, EducationVO education) {
 		// TODO Auto-generated method stub
-		int result = session.insert("educationMapper.inserteducation", education);
+		int result = session.insert("EducationMapper.inserteducation", education);
 		return result;
 	}
 
@@ -93,7 +93,7 @@ public class EducationStoreImpl implements EducationStore{
 	 */
 	@Override
 	public int updateeducation(SqlSession session, EducationVO education) {
-		int result = session.update("educationMapper.updateeducation", education);
+		int result = session.update("EducationMapper.updateeducation", education);
 		return result;
 	}
 
@@ -104,7 +104,7 @@ public class EducationStoreImpl implements EducationStore{
 	 */
 	@Override
 	public int deleteeducation(SqlSession session, int educationNo) {
-		int result = session.delete("educationMapper.deleteeducation", educationNo);
+		int result = session.delete("EducationMapper.deleteeducation", educationNo);
 		return result;
 	}
 

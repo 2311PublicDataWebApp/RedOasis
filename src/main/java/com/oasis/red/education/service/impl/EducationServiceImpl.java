@@ -25,19 +25,19 @@ public class EducationServiceImpl implements EducationService{
 	 * 공지사항 리스트 Service
 	 */
 	@Override
-	public List<EducationVO> selecteducationList() {
+	public List<EducationVO> selecteducationList(PageInfo pInfo) {
 		// TODO Auto-generated method stub
-		List<EducationVO> tList = eStore.selecteducationList(session, pInfo);
-		return tList;
+		List<EducationVO> eList = eStore.selecteducationList(session, pInfo);
+		return eList;
 	}
 
 	/**
 	 * 공지사항 상세조회 Service
 	 */
 	@Override
-	public EducationVO selectByeducationNo(int educationDetailNo) {
+	public EducationVO selectByeducationNo(int educationNo) {
 		// TODO Auto-generated method stub
-		EducationVO education = eStore.selectByeducationNo(session, educationDetailNo);
+		EducationVO education = eStore.selectByeducationNo(session, educationNo);
 		return education;
 	}
 
@@ -51,15 +51,15 @@ public class EducationServiceImpl implements EducationService{
 		return searchList;
 	}
 
-//	/**
-//	 * 전체 게시물 갯수 조회 Service
-//	 */
-//	@Override
-//	public int getTotalCount() {
-//		// TODO Auto-generated method stub
-//		int totalCount = eStore.selectTotalCount(session);
-//		return totalCount;
-//	}
+	/**
+	 * 전체 게시물 갯수 조회 Service
+	 */
+	@Override
+	public int getTotalCount() {
+		// TODO Auto-generated method stub
+		int totalCount = eStore.selectTotalCount(session);
+		return totalCount;
+	}
 	
 	/**
 	 * 검색 게시물 전체 갯수 Service

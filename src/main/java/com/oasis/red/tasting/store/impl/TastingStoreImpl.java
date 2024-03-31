@@ -35,8 +35,8 @@ public class TastingStoreImpl implements TastingStore{
 	 * @return Tasting
 	 */
 	@Override
-	public TastingVO selectByTastingNo(SqlSession session, int TastingDetailNo) {
-		TastingVO Tasting = session.selectOne("TastingMapper.selectByTastingNo", TastingDetailNo);
+	public TastingVO selectByTastingNo(SqlSession session, int TastingNo) {
+		TastingVO Tasting = session.selectOne("TastingMapper.selectByTastingNo", TastingNo);
 		return Tasting;
 	}
 	

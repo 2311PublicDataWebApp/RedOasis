@@ -23,7 +23,7 @@ public interface TastingService {
 	 * @param TastingNo
 	 * @return Tasting
 	 */
-	TastingVO selectByTastingNo(int TastingDetailNo);
+	TastingVO selectByTastingNo(int TastingNo);
 
 	/**
 	 * 공지사항 검색 Service
@@ -67,6 +67,8 @@ public interface TastingService {
 	 * @return result
 	 */
 	int deleteTasting(int TastingNo);
+
+	List<TastingVO> selectLatestTastings(int i);
 
 
 

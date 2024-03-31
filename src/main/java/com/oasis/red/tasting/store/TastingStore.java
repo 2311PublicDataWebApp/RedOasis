@@ -23,7 +23,7 @@ public interface TastingStore {
 	 * @param TastingNo
 	 * @return Tasting
 	 */
-	TastingVO selectByTastingNo(SqlSession session, int TastingDetailNo);
+	TastingVO selectByTastingNo(SqlSession session, int TastingNo);
 
 	/**
 	 * 공지사항 검색 Store

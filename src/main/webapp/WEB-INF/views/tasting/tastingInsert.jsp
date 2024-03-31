@@ -7,7 +7,7 @@
 		<title>와인 시음회 추가 테스트</title>
 	</head>
 	<body>
-		<h1>공지사항 등록</h1>
+		<h1>와인시음회 등록</h1>
     <form action="/tasting/insert.kw" method="post" enctype="multipart/form-data">
         <ul>
             <li>

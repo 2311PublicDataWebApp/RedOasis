@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
   <!DOCTYPE html>
   <html>
 
@@ -19,9 +20,25 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="/RedOasis/src/main/webapp/resources/css/style.css" rel="stylesheet" />
+    <link href="../resources/css/style.css" rel="stylesheet" />
+    <link href="../resources/css/blog.css" rel="stylesheet" />
+    <link href="../resources/css/blog.rtl.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    
 
     <style>
+      /* 		  폰트 */
+      @font-face {
+        font-family: 'SUITE-Regular';
+        src:
+          url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+      }
+
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -118,8 +135,12 @@
       h4,
       h5,
       h6 {
-        font-family: "Playfair Display", Georgia, "Times New Roman", serif
-          /*rtl:Amiri, Georgia, "Times New Roman", serif*/
+        font-family: 'SUITE-Regular';
+        src:
+          url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        /*rtl:Amiri, Georgia, "Times New Roman", serif*/
         ;
       }
 
@@ -157,8 +178,11 @@
       /* stylelint-disable @stylistic/selector-list-comma-newline-after */
 
       .blog-header-logo {
-        font-family: Amiri, Georgia, "Times New Roman", serif;
-        font-size: 2.25rem;
+        font-family: 'SUITE-Regular';
+        src:
+          url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
       }
 
       .blog-header-logo:hover {
@@ -171,7 +195,11 @@
       h4,
       h5,
       h6 {
-        font-family: Amiri, Georgia, "Times New Roman", serif;
+        font-family: 'SUITE-Regular';
+        src:
+          url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
       }
 
       .flex-auto {
@@ -271,195 +299,277 @@
           }
         }
       }
+/*       목록 */
+	h2 {
+		font-family: 'SUITE-Regular';
+        src:
+          url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+	}
+.hr1 { border: 0;
+height: 2px;
+background:  #d3d3d3;}
+    .grey { 
+     color: #727272;}
+     #strong { font-family: 'SUITE-Regular';
+        src:
+          url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;}
+
+            table {
+            width: 100%;
+            border-top: 1px solid #d3d3d3;
+            border-collapse: collapse;
+            }
+            th { background-color: #d3d3d3 ; 
+            border-top: 3px solid #727272;
+            }
+            th, td {
+            border-bottom: 1px solid #d3d3d3;
+            padding: 10px;
+            }
+
+  .greylist {
+  width: 50px;
+  height: 30px;
+  font-weight: 900;
+  color: white;
+  text-align: center;
+  background: grey;
+  border: solid 2px white;
+  border-radius: 5px;
+  }
+  .gradient {
+  width: 80px;
+  height: 30px;
+  font-weight: 900;
+  color: white;
+  text-align: center;
+  background: linear-gradient( to bottom, grey, black );
+  border: solid 2px white;
+  border-radius: 5px;
+  }
+
+            .left {text-align: left;}
+            .right {  float: right;}
+            .center { text-align: center;}
+
+a {color:black;
+text-decoration-line : none;}
+
+
     </style>
   </head>
 
   <body>
+  <jsp:include page="../../inc/header.jsp"></jsp:include>
 
     <body id="page-top">
-      <!-- Navigation-->
-      <div id="navbar-square" class="navbar navbar-expand-lg navbar-dark fixed-top"></div>
-      <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-        <div class="container">
-          <a class="navbar-brand" href="#page-top"><img src="/RedOasis/src/main/webapp/resources/imag/main-logo.png"
-              alt="..." style="width: 100px; height: 50px;" /></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            Menu
-            <i class="fas fa-bars ms-1"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-              <li class="nav-item"><a class="nav-link" href="#services">와이너리</a></li>
-              <li class="nav-item"><a class="nav-link" href="#portfolio">와인목록</a></li>
-              <li class="nav-item"><a class="nav-link" href="#about">와인설명</a></li>
-              <li class="nav-item"><a class="nav-link" href="#team">자유게시판</a></li>
-              <li class="nav-item"><a class="nav-link" href="#contact">교육/시음회</a></li>
-            </ul>
-            <div class="col-md-3 text-end">
-              <button type="button" class="btn btn-outline-primary me-2">로그인</button>
-              <button type="button" class="btn btn-primary">회원가입</button>
-            </div>
-          </div>
-        </div>
-      </nav>
-      <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-        <symbol id="check2" viewBox="0 0 16 16">
-          <path
-            d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-        </symbol>
-        <symbol id="circle-half" viewBox="0 0 16 16">
-          <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
-        </symbol>
-        <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-          <path
-            d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
-          <path
-            d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
-        </symbol>
-        <symbol id="sun-fill" viewBox="0 0 16 16">
-          <path
-            d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
-        </symbol>
-      </svg>
+    
+     
 
       <!-- 움직이는 배너 -->
-      <div class="slider">
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-      </div>
-
+      
 
       <!-- 목록 -->
-      <div style="margin-top: 200px; margin-left: 100px;">
-        <div>
-          <h4 class="fst-italic" style="float: left;"> 교육&nbsp; /&nbsp;</h4>
-          <h4 class="fst-italic">&nbsp;시음회</h4>
+      <div style="margin-top: 200px;">
+		<div style="margin-top: 200px; margin-bottom: 20px; margin-left: 50px; ">
+          <button type="button" class="btn btn-primary"  onclick="location.href='/education/list.kw'">교육</button>
+          /
+          <button type="button" class="btn btn-secondary" disabled>시음회</button>
         </div>
-        <ul class="list-unstyled">
-          <li>
-            <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-              href="#">
-              <svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <rect width="100%" height="100%" fill="#777" />
-              </svg>
-              <div class="col-lg-8">
-                <h6 class="mb-0">Example blog post title</h6>
-                <small class="text-body-secondary">January 15, 2024</small>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-              href="#">
-              <svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <rect width="100%" height="100%" fill="#777" />
-              </svg>
-              <div class="col-lg-8">
-                <h6 class="mb-0">This is another blog post title</h6>
-                <small class="text-body-secondary">January 14, 2024</small>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-              href="#">
-              <svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <rect width="100%" height="100%" fill="#777" />
-              </svg>
-              <div class="col-lg-8">
-                <h6 class="mb-0">Longer blog post title: This one has multiple lines!</h6>
-                <small class="text-body-secondary">January 13, 2024</small>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-              href="#">
-              <svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <rect width="100%" height="100%" fill="#777" />
-              </svg>
-              <div class="col-lg-8">
-                <h6 class="mb-0">Example blog post title</h6>
-                <small class="text-body-secondary">January 15, 2024</small>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-              href="#">
-              <svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <rect width="100%" height="100%" fill="#777" />
-              </svg>
-              <div class="col-lg-8">
-                <h6 class="mb-0">This is another blog post title</h6>
-                <small class="text-body-secondary">January 14, 2024</small>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-              href="#">
-              <svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <rect width="100%" height="100%" fill="#777" />
-              </svg>
-              <div class="col-lg-8">
-                <h6 class="mb-0">Longer blog post title: This one has multiple lines!</h6>
-                <small class="text-body-secondary">January 13, 2024</small>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <br><br><br><br>
-        <!-- Footer-->
-        <footer class="footer py-4">
-          <div class="container">
-            <div class="row align-items-center">
-              <div class="col-lg-4 text-lg-start">Copyright &copy; Red Oasis 2024</div>
-              <div class="col-lg-4 my-3 my-lg-0">
-                <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i
-                    class="fab fa-twitter"></i></a>
-                <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i
-                    class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i
-                    class="fab fa-linkedin-in"></i></a>
-              </div>
-              <div class="col-lg-4 text-lg-end">
-                <a class="link-dark text-decoration-none me-3" href="#!">이용약관</a>
-                <a class="link-dark text-decoration-none" href="#!">개인정보처리방침</a>
-              </div>
+     	<table>
+     		<thead>
+    <tr>
+        <th class="center">번호</th>
+        <th class="left">제목</th>
+        <th class="left">글쓴이</th>
+        <th class="center">장소</th>
+        <th class="center">날짜</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${tList}" var="tasting" varStatus="i">
+    <tr>
+        <td class="center">${i.count}</td>
+        <td class="left"><a href="/tasting/detail.kw?tastingNo=${tasting.tastingNo}">${tasting.tastingName}</a></td>
+        <td class="left">${tasting.tastingWriter}</td>
+        <td class="center">${tasting.tastingLocation}</td>
+        <td class="center">${tasting.tastingDate}</td>   
+    </tr>
+    </c:forEach>
+    </tbody>
+</table>
+</div>
+<!-- 				페이지네이션 위치 -->
+				<div style="margin-left: 900px; margin-top: 30px; ">
+				<tr align="center">
+					<td colspan="5">
+						<c:if test="${pInfo.startNavi ne '1' }">
+							<a href="/tasting/list.kw?page=${pInfo.startNavi - 1 }">[이전]</a>
+						</c:if>
+						<c:forEach begin="${pInfo.startNavi }" end="${pInfo.endNavi }" var="p">
+							<a href="/tasting/list.kw?page=${p }">${p }</a>
+						</c:forEach>
+						<c:if test="${pInfo.endNavi ne pInfo.naviTotalCount }">
+							<a href="/tasting/list.kw?page=${pInfo.endNavi + 1 }">[다음]</a>
+						</c:if>
+						<button type="button" class="btn btn-primary" onclick="showInsertForm();" style="margin-left: 800px;">글쓰기</button>
+						<script>
+						function showInsertForm() {
+							// 공지사항 글쓰기 페이지 이동
+							location.href="/tasting/insert.kw";
+						}
+						</script>
+						
+					</td>
+				</tr>
+
+				</div>
+
+     	
+<!--       <div style="margin-top: 400px; margin-bottom: 50px; "> -->
+<!--         <div style="margin-left: 300px; "> -->
+<!--           <a style="float: left;"> 교육&nbsp; /&nbsp;</a> -->
+<!--           <a>&nbsp;시음회</a> -->
+<!--         </div> -->
+<!--         </div> -->
+<!-- 		<tbody>	 -->
+<%-- 		<c:forEach items="${tList}" var="tasting" varStatus="i"> --%>
+<!--           <tr> -->
+<%--           	<td>${i.count}</td> --%>
+<!--               <div class="col-lg-8" style="margin-left: 650px; margin-top: -150px;"> -->
+<%--                <a href="/tasting/detail.kw?tastingNo=${tasting.tastingNo}">${tasting.tastingName}</a> --%>
+<%--                 <td>${tasting.tastingDate}</td> --%>
+<!--               </div> -->
+<!--           </tr> -->
+<%--           </c:forEach> --%>
+<%--         <c:forEach items="${tList}" var="tasting" varStatus="i"> --%>
+<!--           <tr> -->
+<%--           	<td>${i.count}</td> --%>
+<!--               <svg class="bd-placeholder-img" width="400" height="200" xmlns="http://www.w3.org/2000/svg" style="margin-left: 200px; margin-bottom: 50px;"> -->
+<!--                 <rect width="100%" height="100%" fill="#777"  /> -->
+<!--               </svg> -->
+<!--               <div class="col-lg-8" style="margin-left: 650px; margin-top: -150px;"> -->
+<%--                 <h6 class="mb-0"><a href="/tasting/detail.kw?tastingNo=${tasting.tastingNo}">${tasting.tastingName}</a></h6> --%>
+<%--                 <td>${tasting.tastingDate}</small> --%>
+<!--               </div> -->
+<!--           </tr> -->
+<%--           </c:forEach> --%>
+		</tbody>
+<!--           <li> -->
+<!--             <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none " -->
+<!--               href="#"> -->
+<!--               <svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" -->
+<!--                 aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"> -->
+<!--                 <rect width="100%" height="100%" fill="#777" /> -->
+<!--               </svg> -->
+<!--               <div class="col-lg-8"> -->
+<!--                 <h6 class="mb-0">This is another blog post title</h6> -->
+<!--                 <small class="text-body-secondary">January 14, 2024</small> -->
+<!--               </div> -->
+<!--             </a> -->
+<!--           </li> -->
+<!--           <li> -->
+<!--             <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none " -->
+<!--               href="#"> -->
+<!--               <svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" -->
+<!--                 aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"> -->
+<!--                 <rect width="100%" height="100%" fill="#777" /> -->
+<!--               </svg> -->
+<!--               <div class="col-lg-8"> -->
+<!--                 <h6 class="mb-0">Longer blog post title: This one has multiple lines!</h6> -->
+<!--                 <small class="text-body-secondary">January 13, 2024</small> -->
+<!--               </div> -->
+<!--             </a> -->
+<!--           </li> -->
+<!--           <li> -->
+<!--             <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none " -->
+<!--               href="#"> -->
+<!--               <svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" -->
+<!--                 aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"> -->
+<!--                 <rect width="100%" height="100%" fill="#777" /> -->
+<!--               </svg> -->
+<!--               <div class="col-lg-8"> -->
+<!--                 <h6 class="mb-0">Example blog post title</h6> -->
+<!--                 <small class="text-body-secondary">January 15, 2024</small> -->
+<!--               </div> -->
+<!--             </a> -->
+<!--           </li> -->
+<!--           <li> -->
+<!--             <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none " -->
+<!--               href="#"> -->
+<!--               <svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" -->
+<!--                 aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"> -->
+<!--                 <rect width="100%" height="100%" fill="#777" /> -->
+<!--               </svg> -->
+<!--               <div class="col-lg-8"> -->
+<!--                 <h6 class="mb-0">This is another blog post title</h6> -->
+<!--                 <small class="text-body-secondary">January 14, 2024</small> -->
+<!--               </div> -->
+<!--             </a> -->
+<!--           </li> -->
+<!--           <li> -->
+<!--             <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none " -->
+<!--               href="#"> -->
+<!--               <svg class="bd-placeholder-img" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" -->
+<!--                 aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"> -->
+<!--                 <rect width="100%" height="100%" fill="#777" /> -->
+<!--               </svg> -->
+<!--               <div class="col-lg-8"> -->
+<!--                 <h6 class="mb-0">Longer blog post title: This one has multiple lines!</h6> -->
+<!--                 <small class="text-body-secondary">January 13, 2024</small> -->
+<!--               </div> -->
+<!--             </a> -->
+<!--           </li> -->
+
+      
+      
+
+      <br><br><br><br><br><br><br><br><br><br>
+      <!-- Footer-->
+      <footer class="footer py-4">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-4 text-lg-start">Copyright &copy; Red Oasis 2024</div>
+            <div class="col-lg-4 my-3 my-lg-0">
+              <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i
+                  class="fab fa-facebook-f"></i></a>
+              <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i
+                  class="fab fa-linkedin-in"></i></a>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+              <a class="link-dark text-decoration-none me-3" href="#!">이용약관</a>
+              <a class="link-dark text-decoration-none" href="#!">개인정보처리방침</a>
             </div>
           </div>
-        </footer>
-        <br>
-        <div class="footer-info" style="margin-left: 260px;">
-          <p style="margin-left: 280px;">
-            <span>주소 : 서울 중구 남대문로 120 대일빌딩 2층, 3층</span>
-            <span>개인정보 관리책임자 : k-와이너리</span>
-            <span>청소년보호책임자 : k-와이너리</span>
-            <span>발행.편집인 : k-와이너리</span>
-          </p>
-          <p style="margin-left: 200px;">
-            <span>㈜레드오아시스</span>
-            <span>대표이사 : k-와이너리</span>
-            <span>사업자등록번호 : 123-45-67890</span>
-            <span>레드오아시스미디어 인터넷신문등록번호 : 서울특별시 아012345</span>
-            <span>발행/등록년월일 : 2024.03.11</span>
-          </p>
         </div>
+      </footer>
+      <br>
+      <div class="footer-info" style="margin-left: 260px;">
+        <p style="margin-left: 280px;">
+          <span>주소 : 서울 중구 남대문로 120 대일빌딩 2층, 3층</span>
+          <span>개인정보 관리책임자 : k-와이너리</span>
+          <span>청소년보호책임자 : k-와이너리</span>
+          <span>발행.편집인 : k-와이너리</span>
+        </p>
+        <p style="margin-left: 200px;">
+          <span>㈜레드오아시스</span>
+          <span>대표이사 : k-와이너리</span>
+          <span>사업자등록번호 : 123-45-67890</span>
+          <span>레드오아시스미디어 인터넷신문등록번호 : 서울특별시 아012345</span>
+          <span>발행/등록년월일 : 2024.03.11</span>
+        </p>
       </div>
-      <br><br><br>
+      <br><br><br><br><br><br>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
       <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 
   </html>

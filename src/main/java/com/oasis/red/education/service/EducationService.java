@@ -16,14 +16,14 @@ public interface EducationService {
 	 * @param pInfo 
 	 * @return nList
 	 */
-	List<EducationVO> selecteducationList();
+	List<EducationVO> selecteducationList(PageInfo pInfo);
 
 	/**
 	 * 공지사항 상세조회 Service
 	 * @param educationNo
 	 * @return education
 	 */
-	EducationVO selectByeducationNo(int educationDetailNo);
+	EducationVO selectByeducationNo(int educationNo);
 
 	/**
 	 * 공지사항 검색 Service
@@ -33,12 +33,12 @@ public interface EducationService {
 	 */
 	List<EducationVO> searcheducationByKeyword(PageInfo pInfo, Map<String, String> paramMap);
 
-//	/**
-//	 * 전체 게시물 갯수 Service
-//	 * @return totalCount
-//	 */
-//	int getTotalCount();
-//	
+	/**
+	 * 전체 게시물 갯수 Service
+	 * @return totalCount
+	 */
+	int getTotalCount();
+	
 	
 	/**
 	 * 검색 게시물 전체 갯수 Service
