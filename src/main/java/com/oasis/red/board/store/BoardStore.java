@@ -60,10 +60,10 @@ public interface BoardStore {
 	/**
 	 * 자유게시판 상세
 	 * @param session
-	 * @param noticeNo
-	 * @return notice
+	 * @param boardNo
+	 * @return board
 	 */
-	BoardVO selectBoardByNo(SqlSession session, int boardNo);
+	BoardVO selectBoardByNo(SqlSession session, Integer boardNo);
 
 	/**
 	 * 자유게시판 수정
@@ -71,7 +71,7 @@ public interface BoardStore {
 	 * @param board
 	 * @return
 	 */
-	int upadateBoard(SqlSession session, BoardVO board);
+	int upadateBoard(SqlSession session, BoardVO board, BoardImgVO boardImg);
 
 
 	/**
@@ -81,4 +81,17 @@ public interface BoardStore {
 	 * @return int
 	 */
 	int insertBoard(SqlSession session, BoardVO board, BoardImgVO boardImg);
+
+	
+	/**
+	 * 게시판 삭제 Store
+	 * @param session
+	 * @param boardNo
+	 * @return
+	 */
+	int deleteBoard(SqlSession session, Integer boardNo);
+
+	
+
+
 }

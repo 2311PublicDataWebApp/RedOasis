@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수정하기</title>
+<title>자유게시판</title>
 <!-- -----------------------------------부트스트랩 cdn------------------------ --> 
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -95,8 +95,8 @@
 				<br> <br>
 				<div class="row">
 					<div class="container text-center">
-						<input type="submit" value="수정하기" id="update" class="btn btn-lg rounded-pill" style="width: 220px; height: 60px; background-color: #04D9C4; color: #ffffff;">
-						<button type="button" id="list" onclick="showBoardPage();" class="btn btn-light btn-lg rounded-pill" style="width: 220px; height: 60px; background-color: #AAAAAA; color: #ffffff;">묵록</button>
+						<input type="submit" value="수정하기" id="update" class="btn btn-lg rounded-pill" style="width: 220px; height: 60px; background-color: #212529; color: #ffffff;">
+						<button type="button" id="list" onclick="window.location.href='/board/list.kw'"; class="btn btn-light btn-lg rounded-pill" style="width: 220px; height: 60px; background-color: #212529; color: #ffffff;">목록</button>
 					</div>
 				</div>
 			</form>

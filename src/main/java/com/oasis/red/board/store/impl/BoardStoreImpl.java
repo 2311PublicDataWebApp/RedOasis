@@ -52,16 +52,16 @@ public class BoardStoreImpl implements BoardStore {
 	}
 
 	@Override
-	public BoardVO selectBoardByNo(SqlSession session, int boardNo) {
+	public BoardVO selectBoardByNo(SqlSession session, Integer boardNo) {
 		BoardVO board = session.selectOne("BoardMapper.selectBoardByNo", boardNo);
 		return board;
 	}
 
 	@Override
-	public int upadateBoard(SqlSession session, BoardVO board) {
+	public int upadateBoard(SqlSession session, BoardVO board, BoardImgVO boardImg) {
 		// TODO Auto-generated method stub
 		int result = session.update("BoardMapper.updateBoard", board);
-		result += session.update("BoardMapper.updateBoardImg", board);
+		result += session.update("BoardMapper.updateBoardImg", boardImg);
 		return result;
 	}
 
@@ -69,6 +69,12 @@ public class BoardStoreImpl implements BoardStore {
 	public int insertBoard(SqlSession session, BoardVO board, BoardImgVO boardImg) {
 		int result = session.insert("BoardMapper.insertBoard", board);
 		result += session.insert("BoardMapper.insertBoardFiles", boardImg);
+		return result;
+	}
+
+	@Override
+	public int deleteBoard(SqlSession session, Integer boardNo) {
+		int result = session.delete("BoardMapper.deleteBoard", boardNo);
 		return result;
 	}
 

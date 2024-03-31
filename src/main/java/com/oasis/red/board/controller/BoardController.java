@@ -127,8 +127,9 @@ public class BoardController {
 	
 //------------------------게시판 수정페이지-----------------------------------------------------
 			@RequestMapping(value="/board/update.kw", method=RequestMethod.GET)
-			public ModelAndView showUpdateForm(ModelAndView mv, int boardNo) {
+			public ModelAndView showUpdateForm(ModelAndView mv, Integer boardNo) {
 				try {
+					
 					BoardVO board = bService.selectBoardByNo(boardNo);
 					if(board != null) {
 						mv.addObject("board", board);
@@ -146,11 +147,13 @@ public class BoardController {
 			}
 			
 
+
+//---------------------------------------- 게시판 수정----------------------------------
 			@RequestMapping(value="/board/update.kw", method=RequestMethod.POST)
 			public ModelAndView updateBoard(
 					ModelAndView mv
-					, @ModelAttribute BoardImgVO boardImg
-					, @ModelAttribute BoardVO board
+					,@ModelAttribute BoardImgVO boardImg
+					, @ModelAttribute BoardVO board					
 					,@RequestParam(value="reloadFile", required=false) MultipartFile reloadFile
 					, HttpServletRequest request) {
 				try {
@@ -159,7 +162,7 @@ public class BoardController {
 						String fileName = boardImg.getImgFileRename();
 						if(fileName != null) {
 							//있으면 기존 파일 삭제
-							//this.deleteFile(request, fileName);
+							this.deleteFile(request, fileName);
 						}
 						//없으면 새로 업로드하려는 파일 저장
 						Map<String, Object> infoMap = this.saveFile(request, reloadFile);
@@ -167,12 +170,12 @@ public class BoardController {
 						boardImg.setImgFilename(boardFilename);
 						boardImg.setImgFileRename((String)infoMap.get("fileRename"));
 						boardImg.setImgFilepath((String)infoMap.get("filePath"));
-						boardImg.setImgFilelength((long)infoMap.get("fileSize"));
+						boardImg.setImgFilelength((long)infoMap.get("fileLength"));
 					}
-					int result = bService.updateBoard(board);
+					int result = bService.updateBoard(board, boardImg);
 					if(result > 0) {
 						mv.setViewName("redirect:/board/detail.kw?boardNo="+board.getBoardNo());
-//						return "redirect:/board/detail.kw?boardNo="+board.getBoardNo();
+//						return "redirect:/notice/detail.kh?noticeNo="+notice.getNoticeNo();
 					}else {
 						mv.addObject("msg", "데이터 존재안함");
 						mv.setViewName("common/errorPage");
@@ -183,7 +186,10 @@ public class BoardController {
 					mv.setViewName("common/errorPage");
 				}
 				return mv;
-			}
+			}		
+			
+			
+			
 	
 	//--------------------------------------게시판 등록----------------------------
 	// 게시물 등록 페이지, /board/register.kh를 주소표시줄에 입력하면 register.jsp가 나타남
@@ -251,4 +257,37 @@ public class BoardController {
 		fileMap.put("fileLength", uploadFile.getSize());
 		return fileMap;
 	}
+	//-------------------------------- 첨부파일 삭제------------------------------------
+	@RequestMapping(value = "/board/delete.kw", method = RequestMethod.GET)
+	public ModelAndView deleteBoard(ModelAndView mv, Integer boardNo) {
+		try {
+			int result = bService.deleteBoard(boardNo);
+			if (result > 0) {
+				mv.setViewName("redirect:/board/list.kw");
+			} else {
+				mv.addObject("msg", "데이터조회안됨");
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	//--------------------------------- 게시판 삭제-------------------------------------
+	private void deleteFile(HttpServletRequest request, String fileName) {
+		// TODO Auto-generated method stub
+		String rPath = request.getSession().getServletContext().getRealPath("resources");
+		String delFilepath = rPath + "\\kwloadFiles\\" + fileName;
+		File delFile = new File(delFilepath);
+		if(delFile.exists()) {
+			delFile.delete();
+		}
+		
+	}
+	
+
+	
 }

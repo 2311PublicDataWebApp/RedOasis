@@ -54,14 +54,14 @@ public interface BoardService {
 	 * @param noticeNo
 	 * @return
 	 */
-	BoardVO selectBoardByNo(int boardNo);
+	BoardVO selectBoardByNo(Integer boardNo);
 
 	/**
 	 * 공지사항 수정
 	 * @param board
 	 * @return int
 	 */
-	int updateBoard(BoardVO board);
+	int updateBoard(BoardVO board, BoardImgVO boardImg);
 
 	/**
 	 * 게시물 등록
@@ -70,6 +70,16 @@ public interface BoardService {
 	 * @return
 	 */
 	int insertBoard(BoardVO board, BoardImgVO boardImg);
+
+	
+	/**
+	 * 게시판 삭제
+	 * @param boardNo
+	 * @return
+	 */
+	int deleteBoard(Integer boardNo);
+
+	
 
 
 }
