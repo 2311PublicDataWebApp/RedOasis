@@ -53,20 +53,26 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public BoardVO selectBoardByNo(int boardNo) {
+	public BoardVO selectBoardByNo(Integer boardNo) {
 		BoardVO board = bStore.selectBoardByNo(session, boardNo);
 		return board;
 	}
 
 	@Override
-	public int updateBoard(BoardVO board) {
-		int result = bStore.upadateBoard(session, board);
+	public int updateBoard(BoardVO board, BoardImgVO boardImg) {
+		int result = bStore.upadateBoard(session, board, boardImg);
 		return result;
 	}
 
 	@Override
 	public int insertBoard(BoardVO board, BoardImgVO boardImg) {
 		int result = bStore.insertBoard(session, board, boardImg);
+		return result;
+	}
+
+	@Override
+	public int deleteBoard(Integer boardNo) {
+		int result = bStore.deleteBoard(session, boardNo);
 		return result;
 	}
 	

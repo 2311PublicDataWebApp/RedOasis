@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판 상세</title>
+<title>자유게시판</title>
 <!-- -----------------------------------부트스트랩 cdn------------------------ -->
 
 <link
@@ -115,10 +115,14 @@
 								class="overflow-auto text-wrap p-3" readonly>${board.boardContent }</textarea>
 						</div></li>
 				</div>
+				
 				<div class="row mb-4 justify-content-center">
-					<li><label>첨부파일</label> <span><a
+					<li><label>첨부파일</label> 
+					<c:forEach items="${iList }" var="boardImg">
+					<span><a
 							class="link-underline-light"
-							href="../resources/nuploadFiles/${boardImg.imgFileRename }">${boardImg.imgFilename }</a></span>
+							href="${boardImg.imgFilepath }">${boardImg.imgFilename }</a></span>
+					</c:forEach>
 					</li>
 				</div>
 			</ul>
@@ -131,10 +135,10 @@
 	</div>
 	<br>
 	<div>
-		<button onclick="window.location.href='/board/update.kw'">수정하기</button>
-		<button>삭제하기</button>
-		<button>목록으로</button>
-		<button>뒤로가기</button>
+		<button onclick="window.location.href='/board/update.kw?boardNo=${board.boardNo}'">수정하기</button>
+		<button onclick="window.location.href='/board/delete.kw?boardNo=${board.boardNo}'">삭제하기</button>
+		<button onclick="window.location.href='/board/list.kw'">목록으로</button>
+		<button onclick="window.location.href='/board/list.kw'">뒤로가기</button>
 	</div>
 	<!-- 댓글 등록 -->
 	<hr>
@@ -239,6 +243,14 @@
 	 			});
 	 		});
 	 	</script>
+<!-- 	 	<script> 	 	
+// 		function deleteBoard(boardNo) {
+// 			if (confirm("삭제하시겠습니까")) {
+// 				location.href = "/board/delete.kw?boardNo=" + boardNo;
+// 			}
+// 		}
+		
+		</script> -->
 	<!-- -----------------------------푸터--------------------------------------- -->
 	<!-- Footer-->
 	<footer class="footer py-4">
