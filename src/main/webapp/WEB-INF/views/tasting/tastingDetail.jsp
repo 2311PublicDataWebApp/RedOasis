@@ -94,5 +94,4 @@
         <!-- Core theme JS-->
         <script src="../resources/js/scripts_tastingDetail.js"></script>
     </body>
-
     </html>
