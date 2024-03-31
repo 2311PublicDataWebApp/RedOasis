@@ -155,6 +155,7 @@
 	<body>
 		<!-- Navigation-->
     <div id="navbar-square" class="navbar navbar-expand-lg navbar-dark fixed-top"></div>
+    
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="/"><img src="../../resources/imag/main-logo.png" alt="..." style="width: 100px; height: 50px;"/></a>

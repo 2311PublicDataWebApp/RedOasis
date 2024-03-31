@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>에러페이지</title>	
 </head>
+<jsp:include page="../../inc/header.jsp"></jsp:include>
 <body>
 	<h1>에러메시지</h1>
 	<h2>${msg}</h2>

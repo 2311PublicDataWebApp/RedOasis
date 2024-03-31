@@ -76,7 +76,9 @@
                     <div class="portfolio-hover">
                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid" src="${wine.imgFilePath }" alt="wine" style="width: 100px; height: 350px;  margin-left: 595px;" />
+                    <c:forEach items="${wList}" var="wine">
+                    <img class="img-fluid" src="${wine.imgFilePath}" alt="wine" style="width: 300px; height: 350px;  margin-left: 495px;" />
+                    </c:forEach>
                 </a>
                 <div class="row text-center">
                     <!-- <div class="col-md-4">

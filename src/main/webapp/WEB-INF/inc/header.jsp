@@ -15,6 +15,15 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../resources/css/style.css" rel="stylesheet" />
+<style>
+ /* 네비 네모 박스 */
+    #navbar-square {
+    width: 2000px;
+    height: 100px;
+    background: #BE2E22;
+  }
+  
+</style>
 </head>
 <body id="page-top">
       <!-- Navigation-->

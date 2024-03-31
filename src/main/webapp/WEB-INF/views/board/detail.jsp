@@ -35,64 +35,12 @@
 <link href="/src/main/webapp/resources/css/style.css" rel="stylesheet" />
 
 <!-- ----------------------------스타일--------------------------- -->
-<style>
-/* 네비 네모 박스 */
-#navbar-square {
-	width: 2000px;
-	height: 100px;
-	background: #212529;
-}
-</style>
 </head>
 <!-------------------------------------------헤더------------------------------------------ -->
+
 <body id="page-top">
-	<!-- Navigation-->
-	<div id="navbar-square"
-		class="navbar navbar-expand-lg navbar-dark fixed-top"></div>
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-		<div class="container">
-			<a class="navbar-brand" href="#page-top"><img
-				src="/src/main/webapp/resources/imag/main-logo.png" alt="..."
-				style="width: 100px; height: 50px;" /></a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				Menu <i class="fas fa-bars ms-1"></i>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-					<li class="nav-item"><a class="nav-link"
-						href="/winery/main.kw">와이너리</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/wine/winelist.kw">와인목록</a></li>
-					<li class="nav-item"><a class="nav-link" href="/wine/list.kw">와인설명</a></li>
-					<li class="nav-item"><a class="nav-link" href="/board/list.kw">자유게시판</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/tasting/list.kw">교육/시음회</a></li>
-				</ul>
-				<div class="col-md-3 text-end">
-					<c:choose>
-						<c:when test="${loggedIn}">
-							<!-- 로그인 중인 경우에 보이는 내용 -->
-							<button type="button" class="btn me-2"
-								onclick="window.location.href=' /user/logout.kw'">로그아웃</button>
-							<button type="button" class="btn me-2"
-								onclick="window.location.href='/user/updateuser.kw'">마이페이지</button>
-						</c:when>
-						<c:otherwise>
-							<!-- 로그인 중이 아닌 경우에 보이는 내용 -->
-							<button type="button" class="btn btn-outline-primary me-2"
-								onclick="window.location.href='/user/login.kw'">로그인</button>
-							<button type="button" class="btn btn-primary"
-								onclick="window.location.href='/user/register.kw'">회원가입</button>
-						</c:otherwise>
-					</c:choose>
-				</div>
-			</div>
-		</div>
-		</div>
-	</nav>
+<jsp:include page="../../inc/header.jsp"></jsp:include>
+	
 	<!-- --------------------------메인--------------------------------------------------------- -->
 	<div class="container" style="margin-top: 200px;">
 		<main class="my-5">
@@ -145,16 +93,16 @@
 	<!-- 	 	<form action="/reply/add.kw" method="post"> -->
 	<input type="hidden" name="refBoardNo" value="${board.boardNo }"
 		id="refBoardNo">
-	<table width="500" border="1">
-		<tr>
-			<td><input type="text" name="replyContent" id="replyContent"
-				size="50"></td>
-			<td>
-				<!-- 	 					<input type="submit" value="완료"> -->
-				<button id="rSubmit">등록하기</button>
-			</td>
-		</tr>
-	</table>
+<!-- 	<table width="500" border="1"> -->
+<!-- 		<tr> -->
+<!-- 			<td><input type="text" name="replyContent" id="replyContent" -->
+<!-- 				size="50"></td> -->
+<!-- 			<td> -->
+<!-- 					 					<input type="submit" value="완료"> -->
+<!-- 				<button id="rSubmit">등록하기</button> -->
+<!-- 			</td> -->
+<!-- 		</tr> -->
+<!-- 	</table> -->
 	<!-- 	 	</form> -->
 	<!-- 댓글 목록 -->
 	<table width="550" border="1" id="replyTable">
