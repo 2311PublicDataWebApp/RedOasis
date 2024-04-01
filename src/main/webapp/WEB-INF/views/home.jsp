@@ -125,7 +125,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="../resources/assets/img/portfolio/1.jpg" alt="..." />
+                                <img class="img-fluid" src="../resources/assets/img/portfolio/1.png" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">비노아미쿠스 X 베리타스 비노 2024 그랜드 테이스팅</div>
@@ -155,7 +155,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="../resources/assets/img/portfolio/3.jpg" alt="..." />
+                                <img class="img-fluid" src="../resources/assets/img/portfolio/3.png" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">B2B 와인 시음회 인 부산 (B2B Wine Tasting in Busan)</div>
@@ -171,7 +171,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="../resources/assets/img/portfolio/4.jpg" alt="..." />
+                                <img class="img-fluid" src="../resources/assets/img/portfolio/4.png" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">'OLD VINE'에 대한 이상적 접근 By 최태현강사님</div>
@@ -201,7 +201,7 @@
                                 <div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="../resources/assets/img/portfolio/6.jpg" alt="..." />
+                                <img class="img-fluid" src="../resources/assets/img/portfolio/6.png" alt="..." />
                             </a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">11/21(화) 유러피안 와인 앰배서더즈 '아시아 세미나 프로그램'</div>

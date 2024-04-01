@@ -27,7 +27,7 @@
             <div class="card h-100">
                 <div class="card-body">
                     <div>
-                        <img src="./assets/다운로드 (6).jpg" alt="강사사진" style="">
+                        <img src="${education.imgFilePath }" alt="강사사진" style="">
                     </div>
                     <br>
                     <h2 class="card-title">담당 강사 정보</h2>

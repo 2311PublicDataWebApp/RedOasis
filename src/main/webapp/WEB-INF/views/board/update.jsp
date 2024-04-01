@@ -31,7 +31,7 @@
 <!-- --------------------------메인--------------------------------------------------------- -->
 <div class="container"style="margin-top: 200px;">
 <main class="my-5">
-			<h1 class="mb-4 py-3">공지사항 수정</h1>
+			<h1 class="mb-4 py-3">자유게시판 수정</h1>
 			<br>
 			<form action="/board/update.kw" method="post"
 				enctype="multipart/form-data">

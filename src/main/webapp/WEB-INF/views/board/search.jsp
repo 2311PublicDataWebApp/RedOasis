@@ -49,7 +49,7 @@
 					<c:forEach items="${sList }" var="board" varStatus="i">
 						<tr align="center">
 							<td>${board.boardNo }</td>
-							<td><a class="link-underline-light link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="/board/detail.do?boardNo=${board.boardNo }"> ${board.boardName }</a></td>
+							<td><a class="link-underline-light link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="/board/detail.kw?boardNo=${board.boardNo }"> ${board.boardName }</a></td>
 							<td>${board.userId }</td>
 							<td>${board.boardDate }</td>
 

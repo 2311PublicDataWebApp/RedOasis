@@ -5,7 +5,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Insert title here</title>
+        <title>와인 시음회</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="/RedOasis/src/main/webapp/resources/assets/favicon.ico" />
         <!-- Bootstrap icons-->

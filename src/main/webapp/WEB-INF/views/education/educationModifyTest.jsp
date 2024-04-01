@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>교육</title>
 	</head>
 	<body>
 	<h1>와인강의 상세 조회</h1>
