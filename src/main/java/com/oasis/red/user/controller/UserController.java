@@ -142,7 +142,7 @@ public class UserController {
 			// 비밀번호 변경 로직을 수행하는 서비스 메서드 호출
 			UserVO user = new UserVO(userId, userPw);
 			uService.changePassword(user);
-			return "redirect:/user/login.do"; // 비밀번호 재설정 성공 페이지로 이동
+			return "redirect:/user/login.kw"; // 비밀번호 재설정 성공 페이지로 이동
 		} catch (Exception e) {
 			// 비밀번호 변경 과정에서 예외가 발생한 경우, 에러 메시지를 모델에 추가하여 에러 페이지로 이동
 			model.addAttribute("errorMessage", "비밀번호 변경 중 오류가 발생했습니다: " + e.getMessage());
