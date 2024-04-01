@@ -49,3 +49,8 @@ __팀명 - K-Winery__
 <img src="https://img.shields.io/badge/MyBatis-339933?style=for-the-badge&logo=mybatis&logoColor=white">  
 <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white">
 <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
+
+
+## 🗂ERD
+![image](https://github.com/2311PublicDataWebApp/RedOasis/assets/152952078/f64229df-b1b7-4d47-a298-80e2eee963b8)
+링크 : https://www.erdcloud.com/d/iuwmdJpLmnhFR9nmn(https://www.erdcloud.com/d/iuwmdJpLmnhFR9nmn)
